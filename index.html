@@ -1,176 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Website</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roblox Scripts</title>
 
-        body {
-            background: #0f0f0f;
-            color: #ffffff;
-            line-height: 1.6;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
 
-        header {
-            background: #000000;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid #222;
-        }
+body{
+    background:#000;
+    color:#fff;
+}
 
-        header h1 {
-            color: #00ffcc;
-            font-size: 28px;
-        }
+/* ===== LOADER ===== */
+#loader{
+    position:fixed;
+    inset:0;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+}
+.spinner{
+    width:50px;
+    height:50px;
+    border:4px solid #333;
+    border-top:4px solid #fff;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+@keyframes spin{
+    to{transform:rotate(360deg);}
+}
 
-        nav {
-            margin-top: 10px;
-        }
+/* ===== NAV ===== */
+header{
+    padding:20px;
+    border-bottom:1px solid #222;
+    text-align:center;
+}
+header h1{
+    margin-bottom:10px;
+}
+nav a{
+    color:#fff;
+    margin:0 12px;
+    text-decoration:none;
+    font-size:14px;
+    cursor:pointer;
+}
+nav a:hover{
+    text-decoration:underline;
+}
 
-        nav a {
-            color: #cccccc;
-            margin: 0 12px;
-            text-decoration: none;
-            font-size: 14px;
-        }
+/* ===== CONTENT ===== */
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:60px 20px;
+}
+.page{
+    display:none;
+}
+.page.active{
+    display:block;
+}
 
-        nav a:hover {
-            color: #00ffcc;
-        }
+.card{
+    border:1px solid #222;
+    padding:20px;
+    margin-bottom:20px;
+}
+.card h3{
+    margin-bottom:10px;
+}
 
-        .hero {
-            padding: 70px 20px;
-            text-align: center;
-        }
+button{
+    background:#fff;
+    color:#000;
+    border:none;
+    padding:8px 14px;
+    cursor:pointer;
+    font-weight:bold;
+}
+button:hover{
+    opacity:.8;
+}
 
-        .hero h2 {
-            font-size: 34px;
-            margin-bottom: 15px;
-        }
-
-        .hero p {
-            color: #aaaaaa;
-            max-width: 620px;
-            margin: auto;
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 32px;
-            background: #00ffcc;
-            color: #000000;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            background: #00ccaa;
-        }
-
-        .section {
-            padding: 60px 20px;
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        .section h3 {
-            text-align: center;
-            margin-bottom: 35px;
-            font-size: 26px;
-            color: #00ffcc;
-        }
-
-        .services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: #1a1a1a;
-            padding: 30px;
-            border-radius: 14px;
-            border: 1px solid #222;
-            text-align: center;
-        }
-
-        .card h4 {
-            margin-bottom: 12px;
-            font-size: 18px;
-        }
-
-        .card p {
-            color: #aaaaaa;
-            font-size: 14px;
-        }
-
-        footer {
-            background: #000000;
-            text-align: center;
-            padding: 25px;
-            border-top: 1px solid #222;
-            color: #777777;
-            font-size: 14px;
-        }
-
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 22px;
-            }
-            .hero h2 {
-                font-size: 24px;
-            }
-        }
-    </style>
+@media(max-width:600px){
+    header h1{font-size:20px;}
+}
+</style>
 </head>
+
 <body>
 
+<!-- LOADER -->
+<div id="loader">
+    <div class="spinner"></div>
+</div>
+
 <header>
-    <h1>MY BUSINESS</h1>
+    <h1>ROBLOX SCRIPTS</h1>
     <nav>
-        <a href="#">Home</a>
-        <a href="#">Services</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a onclick="showPage('home')">Home</a>
+        <a onclick="showPage('scripts')">Scripts</a>
+        <a onclick="showPage('about')">About</a>
     </nav>
 </header>
 
-<section class="hero">
-    <h2>Grow Your Business With Us</h2>
-    <p>We provide professional digital solutions to help your business grow faster and stronger.</p>
-    <a href="#" class="btn">Get in Touch</a>
-</section>
+<div class="container">
 
-<section class="section">
-    <h3>Our Services</h3>
-    <div class="services">
-        <div class="card">
-            <h4>Website Development</h4>
-            <p>Modern, fast, and responsive websites for your business.</p>
-        </div>
-        <div class="card">
-            <h4>Digital Marketing</h4>
-            <p>Effective online marketing strategies to boost your brand.</p>
-        </div>
-        <div class="card">
-            <h4>24/7 Support</h4>
-            <p>Reliable technical support whenever you need it.</p>
-        </div>
+<!-- HOME -->
+<div id="home" class="page active">
+    <h2>Welcome</h2>
+    <p>I share clean, powerful and fast Roblox scripts with minimal black & white design.</p>
+</div>
+
+<!-- SCRIPTS -->
+<div id="scripts" class="page">
+    <div class="card">
+        <h3>⚡ Auto Farm Script</h3>
+        <p>Fast autofarm for Roblox games.</p>
+        <button onclick="copyText('loadstring(AUTO_FARM_SCRIPT)')">Copy Script</button>
     </div>
-</section>
 
-<footer>
-    © 2026 My Business. All rights reserved.
-</footer>
+    <div class="card">
+        <h3>🔥 Admin Script</h3>
+        <p>Powerful admin commands.</p>
+        <button onclick="copyText('loadstring(ADMIN_SCRIPT)')">Copy Script</button>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="page">
+    <p>
+        I am a Roblox scripter.  
+        I focus on clean UI, performance, and minimal black & white design.
+    </p>
+</div>
+
+</div>
+
+<script>
+/* LOADER */
+window.addEventListener("load",()=>{
+    document.getElementById("loader").style.display="none";
+});
+
+/* PAGE SWITCH */
+function showPage(id){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+/* COPY SCRIPT */
+function copyText(text){
+    navigator.clipboard.writeText(text);
+    alert("Script copied!");
+}
+</script>
 
 </body>
 </html>
