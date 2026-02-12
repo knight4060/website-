@@ -10,12 +10,13 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
+    font-family:Arial, sans-serif;
 }
 
 body{
     background:#000;
     color:#fff;
+    overflow-x:hidden;
 }
 
 /* ===== LOADER ===== */
@@ -27,73 +28,119 @@ body{
     align-items:center;
     justify-content:center;
     z-index:9999;
+    animation:fadeOut 1s ease forwards;
+    animation-delay:1.5s;
 }
-.spinner{
-    width:50px;
-    height:50px;
-    border:4px solid #333;
-    border-top:4px solid #fff;
+.loader-ring{
+    width:60px;
+    height:60px;
+    border:3px solid #222;
+    border-top:3px solid #fff;
     border-radius:50%;
     animation:spin 1s linear infinite;
 }
+
 @keyframes spin{
     to{transform:rotate(360deg);}
 }
+@keyframes fadeOut{
+    to{opacity:0; visibility:hidden;}
+}
 
-/* ===== NAV ===== */
+/* ===== HEADER ===== */
 header{
-    padding:20px;
+    padding:25px;
     border-bottom:1px solid #222;
     text-align:center;
 }
 header h1{
-    margin-bottom:10px;
+    letter-spacing:3px;
+    font-size:26px;
+}
+
+/* ===== NAV ===== */
+nav{
+    margin-top:10px;
 }
 nav a{
-    color:#fff;
-    margin:0 12px;
+    color:#aaa;
+    margin:0 14px;
     text-decoration:none;
     font-size:14px;
     cursor:pointer;
+    position:relative;
+}
+nav a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    width:0;
+    height:1px;
+    background:#fff;
+    transition:.3s;
 }
 nav a:hover{
-    text-decoration:underline;
+    color:#fff;
+}
+nav a:hover::after{
+    width:100%;
 }
 
 /* ===== CONTENT ===== */
 .container{
     max-width:1000px;
     margin:auto;
-    padding:60px 20px;
+    padding:70px 20px;
 }
+
 .page{
     display:none;
+    opacity:0;
+    transform:translateY(20px);
+    animation:pageIn .5s ease forwards;
 }
 .page.active{
     display:block;
 }
 
+@keyframes pageIn{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ===== CARDS ===== */
 .card{
     border:1px solid #222;
-    padding:20px;
-    margin-bottom:20px;
+    padding:25px;
+    margin-bottom:25px;
+    transition:.3s;
+}
+.card:hover{
+    border-color:#fff;
+    transform:translateY(-4px);
 }
 .card h3{
     margin-bottom:10px;
 }
 
+/* ===== BUTTON ===== */
 button{
     background:#fff;
     color:#000;
     border:none;
-    padding:8px 14px;
-    cursor:pointer;
+    padding:10px 18px;
     font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
 }
 button:hover{
-    opacity:.8;
+    transform:scale(1.05);
 }
 
+/* ===== MOBILE ===== */
 @media(max-width:600px){
     header h1{font-size:20px;}
 }
@@ -104,7 +151,7 @@ button:hover{
 
 <!-- LOADER -->
 <div id="loader">
-    <div class="spinner"></div>
+    <div class="loader-ring"></div>
 </div>
 
 <header>
@@ -120,50 +167,61 @@ button:hover{
 
 <!-- HOME -->
 <div id="home" class="page active">
-    <h2>Welcome</h2>
-    <p>I share clean, powerful and fast Roblox scripts with minimal black & white design.</p>
+    <h2>Professional Roblox Scripts</h2>
+    <p>Clean UI, smooth performance, and powerful scripts.</p>
 </div>
 
 <!-- SCRIPTS -->
 <div id="scripts" class="page">
     <div class="card">
-        <h3>⚡ Auto Farm Script</h3>
-        <p>Fast autofarm for Roblox games.</p>
-        <button onclick="copyText('loadstring(AUTO_FARM_SCRIPT)')">Copy Script</button>
+        <h3>⚡ Auto Farm</h3>
+        <p>Fast and stable autofarm script.</p>
+        <button onclick="copyScript('loadstring(AUTO_FARM_SCRIPT)')">Copy Script</button>
     </div>
 
     <div class="card">
         <h3>🔥 Admin Script</h3>
-        <p>Powerful admin commands.</p>
-        <button onclick="copyText('loadstring(ADMIN_SCRIPT)')">Copy Script</button>
+        <p>Advanced admin commands.</p>
+        <button onclick="copyScript('loadstring(ADMIN_SCRIPT)')">Copy Script</button>
     </div>
 </div>
 
 <!-- ABOUT -->
 <div id="about" class="page">
     <p>
-        I am a Roblox scripter.  
-        I focus on clean UI, performance, and minimal black & white design.
+        I am a Roblox scripter focused on professional design, smooth animations,
+        and clean black & white aesthetics.
     </p>
 </div>
 
 </div>
 
+<!-- SOUNDS (Base64, external file yo‘q) -->
+<audio id="clickSound">
+<source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=" type="audio/wav">
+</audio>
+
 <script>
-/* LOADER */
-window.addEventListener("load",()=>{
-    document.getElementById("loader").style.display="none";
-});
+const clickSound=document.getElementById("clickSound");
 
 /* PAGE SWITCH */
 function showPage(id){
-    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
+    clickSound.currentTime=0;
+    clickSound.play();
+
+    document.querySelectorAll(".page").forEach(p=>{
+        p.classList.remove("active");
+    });
+
+    const page=document.getElementById(id);
+    page.classList.add("active");
 }
 
 /* COPY SCRIPT */
-function copyText(text){
+function copyScript(text){
     navigator.clipboard.writeText(text);
+    clickSound.currentTime=0;
+    clickSound.play();
     alert("Script copied!");
 }
 </script>
