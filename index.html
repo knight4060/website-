@@ -9,16 +9,29 @@
 
 <style>
 :root{
-  --bg:#000;--border:#1f1f1f;--text:#fff;--muted:#aaa;--green:#16ff00;
+  --bg:#000;
+  --border:#1f1f1f;
+  --text:#fff;
+  --muted:#aaa;
+  --green:#16ff00;
 }
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:radial-gradient(circle at top,#111,#000 65%);color:var(--text)}
 
-/* NAVBAR */
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{
+  background:radial-gradient(circle at top,#111,#000 65%);
+  color:var(--text);
+}
+
+/* ================= NAVBAR ================= */
 header{
-  position:fixed;top:0;width:100%;height:95px;
+  position:fixed;
+  top:0;
+  width:100%;
+  height:95px;
   padding:0 32px;
-  display:grid;grid-template-columns:auto 1fr auto;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
   align-items:center;
   background:rgba(0,0,0,.85);
   backdrop-filter:blur(12px);
@@ -26,7 +39,11 @@ header{
   z-index:10;
 }
 
-.nav-left{display:flex;align-items:center;gap:22px}
+.nav-left{
+  display:flex;
+  align-items:center;
+  gap:22px;
+}
 .nav-left a{
   color:var(--muted);
   font-size:19px;
@@ -36,6 +53,7 @@ header{
 }
 .nav-left a:hover{color:#fff}
 
+/* LOGO + GLOW */
 .nav-logo{
   height:44px;
   cursor:pointer;
@@ -43,17 +61,59 @@ header{
 }
 .nav-logo:hover{transform:scale(1.08)}
 
-.logo{text-align:center;font-size:24px;font-weight:bold;letter-spacing:3px}
+.logo{
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+  letter-spacing:3px;
+  animation:logoGlow 2.5s infinite;
+}
+@keyframes logoGlow{
+  0%{text-shadow:0 0 6px #fff}
+  50%{text-shadow:0 0 20px #fff}
+  100%{text-shadow:0 0 6px #fff}
+}
 
-.nav-right{display:flex;align-items:center;gap:26px}
-.socials{display:flex;gap:22px}
-.socials a{color:#fff;font-size:22px;opacity:.85}
-.socials a:hover{opacity:1;transform:scale(1.2)}
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:26px;
+}
 
-.toggle{border:1px solid var(--border);padding:7px 16px;border-radius:22px;font-size:14px;cursor:pointer}
+/* SOCIAL ICONS + GLOW */
+.socials{
+  display:flex;
+  gap:22px;
+}
+.socials a{
+  color:#fff;
+  font-size:22px;
+  opacity:.85;
+  transition:.3s;
+}
+.socials a:hover{
+  opacity:1;
+  transform:scale(1.2);
+  text-shadow:
+    0 0 8px #fff,
+    0 0 16px #fff,
+    0 0 24px #fff;
+}
 
-/* HERO */
-.hero{min-height:100vh;padding-top:150px;text-align:center}
+.toggle{
+  border:1px solid var(--border);
+  padding:7px 16px;
+  border-radius:22px;
+  font-size:14px;
+  cursor:pointer;
+}
+
+/* ================= HERO ================= */
+.hero{
+  min-height:100vh;
+  padding-top:150px;
+  text-align:center;
+}
 .hero h1{font-size:50px}
 .hero p{color:var(--muted);margin-top:10px}
 
@@ -67,48 +127,126 @@ header{
 }
 .video-box iframe{width:100%;height:100%}
 
-/* SECTIONS */
+/* ================= SECTIONS ================= */
 .section{max-width:1150px;margin:auto;padding:80px 20px}
 .section h2{text-align:center;margin-bottom:35px}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+}
+
+/* SCRIPT CARD + GLOW */
 .card{
   background:linear-gradient(145deg,#0a0a0a,#000);
   border:1px solid var(--border);
   padding:25px;
   border-radius:20px;
   cursor:pointer;
+  transition:.4s;
 }
-.card:hover{border-color:#fff;transform:translateY(-6px)}
+.card:hover{
+  border-color:#fff;
+  transform:translateY(-6px);
+  box-shadow:
+    0 0 15px rgba(255,255,255,.3),
+    0 0 30px rgba(255,255,255,.15);
+}
 .card p{color:var(--muted)}
 
-/* MODAL */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;z-index:20}
-.modal.active{display:flex}
-.modal-box{
-  background:#000;border:1px solid var(--border);
-  border-radius:24px;padding:30px;
-  width:92%;max-width:480px;
-  text-align:center;position:relative
+/* ================= MODAL ================= */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.88);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
 }
-.close{position:absolute;top:14px;right:18px;font-size:22px;color:#aaa;cursor:pointer}
+.modal.active{display:flex}
+
+.modal-box{
+  background:#000;
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:30px;
+  width:92%;
+  max-width:480px;
+  text-align:center;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  top:14px;
+  right:18px;
+  font-size:22px;
+  color:#aaa;
+  cursor:pointer;
+}
 .close:hover{color:#fff}
 
 /* PROGRESS */
-.progress{height:10px;background:#222;border-radius:20px;overflow:hidden;margin:15px 0}
-#bar{height:100%;width:0%;background:#fff;transition:.4s}
+.progress{
+  height:10px;
+  background:#222;
+  border-radius:20px;
+  overflow:hidden;
+  margin:15px 0;
+}
+#bar{
+  height:100%;
+  width:0%;
+  background:#fff;
+  transition:.4s;
+}
 #percent{font-size:12px;color:#ccc}
 
 /* STEPS */
-.step{display:block;background:#fff;color:#000;padding:14px;margin:10px 0;border-radius:18px;font-weight:bold;text-decoration:none}
-.step.done{background:var(--green)}
-.step.done::after{content:"✓";float:right}
+.step{
+  display:block;
+  background:#fff;
+  color:#000;
+  padding:14px;
+  margin:10px 0;
+  border-radius:18px;
+  font-weight:bold;
+  text-decoration:none;
+}
+.step.done{
+  background:var(--green);
+}
+.step.done::after{
+  content:"✓";
+  float:right;
+}
 
-/* BUTTON */
-button{width:100%;padding:14px;border:none;border-radius:18px;background:#fff;font-weight:bold;opacity:.4}
-button.active{opacity:1;cursor:pointer}
+/* CONTINUE BUTTON + GLOW */
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:18px;
+  background:#fff;
+  font-weight:bold;
+  opacity:.4;
+}
+button.active{
+  opacity:1;
+  cursor:pointer;
+  box-shadow:
+    0 0 10px #16ff00,
+    0 0 25px rgba(22,255,0,.6);
+}
 
-footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#666}
+footer{
+  text-align:center;
+  padding:40px;
+  border-top:1px solid var(--border);
+  color:#666;
+}
 </style>
 </head>
 
@@ -160,7 +298,11 @@ footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#
 <section id="keys" class="section">
 <h2>License Keys</h2>
 <div class="grid">
-  <div class="card" onclick="openUnlock('Daily Key','99nightinforest-AOHSDIBNJASCOBXVZHKLNJCVBHO')">
+  <div class="card"
+    onclick="openUnlock(
+      'Daily License Key',
+      '99nightinforest-AOHSDIBNJASCOBXVZHKLNJCVBHO'
+    )">
     <h3>Daily Free Key</h3>
     <p>Unlock today’s key</p>
   </div>
@@ -173,20 +315,21 @@ footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#
 
 <footer>© 2026 PoloX Scripts</footer>
 
+<!-- UNLOCK MODAL -->
 <div id="gate" class="modal">
-<div class="modal-box">
-<span class="close" onclick="closeAll()">×</span>
-<h3 id="unlockTitle">Unlock</h3>
+  <div class="modal-box">
+    <span class="close" onclick="closeAll()">×</span>
+    <h3 id="unlockTitle">Unlock</h3>
 
-<div class="progress"><div id="bar"></div></div>
-<div id="percent">0% completed</div>
+    <div class="progress"><div id="bar"></div></div>
+    <div id="percent">0% completed</div>
 
-<a class="step" href="https://www.youtube.com/@PoloX_script" onclick="unlock(event,'yt')">YouTube</a>
-<a class="step" href="https://t.me/eventpolo" onclick="unlock(event,'tg')">Telegram</a>
-<a class="step" href="https://discord.gg/SENING_DISCORD" onclick="unlock(event,'dc')">Discord</a>
+    <a class="step" href="https://www.youtube.com/@PoloX_script" onclick="unlock(event,'yt')">YouTube</a>
+    <a class="step" href="https://t.me/eventpolo" onclick="unlock(event,'tg')">Telegram</a>
+    <a class="step" href="https://discord.gg/SENING_DISCORD" onclick="unlock(event,'dc')">Discord</a>
 
-<button id="continue" onclick="finish()">Continue</button>
-</div>
+    <button id="continue" onclick="finish()">Continue</button>
+  </div>
 </div>
 
 <audio id="snd">
@@ -204,7 +347,12 @@ function toggleSound(){
   document.getElementById("sndState").innerText=sound?"ON":"OFF";
 }
 
-function play(){if(sound){snd.currentTime=0;snd.play().catch(()=>{})}}
+function play(){
+  if(sound){
+    snd.currentTime=0;
+    snd.play().catch(()=>{});
+  }
+}
 
 function goHome(){play();window.scrollTo({top:0,behavior:"smooth"})}
 function scrollToSec(id){play();document.getElementById(id).scrollIntoView({behavior:"smooth"})}
@@ -213,39 +361,52 @@ function openUnlock(title,script){
   play();
   currentScript=script;
   state={yt:false,tg:false,dc:false};
+
   document.getElementById("unlockTitle").innerText=title;
   document.getElementById("bar").style.width="0%";
   document.getElementById("percent").innerText="0% completed";
   document.querySelectorAll(".step").forEach(s=>s.classList.remove("done"));
   document.getElementById("continue").classList.remove("active");
+
   document.getElementById("gate").classList.add("active");
 }
 
 function unlock(e,type){
   e.preventDefault();
   play();
+
   if(state[type]) return;
+
   state[type]=true;
   e.currentTarget.classList.add("done");
 
   let done=Object.values(state).filter(v=>v).length;
-  let p=done*33;if(done===3)p=100;
+  let p=done*33;
+  if(done===3) p=100;
+
   document.getElementById("bar").style.width=p+"%";
   document.getElementById("percent").innerText=p+"% completed";
 
-  setTimeout(()=>{window.open(e.currentTarget.href,"_blank")},300);
-  if(done===3)document.getElementById("continue").classList.add("active");
+  setTimeout(()=>{
+    window.open(e.currentTarget.href,"_blank");
+  },300);
+
+  if(done===3){
+    document.getElementById("continue").classList.add("active");
+  }
 }
 
 function finish(){
-  if(!document.getElementById("continue").classList.contains("active"))return;
+  if(!document.getElementById("continue").classList.contains("active")) return;
   play();
   navigator.clipboard.writeText(currentScript);
   alert("Copied!");
   closeAll();
 }
 
-function closeAll(){document.getElementById("gate").classList.remove("active")}
+function closeAll(){
+  document.getElementById("gate").classList.remove("active");
+}
 </script>
 
 </body>
