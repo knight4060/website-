@@ -13,10 +13,9 @@
   --border:#1f1f1f;
   --text:#fff;
   --muted:#aaa;
+  --green:#16ff00;
 }
-
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-
 body{
   background:radial-gradient(circle at top,#111,#000 65%);
   color:var(--text);
@@ -24,10 +23,7 @@ body{
 
 /* NAVBAR */
 header{
-  position:fixed;
-  top:0;
-  width:100%;
-  height:95px;
+  position:fixed;top:0;width:100%;height:95px;
   padding:0 32px;
   display:grid;
   grid-template-columns:auto 1fr auto;
@@ -37,22 +33,16 @@ header{
   border-bottom:1px solid var(--border);
   z-index:10;
 }
-
-/* LEFT NAV */
-.nav-left{
-  display:flex;
-  gap:26px;
-}
+.nav-left{display:flex;gap:26px}
 .nav-left a{
   color:var(--muted);
-  text-decoration:none;
   font-size:19px;
   font-weight:600;
   cursor:pointer;
+  text-decoration:none;
 }
 .nav-left a:hover{color:#fff}
 
-/* CENTER LOGO */
 .logo{
   text-align:center;
   font-size:24px;
@@ -60,30 +50,15 @@ header{
   letter-spacing:3px;
 }
 
-/* RIGHT NAV */
-.nav-right{
-  display:flex;
-  align-items:center;
-  gap:26px; /* ICONLAR ORASI OCHILDI */
-}
-
-/* SOCIAL ICONS */
-.socials{
-  display:flex;
-  gap:22px; /* ICONLAR ORASI OCHILDI */
-}
+.nav-right{display:flex;align-items:center;gap:26px}
+.socials{display:flex;gap:22px}
 .socials a{
   color:#fff;
-  font-size:22px;   /* ICONLAR KATTAROQ */
+  font-size:22px;
   opacity:.85;
-  transition:.2s;
 }
-.socials a:hover{
-  opacity:1;
-  transform:scale(1.2);
-}
+.socials a:hover{opacity:1;transform:scale(1.2)}
 
-/* SOUND TOGGLE */
 .toggle{
   border:1px solid var(--border);
   padding:7px 16px;
@@ -96,83 +71,111 @@ header{
 .hero{
   min-height:100vh;
   padding-top:150px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
   text-align:center;
 }
-.hero h1{
-  font-size:50px;
-  margin-bottom:10px;
-}
-.hero p{
-  color:var(--muted);
-  max-width:650px;
-}
+.hero h1{font-size:50px}
+.hero p{color:var(--muted);margin-top:10px}
 
-/* VIDEO */
 .video-box{
-  margin-top:38px;
-  width:100%;
+  margin:38px auto 0;
   max-width:860px;
   aspect-ratio:16/9;
   border-radius:24px;
   overflow:hidden;
   border:1px solid var(--border);
 }
-.video-box iframe{
-  width:100%;
-  height:100%;
-}
+.video-box iframe{width:100%;height:100%}
 
-/* SECTION */
-.section{
-  max-width:1150px;
-  margin:auto;
-  padding:80px 20px;
-}
-.section h2{
-  text-align:center;
-  margin-bottom:35px;
-}
+/* SECTIONS */
+.section{max-width:1150px;margin:auto;padding:80px 20px}
+.section h2{text-align:center;margin-bottom:35px}
 
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:25px;
-}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
 .card{
   background:linear-gradient(145deg,#0a0a0a,#000);
   border:1px solid var(--border);
   padding:25px;
   border-radius:20px;
   cursor:pointer;
-  transition:.4s;
 }
-.card:hover{
-  transform:translateY(-6px);
-  border-color:#fff;
+.card:hover{border-color:#fff;transform:translateY(-6px)}
+.card p{color:var(--muted)}
+
+/* MODAL */
+.modal{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.88);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
 }
-.card p{
-  color:var(--muted);
-  font-size:14px;
+.modal.active{display:flex}
+
+.modal-box{
+  background:#000;
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:30px;
+  width:92%;
+  max-width:480px;
+  text-align:center;
+  position:relative;
+}
+.close{
+  position:absolute;
+  top:14px;right:18px;
+  font-size:22px;
+  color:#aaa;
+  cursor:pointer;
+}
+.close:hover{color:#fff}
+
+/* PROGRESS */
+.progress{
+  height:10px;
+  background:#222;
+  border-radius:20px;
+  overflow:hidden;
+  margin:15px 0;
+}
+#bar{height:100%;width:0%;background:#fff;transition:.4s}
+#percent{font-size:12px;color:#ccc}
+
+/* STEPS */
+.step{
+  display:block;
+  background:#fff;
+  color:#000;
+  padding:14px;
+  margin:10px 0;
+  border-radius:18px;
+  font-weight:bold;
+  text-decoration:none;
+}
+.step.done{background:var(--green)}
+.step.done::after{
+  content:"✓";
+  float:right;
 }
 
-/* FOOTER */
+/* BUTTON */
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:18px;
+  background:#fff;
+  font-weight:bold;
+  opacity:.4;
+}
+button.active{opacity:1;cursor:pointer}
+
 footer{
   text-align:center;
   padding:40px;
   border-top:1px solid var(--border);
   color:#666;
-}
-
-/* RESPONSIVE */
-@media(max-width:700px){
-  header{height:85px}
-  .hero h1{font-size:34px}
-  .nav-left a{font-size:17px}
-  .socials a{font-size:20px}
 }
 </style>
 </head>
@@ -180,17 +183,14 @@ footer{
 <body>
 
 <header>
-  <!-- LEFT -->
   <div class="nav-left">
     <a onclick="goHome()">Home</a>
     <a onclick="scrollToSec('scripts')">Scripts</a>
     <a onclick="scrollToSec('keys')">Keys</a>
   </div>
 
-  <!-- CENTER -->
   <div class="logo">PoloX Scripts</div>
 
-  <!-- RIGHT -->
   <div class="nav-right">
     <div class="socials">
       <a href="https://youtube.com/@SENING_YOUTUBE" target="_blank"><i class="fab fa-youtube"></i></a>
@@ -202,7 +202,6 @@ footer{
   </div>
 </header>
 
-<!-- HOME -->
 <section id="home" class="hero">
   <h1>PoloX Scripts Hub</h1>
   <p>Clean, fast and reliable scripts for Mobile & PC.</p>
@@ -212,28 +211,22 @@ footer{
   </div>
 </section>
 
-<!-- SCRIPTS -->
 <section id="scripts" class="section">
 <h2>Scripts</h2>
 <div class="grid">
-  <div class="card">
+  <div class="card" onclick="openUnlock('99 Nights In The Forest','loadstring(FOREST_SCRIPT)()')">
     <h3>99 Nights In The Forest</h3>
     <p>Auto Farm, Admin, ESP</p>
-  </div>
-  <div class="card">
-    <h3>Escape Tsunami</h3>
-    <p>Auto Rebirth, Speed</p>
   </div>
 </div>
 </section>
 
-<!-- KEYS -->
 <section id="keys" class="section">
 <h2>License Keys</h2>
 <div class="grid">
-  <div class="card">
+  <div class="card" onclick="openUnlock('Daily License Key','DAILY_KEY_12345')">
     <h3>Daily Free Key</h3>
-    <p>Unlock today’s free license key</p>
+    <p>Unlock today’s key</p>
   </div>
   <div class="card">
     <h3>Premium Keys</h3>
@@ -244,12 +237,31 @@ footer{
 
 <footer>© 2026 PoloX Scripts</footer>
 
+<!-- UNLOCK MODAL -->
+<div id="gate" class="modal">
+<div class="modal-box">
+<span class="close" onclick="closeAll()">×</span>
+<h3 id="unlockTitle">Unlock</h3>
+
+<div class="progress"><div id="bar"></div></div>
+<div id="percent">0% completed</div>
+
+<a class="step" href="https://youtube.com/@SENING_YOUTUBE" onclick="unlock(event,'yt')">YouTube Channel</a>
+<a class="step" href="https://t.me/SENING_TELEGRAM" onclick="unlock(event,'tg')">Telegram Channel</a>
+<a class="step" href="https://discord.gg/SENING_DISCORD" onclick="unlock(event,'dc')">Discord Server</a>
+
+<button id="continue" onclick="finish()">Continue</button>
+</div>
+</div>
+
 <audio id="snd">
-  <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=">
+<source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=">
 </audio>
 
 <script>
 let sound=true;
+let state={yt:false,tg:false,dc:false};
+let currentScript="";
 const snd=document.getElementById("snd");
 
 function toggleSound(){
@@ -264,14 +276,56 @@ function play(){
   }
 }
 
-function goHome(){
+function goHome(){play();window.scrollTo({top:0,behavior:"smooth"})}
+function scrollToSec(id){play();document.getElementById(id).scrollIntoView({behavior:"smooth"})}
+
+function openUnlock(title,script){
   play();
-  window.scrollTo({top:0,behavior:"smooth"});
+  currentScript=script;
+  state={yt:false,tg:false,dc:false};
+  document.getElementById("unlockTitle").innerText=title;
+  document.getElementById("bar").style.width="0%";
+  document.getElementById("percent").innerText="0% completed";
+  document.querySelectorAll(".step").forEach(s=>s.classList.remove("done"));
+  document.getElementById("continue").classList.remove("active");
+  document.getElementById("gate").classList.add("active");
 }
 
-function scrollToSec(id){
+function unlock(e,type){
+  e.preventDefault();        // MUHIM
   play();
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+
+  if(state[type]) return;
+  state[type]=true;
+  e.currentTarget.classList.add("done");
+
+  let done=Object.values(state).filter(v=>v).length;
+  let percent=done*33;
+  if(done===3) percent=100;
+
+  document.getElementById("bar").style.width=percent+"%";
+  document.getElementById("percent").innerText=percent+"% completed";
+
+  // linkni keyin ochamiz
+  setTimeout(()=>{
+    window.open(e.currentTarget.href,"_blank");
+  },300);
+
+  if(done===3){
+    document.getElementById("continue").classList.add("active");
+  }
+}
+
+function finish(){
+  if(!document.getElementById("continue").classList.contains("active")) return;
+  play();
+  navigator.clipboard.writeText(currentScript);
+  alert("Copied!");
+  closeAll();
+}
+
+function closeAll(){
+  document.getElementById("gate").classList.remove("active");
 }
 </script>
 
