@@ -6,74 +6,58 @@
 <title>PoloX Scripts</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
+:root{
+    --bg:#000;
+    --panel:#0c0c0c;
+    --border:#1f1f1f;
+    --text:#fff;
+    --muted:#aaa;
 }
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 
 body{
-    background:radial-gradient(circle at top, #111, #000 60%);
-    color:#fff;
-    overflow-x:hidden;
+    background:radial-gradient(circle at top,#111,#000 60%);
+    color:var(--text);
 }
 
-/* ===== LOADER ===== */
+/* LOADER */
 #loader{
-    position:fixed;
-    inset:0;
+    position:fixed;inset:0;
     background:#000;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    display:flex;align-items:center;justify-content:center;
     z-index:9999;
 }
-.loader{
-    width:60px;
-    height:60px;
+#loader div{
+    width:55px;height:55px;
     border:2px solid #222;
     border-top:2px solid #fff;
     border-radius:50%;
     animation:spin 1s linear infinite;
 }
-@keyframes spin{
-    to{transform:rotate(360deg);}
-}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-/* ===== NAVBAR ===== */
+/* NAVBAR */
 header{
-    position:fixed;
-    top:0;
-    width:100%;
-    padding:18px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    position:fixed;top:0;width:100%;
+    padding:16px 30px;
+    display:flex;align-items:center;justify-content:space-between;
+    background:rgba(0,0,0,.7);
     backdrop-filter:blur(10px);
-    background:rgba(0,0,0,.6);
-    border-bottom:1px solid #222;
+    border-bottom:1px solid var(--border);
     z-index:10;
 }
-
-.logo{
-    font-size:20px;
-    letter-spacing:2px;
-    font-weight:bold;
-}
-
+.logo{font-weight:bold;letter-spacing:2px}
 nav a{
-    color:#aaa;
-    margin-left:22px;
+    color:var(--muted);
+    margin-left:20px;
     text-decoration:none;
     font-size:14px;
     transition:.3s;
 }
-nav a:hover{
-    color:#fff;
-}
+nav a:hover{color:#fff}
 
-/* ===== HERO ===== */
+/* HERO */
 .hero{
     min-height:100vh;
     display:flex;
@@ -84,143 +68,163 @@ nav a:hover{
     padding:120px 20px 60px;
     animation:fadeUp 1s ease forwards;
 }
-
-.hero h1{
-    font-size:42px;
-    margin-bottom:20px;
-}
-.hero p{
-    max-width:650px;
-    color:#aaa;
-    font-size:15px;
-}
-
+.hero h1{font-size:42px;margin-bottom:15px}
+.hero p{color:var(--muted);max-width:650px}
 .hero button{
-    margin-top:35px;
-    padding:14px 34px;
-    background:#fff;
-    color:#000;
-    border:none;
-    font-weight:bold;
+    margin-top:30px;
+    padding:14px 36px;
+    background:#fff;color:#000;
+    border:none;font-weight:bold;
     cursor:pointer;
     transition:.3s;
 }
-.hero button:hover{
-    transform:scale(1.05);
-}
+.hero button:hover{transform:scale(1.05)}
 
 @keyframes fadeUp{
-    from{opacity:0; transform:translateY(40px);}
-    to{opacity:1; transform:translateY(0);}
+    from{opacity:0;transform:translateY(40px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
-/* ===== FEATURES ===== */
-.features{
-    max-width:1100px;
+/* SECTION */
+.section{
+    max-width:1150px;
     margin:auto;
     padding:80px 20px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
+}
+.section h2{
+    text-align:center;
+    margin-bottom:40px;
 }
 
+/* CARDS */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
 .card{
     background:linear-gradient(145deg,#0a0a0a,#000);
-    border:1px solid #222;
-    padding:30px;
+    border:1px solid var(--border);
+    padding:25px;
+    border-radius:12px;
     transition:.4s;
 }
 .card:hover{
     transform:translateY(-6px);
     border-color:#fff;
 }
+.card h3{margin-bottom:10px}
+.card p{color:var(--muted);font-size:14px}
 
-.card h3{
-    margin-bottom:10px;
-}
-.card p{
-    color:#aaa;
-    font-size:14px;
+.tags span{
+    display:inline-block;
+    margin:6px 6px 0 0;
+    padding:5px 10px;
+    border:1px solid var(--border);
+    font-size:11px;
+    color:#ccc;
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer{
     text-align:center;
     padding:40px;
+    border-top:1px solid var(--border);
     color:#666;
     font-size:13px;
-    border-top:1px solid #222;
 }
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media(max-width:600px){
-    .hero h1{font-size:28px;}
-    header{padding:16px 20px;}
+    .hero h1{font-size:28px}
 }
+
+/* FADE */
+.fade{
+    animation:fade .6s ease forwards;
+}
+@keyframes fade{from{opacity:0}to{opacity:1}}
 </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-    <div class="loader"></div>
-</div>
+<div id="loader"><div></div></div>
 
 <header>
-    <div class="logo">PoloX</div>
+    <div class="logo">PoloX Scripts</div>
     <nav>
-        <a onclick="play()">Home</a>
-        <a onclick="play()">Scripts</a>
-        <a onclick="play()">About</a>
-        <a onclick="play()">Download</a>
+        <a onclick="navClick()">Home</a>
+        <a onclick="scrollToSec('scripts')">Scripts</a>
+        <a onclick="scrollToSec('keys')">Keys</a>
+        <a onclick="navClick()">Premium</a>
     </nav>
 </header>
 
 <section class="hero">
-    <h1>Experience Reliable Roblox Scripts</h1>
-    <p>
-        PoloX Scripts provides clean, fast and powerful Roblox scripts
-        with professional design and smooth performance.
-    </p>
-    <button onclick="play()">Get Started</button>
+    <h1>Professional Roblox Scripts Hub</h1>
+    <p>The best clean, fast and reliable Roblox scripts for Mobile & PC.</p>
+    <button onclick="navClick()">Get Scripts</button>
 </section>
 
-<section class="features">
-    <div class="card">
-        <h3>External Execution</h3>
-        <p>Execute scripts externally with stable and clean performance.</p>
+<section id="scripts" class="section fade">
+    <h2>Scripts</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>99 Nights In The Forest</h3>
+            <p>Admin commands, teleport, auto fuel, auto farm.</p>
+            <div class="tags">
+                <span>Auto Farm</span><span>Admin</span><span>ESP</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Escape Tsunami</h3>
+            <p>Auto rebirth, speed upgrades, visuals.</p>
+            <div class="tags">
+                <span>Auto Rebirth</span><span>Auto Farm</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Survive Lava</h3>
+            <p>Auto collect, ESP, mobile & PC support.</p>
+            <div class="tags">
+                <span>Auto Collect</span><span>ESP</span>
+            </div>
+        </div>
     </div>
-    <div class="card">
-        <h3>Lightning Fast</h3>
-        <p>Optimized scripts for maximum speed and reliability.</p>
-    </div>
-    <div class="card">
-        <h3>Minimal Design</h3>
-        <p>Black & white professional UI focused on usability.</p>
+</section>
+
+<section id="keys" class="section fade">
+    <h2>License Keys</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Daily Free Keys</h3>
+            <p>Get free daily keys for all supported scripts.</p>
+        </div>
+        <div class="card">
+            <h3>Premium Access</h3>
+            <p>Unlock faster scripts and priority updates.</p>
+        </div>
     </div>
 </section>
 
 <footer>
-    © 2026 PoloX Scripts. All rights reserved.
+    © 2026 PoloX Scripts — All Rights Reserved
 </footer>
 
-<!-- SOUND -->
 <audio id="snd">
 <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=">
 </audio>
 
 <script>
-/* LOADER */
-window.onload=()=>{
-    document.getElementById("loader").style.display="none";
-};
-
-/* SOUND */
-function play(){
-    const s=document.getElementById("snd");
-    s.currentTime=0;
-    s.play();
+window.onload=()=>document.getElementById("loader").style.display="none";
+function navClick(){
+    let s=document.getElementById("snd");
+    s.currentTime=0;s.play();
+}
+function scrollToSec(id){
+    navClick();
+    document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 </script>
 
