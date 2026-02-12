@@ -7,280 +7,173 @@
 
 <style>
 :root{
-  --bg:#000;--panel:#0b0b0b;--border:#1f1f1f;
-  --text:#fff;--muted:#aaa;
+  --bg:#000;
+  --border:#1f1f1f;
+  --text:#fff;
+  --muted:#aaa;
 }
+
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+
 body{
   background:radial-gradient(circle at top,#111,#000 65%);
   color:var(--text);
 }
 
-/* LOADER */
-#loader{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999}
-#loader div{width:45px;height:45px;border:2px solid #222;border-top:2px solid #fff;border-radius:50%;animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-
 /* NAVBAR */
 header{
-  position:fixed;top:0;width:100%;
-  padding:14px 25px;
-  display:grid;grid-template-columns:1fr auto 1fr;
+  position:fixed;
+  top:0;
+  width:100%;
+  height:90px;
+  padding:0 30px;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
   align-items:center;
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(10px);
+  background:rgba(0,0,0,.8);
+  backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);
   z-index:10;
 }
-.logo{text-align:center;font-weight:bold;letter-spacing:3px}
-.nav-left a,.nav-right a{
-  color:var(--muted);margin:0 10px;text-decoration:none;font-size:14px;cursor:pointer
-}
-.nav-left a:hover,.nav-right a:hover{color:#fff}
 
-/* SOUND TOGGLE */
+.nav-left,.nav-right{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.nav-left a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:15px;
+}
+.nav-left a:hover{color:#fff}
+
+.logo{
+  font-size:22px;
+  font-weight:bold;
+  letter-spacing:3px;
+}
+
+/* SOCIAL ICONS */
+.socials a{
+  color:#fff;
+  font-size:18px;
+  text-decoration:none;
+  opacity:.8;
+  transition:.2s;
+}
+.socials a:hover{
+  opacity:1;
+  transform:scale(1.15);
+}
+
 .toggle{
+  margin-left:15px;
+  font-size:13px;
   border:1px solid var(--border);
   padding:6px 12px;
-  border-radius:14px;
-  font-size:12px;
+  border-radius:20px;
+  cursor:pointer;
 }
 
 /* HERO */
 .hero{
-  min-height:100vh;display:flex;flex-direction:column;
-  justify-content:center;align-items:center;
-  text-align:center;padding:120px 20px
-}
-.hero h1{font-size:42px;margin-bottom:10px}
-.hero p{color:var(--muted);max-width:650px}
-
-/* SECTION */
-.section{max-width:1150px;margin:auto;padding:80px 20px}
-.section h2{text-align:center;margin-bottom:35px}
-
-/* GRID */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
-.card{
-  background:linear-gradient(145deg,#0a0a0a,#000);
-  border:1px solid var(--border);
-  padding:25px;border-radius:20px;
-  cursor:pointer;transition:.4s
-}
-.card:hover{transform:translateY(-6px);border-color:#fff}
-.card p{color:var(--muted);font-size:14px}
-
-/* MODAL */
-.modal{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.88);
-  display:none;align-items:center;justify-content:center;
-  z-index:20
-}
-.modal.active{display:flex}
-.modal-box{
-  background:#000;border:1px solid var(--border);
-  border-radius:24px;
-  padding:30px;
-  width:92%;max-width:480px;
+  min-height:100vh;
+  padding-top:140px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
   text-align:center;
-  animation:fadeUp .4s ease;
-  position:relative
-}
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-
-/* CLOSE */
-.close{
-  position:absolute;top:14px;right:18px;
-  font-size:22px;color:#aaa;cursor:pointer
-}
-.close:hover{color:#fff}
-
-/* PROGRESS */
-.progress{width:100%;height:10px;background:#222;border-radius:20px;overflow:hidden;margin:15px 0}
-#bar{height:100%;width:0%;background:#fff;transition:.4s}
-#percent{font-size:12px;color:#ccc}
-
-/* STEPS */
-.step{
-  display:block;
-  background:#fff;color:#000;
-  padding:14px;margin:10px 0;
-  border-radius:18px;
-  font-weight:bold;
-  text-decoration:none;
-  cursor:pointer;
-  position:relative;
-  transition:.3s
-}
-.step.done{background:#0f0}
-.step.done::after{
-  content:"✓";
-  position:absolute;right:16px
 }
 
-/* BUTTON */
-button{
-  margin-top:15px;padding:14px;width:100%;
-  border:none;border-radius:18px;
-  font-weight:bold;
-  background:#fff;color:#000;
-  cursor:pointer;opacity:.4
+.hero h1{
+  font-size:46px;
+  margin-bottom:10px;
 }
-button.active{opacity:1}
 
-/* CHECKING */
-#checking{display:none;color:#aaa;font-size:14px;margin-top:10px}
+.hero p{
+  color:var(--muted);
+  max-width:650px;
+}
 
-/* FOOTER */
-footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#666;font-size:13px}
+/* VIDEO */
+.video-box{
+  margin-top:35px;
+  width:100%;
+  max-width:820px;
+  aspect-ratio:16/9;
+  border-radius:22px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:0 0 40px rgba(255,255,255,.05);
+}
 
-@media(max-width:600px){
-  .hero h1{font-size:28px}
+.video-box iframe{
+  width:100%;
+  height:100%;
+}
+
+/* MOBILE */
+@media(max-width:700px){
+  header{height:80px}
+  .hero h1{font-size:30px}
+  .logo{font-size:18px}
 }
 </style>
+
+<!-- ICONS (Font Awesome CDN) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
-<div id="loader"><div></div></div>
-
 <header>
   <div class="nav-left">
-    <a onclick="scrollToSec('scripts')">Scripts</a>
-    <a onclick="scrollToSec('keys')">Keys</a>
+    <a href="#scripts">Scripts</a>
+    <a href="#keys">Keys</a>
   </div>
+
   <div class="logo">PoloX Scripts</div>
+
   <div class="nav-right">
-    <span class="toggle" onclick="toggleSound()">Sound: <b id="sndState">ON</b></span>
+    <div class="socials">
+      <a href="https://youtube.com/@SENING_YOUTUBE" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://instagram.com/SENING_INSTAGRAM" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://t.me/SENING_TELEGRAM" target="_blank"><i class="fab fa-telegram"></i></a>
+      <a href="https://discord.gg/SENING_DISCORD" target="_blank"><i class="fab fa-discord"></i></a>
+    </div>
+    <div class="toggle" onclick="toggleSound()">Sound: <b id="sndState">ON</b></div>
   </div>
 </header>
 
 <section class="hero">
   <h1>PoloX Scripts Hub</h1>
   <p>Clean, fast and reliable scripts for Mobile & PC.</p>
+
+  <div class="video-box">
+    <iframe
+      src="https://www.youtube.com/embed/VIDEO_ID"
+      title="PoloX Scripts Video"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
 </section>
-
-<!-- SCRIPTS -->
-<section id="scripts" class="section">
-<h2>Scripts</h2>
-<div class="grid">
-  <div class="card" onclick="openUnlock('99 Nights In The Forest','loadstring(FOREST_SCRIPT)()')">
-    <h3>99 Nights In The Forest</h3><p>Auto Farm, Admin, ESP</p>
-  </div>
-  <div class="card" onclick="openUnlock('Escape Tsunami','loadstring(TSUNAMI_SCRIPT)()')">
-    <h3>Escape Tsunami</h3><p>Auto Rebirth, Speed</p>
-  </div>
-</div>
-</section>
-
-<!-- KEYS -->
-<section id="keys" class="section">
-<h2>License Keys</h2>
-<div class="grid">
-  <div class="card" onclick="openUnlock('Daily License Key','DAILY_KEY_12345')">
-    <h3>Daily Free Key</h3><p>Unlock daily license key</p>
-  </div>
-  <div class="card">
-    <h3>Premium Keys</h3><p>Premium access (unchanged)</p>
-  </div>
-</div>
-</section>
-
-<footer>© 2026 PoloX Scripts</footer>
-
-<!-- UNLOCK MODAL -->
-<div id="gate" class="modal">
-<div class="modal-box">
-<span class="close" onclick="closeAll()">×</span>
-<h3 id="unlockTitle">Unlock</h3>
-<p>Complete all steps</p>
-
-<div class="progress"><div id="bar"></div></div>
-<div id="percent">0% completed</div>
-
-<a class="step" href="https://youtube.com/@SENING_YOUTUBE" target="_blank" onclick="unlock('yt')">YouTube Channel</a>
-<a class="step" href="https://t.me/SENING_TELEGRAM" target="_blank" onclick="unlock('tg')">Telegram Channel</a>
-<a class="step" href="https://discord.gg/SENING_DISCORD" target="_blank" onclick="unlock('dc')">Discord Server</a>
-
-<button id="continue" onclick="checkUnlock()">Continue</button>
-<div id="checking">Checking...</div>
-</div>
-</div>
-
-<!-- SCRIPT PAGE -->
-<div id="scriptPage" class="modal">
-<div class="modal-box">
-<span class="close" onclick="closeAll()">×</span>
-<h3 id="finalTitle">Unlocked</h3>
-<button class="active" onclick="copyScript()">Copy</button>
-</div>
-</div>
 
 <audio id="snd">
-<source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=">
+  <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=">
 </audio>
 
 <script>
 let sound=true;
-let state={yt:false,tg:false,dc:false};
-let currentScript="";
 const snd=document.getElementById("snd");
 
-window.onload=()=>document.getElementById("loader").style.display="none";
-
-function play(){if(sound){snd.currentTime=0;snd.play().catch(()=>{})}}
 function toggleSound(){
   sound=!sound;
   document.getElementById("sndState").innerText=sound?"ON":"OFF";
-}
-function scrollToSec(id){play();document.getElementById(id).scrollIntoView({behavior:"smooth"})}
-
-function openUnlock(title,script){
-  play();
-  currentScript=script;
-  state={yt:false,tg:false,dc:false};
-  document.getElementById("unlockTitle").innerText=title;
-  document.getElementById("bar").style.width="0%";
-  document.getElementById("percent").innerText="0% completed";
-  document.querySelectorAll(".step").forEach(s=>s.classList.remove("done"));
-  document.getElementById("continue").classList.remove("active");
-  document.getElementById("gate").classList.add("active");
-}
-
-function unlock(t){
-  play();
-  if(state[t])return;
-  state[t]=true;
-  event.target.classList.add("done");
-  let done=Object.values(state).filter(v=>v).length;
-  let p=done*33;if(done===3)p=100;
-  document.getElementById("bar").style.width=p+"%";
-  document.getElementById("percent").innerText=p+"% completed";
-  if(done===3)document.getElementById("continue").classList.add("active");
-}
-
-function checkUnlock(){
-  if(!document.getElementById("continue").classList.contains("active"))return;
-  play();
-  document.getElementById("checking").style.display="block";
-  setTimeout(()=>{
-    document.getElementById("checking").style.display="none";
-    document.getElementById("gate").classList.remove("active");
-    document.getElementById("finalTitle").innerText="Unlocked";
-    document.getElementById("scriptPage").classList.add("active");
-  },1500);
-}
-
-function copyScript(){
-  play();
-  navigator.clipboard.writeText(currentScript);
-  alert("Copied!");
-}
-
-function closeAll(){
-  play();
-  document.querySelectorAll(".modal").forEach(m=>m.classList.remove("active"));
+  if(sound){snd.play().catch(()=>{})}
 }
 </script>
 
