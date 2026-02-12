@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roblox Scripts</title>
+<title>PoloX Scripts</title>
 
 <style>
 *{
@@ -14,7 +14,7 @@
 }
 
 body{
-    background:#000;
+    background:radial-gradient(circle at top, #111, #000 60%);
     color:#fff;
     overflow-x:hidden;
 }
@@ -28,121 +28,134 @@ body{
     align-items:center;
     justify-content:center;
     z-index:9999;
-    animation:fadeOut 1s ease forwards;
-    animation-delay:1.5s;
 }
-.loader-ring{
+.loader{
     width:60px;
     height:60px;
-    border:3px solid #222;
-    border-top:3px solid #fff;
+    border:2px solid #222;
+    border-top:2px solid #fff;
     border-radius:50%;
     animation:spin 1s linear infinite;
 }
-
 @keyframes spin{
     to{transform:rotate(360deg);}
 }
-@keyframes fadeOut{
-    to{opacity:0; visibility:hidden;}
-}
 
-/* ===== HEADER ===== */
+/* ===== NAVBAR ===== */
 header{
-    padding:25px;
+    position:fixed;
+    top:0;
+    width:100%;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    backdrop-filter:blur(10px);
+    background:rgba(0,0,0,.6);
     border-bottom:1px solid #222;
-    text-align:center;
-}
-header h1{
-    letter-spacing:3px;
-    font-size:26px;
+    z-index:10;
 }
 
-/* ===== NAV ===== */
-nav{
-    margin-top:10px;
+.logo{
+    font-size:20px;
+    letter-spacing:2px;
+    font-weight:bold;
 }
+
 nav a{
     color:#aaa;
-    margin:0 14px;
+    margin-left:22px;
     text-decoration:none;
     font-size:14px;
-    cursor:pointer;
-    position:relative;
-}
-nav a::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-5px;
-    width:0;
-    height:1px;
-    background:#fff;
     transition:.3s;
 }
 nav a:hover{
     color:#fff;
 }
-nav a:hover::after{
-    width:100%;
+
+/* ===== HERO ===== */
+.hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:120px 20px 60px;
+    animation:fadeUp 1s ease forwards;
 }
 
-/* ===== CONTENT ===== */
-.container{
-    max-width:1000px;
-    margin:auto;
-    padding:70px 20px;
+.hero h1{
+    font-size:42px;
+    margin-bottom:20px;
+}
+.hero p{
+    max-width:650px;
+    color:#aaa;
+    font-size:15px;
 }
 
-.page{
-    display:none;
-    opacity:0;
-    transform:translateY(20px);
-    animation:pageIn .5s ease forwards;
-}
-.page.active{
-    display:block;
-}
-
-@keyframes pageIn{
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* ===== CARDS ===== */
-.card{
-    border:1px solid #222;
-    padding:25px;
-    margin-bottom:25px;
-    transition:.3s;
-}
-.card:hover{
-    border-color:#fff;
-    transform:translateY(-4px);
-}
-.card h3{
-    margin-bottom:10px;
-}
-
-/* ===== BUTTON ===== */
-button{
+.hero button{
+    margin-top:35px;
+    padding:14px 34px;
     background:#fff;
     color:#000;
     border:none;
-    padding:10px 18px;
     font-weight:bold;
     cursor:pointer;
-    transition:.2s;
+    transition:.3s;
 }
-button:hover{
+.hero button:hover{
     transform:scale(1.05);
+}
+
+@keyframes fadeUp{
+    from{opacity:0; transform:translateY(40px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* ===== FEATURES ===== */
+.features{
+    max-width:1100px;
+    margin:auto;
+    padding:80px 20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:linear-gradient(145deg,#0a0a0a,#000);
+    border:1px solid #222;
+    padding:30px;
+    transition:.4s;
+}
+.card:hover{
+    transform:translateY(-6px);
+    border-color:#fff;
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+.card p{
+    color:#aaa;
+    font-size:14px;
+}
+
+/* ===== FOOTER ===== */
+footer{
+    text-align:center;
+    padding:40px;
+    color:#666;
+    font-size:13px;
+    border-top:1px solid #222;
 }
 
 /* ===== MOBILE ===== */
 @media(max-width:600px){
-    header h1{font-size:20px;}
+    .hero h1{font-size:28px;}
+    header{padding:16px 20px;}
 }
 </style>
 </head>
@@ -151,78 +164,63 @@ button:hover{
 
 <!-- LOADER -->
 <div id="loader">
-    <div class="loader-ring"></div>
+    <div class="loader"></div>
 </div>
 
 <header>
-    <h1>ROBLOX SCRIPTS</h1>
+    <div class="logo">PoloX</div>
     <nav>
-        <a onclick="showPage('home')">Home</a>
-        <a onclick="showPage('scripts')">Scripts</a>
-        <a onclick="showPage('about')">About</a>
+        <a onclick="play()">Home</a>
+        <a onclick="play()">Scripts</a>
+        <a onclick="play()">About</a>
+        <a onclick="play()">Download</a>
     </nav>
 </header>
 
-<div class="container">
-
-<!-- HOME -->
-<div id="home" class="page active">
-    <h2>Professional Roblox Scripts</h2>
-    <p>Clean UI, smooth performance, and powerful scripts.</p>
-</div>
-
-<!-- SCRIPTS -->
-<div id="scripts" class="page">
-    <div class="card">
-        <h3>⚡ Auto Farm</h3>
-        <p>Fast and stable autofarm script.</p>
-        <button onclick="copyScript('loadstring(AUTO_FARM_SCRIPT)')">Copy Script</button>
-    </div>
-
-    <div class="card">
-        <h3>🔥 Admin Script</h3>
-        <p>Advanced admin commands.</p>
-        <button onclick="copyScript('loadstring(ADMIN_SCRIPT)')">Copy Script</button>
-    </div>
-</div>
-
-<!-- ABOUT -->
-<div id="about" class="page">
+<section class="hero">
+    <h1>Experience Reliable Roblox Scripts</h1>
     <p>
-        I am a Roblox scripter focused on professional design, smooth animations,
-        and clean black & white aesthetics.
+        PoloX Scripts provides clean, fast and powerful Roblox scripts
+        with professional design and smooth performance.
     </p>
-</div>
+    <button onclick="play()">Get Started</button>
+</section>
 
-</div>
+<section class="features">
+    <div class="card">
+        <h3>External Execution</h3>
+        <p>Execute scripts externally with stable and clean performance.</p>
+    </div>
+    <div class="card">
+        <h3>Lightning Fast</h3>
+        <p>Optimized scripts for maximum speed and reliability.</p>
+    </div>
+    <div class="card">
+        <h3>Minimal Design</h3>
+        <p>Black & white professional UI focused on usability.</p>
+    </div>
+</section>
 
-<!-- SOUNDS (Base64, external file yo‘q) -->
-<audio id="clickSound">
-<source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=" type="audio/wav">
+<footer>
+    © 2026 PoloX Scripts. All rights reserved.
+</footer>
+
+<!-- SOUND -->
+<audio id="snd">
+<source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=">
 </audio>
 
 <script>
-const clickSound=document.getElementById("clickSound");
+/* LOADER */
+window.onload=()=>{
+    document.getElementById("loader").style.display="none";
+};
 
-/* PAGE SWITCH */
-function showPage(id){
-    clickSound.currentTime=0;
-    clickSound.play();
-
-    document.querySelectorAll(".page").forEach(p=>{
-        p.classList.remove("active");
-    });
-
-    const page=document.getElementById(id);
-    page.classList.add("active");
-}
-
-/* COPY SCRIPT */
-function copyScript(text){
-    navigator.clipboard.writeText(text);
-    clickSound.currentTime=0;
-    clickSound.play();
-    alert("Script copied!");
+/* SOUND */
+function play(){
+    const s=document.getElementById("snd");
+    s.currentTime=0;
+    s.play();
 }
 </script>
 
