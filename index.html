@@ -22,11 +22,10 @@ body{
   color:var(--text);
 }
 
-/* ================= NAVBAR ================= */
+/* ============ NAVBAR ============ */
 header{
   position:fixed;
-  top:0;
-  left:0;
+  top:0;left:0;
   width:100%;
   height:95px;
   padding:0 32px;
@@ -86,10 +85,10 @@ header{
   cursor:pointer;
 }
 
-/* ================= HOME ================= */
+/* ============ HOME ============ */
 #home{
   min-height:100vh;
-  padding-top:140px; /* navbar uchun joy */
+  padding-top:140px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -110,13 +109,27 @@ header{
   font-size:18px;
 }
 
-/* ================= SECTIONS ================= */
+.video-box{
+  margin:35px auto 0;
+  max-width:880px;
+  aspect-ratio:16/9;
+  border-radius:26px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:0 0 25px rgba(255,255,255,.15);
+}
+.video-box iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+/* ============ SECTIONS ============ */
 .section{
   max-width:1150px;
   margin:auto;
   padding:100px 20px;
 }
-
 .section h2{
   text-align:center;
   margin-bottom:40px;
@@ -128,7 +141,7 @@ header{
   gap:25px;
 }
 
-/* ================= CARDS ================= */
+/* ============ CARDS ============ */
 .card{
   background:linear-gradient(145deg,#0a0a0a,#000);
   border:1px solid var(--border);
@@ -143,7 +156,7 @@ header{
 }
 .card p{color:var(--muted)}
 
-/* ================= MODAL ================= */
+/* ============ MODAL ============ */
 .modal{
   position:fixed;
   inset:0;
@@ -165,17 +178,15 @@ header{
   text-align:center;
   position:relative;
 }
-
 .close{
   position:absolute;
-  top:14px;
-  right:18px;
+  top:14px;right:18px;
   font-size:22px;
   color:#aaa;
   cursor:pointer;
 }
 
-/* ================= PROGRESS ================= */
+/* ============ PROGRESS ============ */
 .progress{
   height:10px;
   background:#222;
@@ -183,17 +194,10 @@ header{
   overflow:hidden;
   margin:15px 0;
 }
-#bar{
-  height:100%;
-  width:0%;
-  background:#fff;
-}
-#percent{
-  font-size:12px;
-  color:#ccc;
-}
+#bar{height:100%;width:0%;background:#fff}
+#percent{font-size:12px;color:#ccc}
 
-/* ================= STEPS ================= */
+/* ============ STEPS ============ */
 .step{
   display:block;
   background:#fff;
@@ -204,15 +208,10 @@ header{
   font-weight:bold;
   text-decoration:none;
 }
-.step.done{
-  background:var(--green);
-}
-.step.done::after{
-  content:"✓";
-  float:right;
-}
+.step.done{background:var(--green)}
+.step.done::after{content:"✓";float:right}
 
-/* ================= BUTTON ================= */
+/* ============ BUTTON ============ */
 button{
   width:100%;
   padding:14px;
@@ -222,10 +221,7 @@ button{
   font-weight:bold;
   opacity:.4;
 }
-button.active{
-  opacity:1;
-  cursor:pointer;
-}
+button.active{opacity:1;cursor:pointer}
 
 footer{
   text-align:center;
@@ -264,6 +260,14 @@ footer{
   <div class="home-inner">
     <h1>PoloX Scripts Hub</h1>
     <p>Clean, fast and reliable scripts for Mobile & PC.</p>
+
+    <div class="video-box">
+      <iframe 
+        src="https://www.youtube.com/embed/_jsAY7nEYmo"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
   </div>
 </section>
 
