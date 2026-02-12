@@ -9,151 +9,56 @@
 
 <style>
 :root{
-  --bg:#000;
-  --border:#1f1f1f;
-  --text:#fff;
-  --muted:#aaa;
-  --green:#16ff00;
+  --bg:#000;--border:#1f1f1f;--text:#fff;--muted:#aaa;--green:#16ff00;
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{
-  background:radial-gradient(circle at top,#111,#000 65%);
-  color:var(--text);
-}
+body{background:radial-gradient(circle at top,#111,#000 65%);color:#fff}
 
 /* NAVBAR */
 header{
-  position:fixed;
-  top:0;
-  width:100%;
-  height:95px;
+  position:fixed;top:0;width:100%;height:95px;
   padding:0 32px;
-  display:grid;
-  grid-template-columns:auto 1fr auto;
+  display:grid;grid-template-columns:auto 1fr auto;
   align-items:center;
   background:rgba(0,0,0,.85);
-  backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);
   z-index:1000;
 }
-.nav-left{
-  display:flex;
-  align-items:center;
-  gap:22px;
-}
-.nav-left a{
-  color:var(--muted);
-  font-size:19px;
-  font-weight:600;
-  cursor:pointer;
-  text-decoration:none;
-}
+.nav-left{display:flex;align-items:center;gap:22px}
+.nav-left a{color:#aaa;font-size:19px;font-weight:600;cursor:pointer;text-decoration:none}
 .nav-left a:hover{color:#fff}
+.nav-logo{height:44px;cursor:pointer}
 
-.nav-logo{
-  height:44px;
-  cursor:pointer;
-  transition:.3s;
-}
-.nav-logo:hover{transform:scale(1.08)}
+.logo{font-size:24px;font-weight:bold;letter-spacing:3px}
 
-.logo{
-  text-align:center;
-  font-size:24px;
-  font-weight:bold;
-  letter-spacing:3px;
-  animation:logoGlow 2.5s infinite;
-}
-@keyframes logoGlow{
-  0%{text-shadow:0 0 6px #fff}
-  50%{text-shadow:0 0 20px #fff}
-  100%{text-shadow:0 0 6px #fff}
-}
-
-.nav-right{
-  display:flex;
-  align-items:center;
-  gap:26px;
-}
-.socials{
-  display:flex;
-  gap:22px;
-}
-.socials a{
-  color:#fff;
-  font-size:22px;
-  opacity:.85;
-  transition:.3s;
-}
-.socials a:hover{
-  opacity:1;
-  transform:scale(1.2);
-  text-shadow:
-    0 0 8px #fff,
-    0 0 16px #fff,
-    0 0 24px #fff;
-}
-
-.toggle{
-  border:1px solid var(--border);
-  padding:7px 16px;
-  border-radius:22px;
-  font-size:14px;
-  cursor:pointer;
-}
+.nav-right{display:flex;align-items:center;gap:26px}
+.socials{display:flex;gap:22px}
+.socials a{color:#fff;font-size:22px}
+.toggle{border:1px solid var(--border);padding:7px 16px;border-radius:22px;font-size:14px;cursor:pointer}
 
 /* HERO */
-.hero{
-  min-height:100vh;
-  padding-top:150px;
-  text-align:center;
-}
+.hero{min-height:100vh;padding-top:150px;text-align:center}
 .hero h1{font-size:50px}
-.hero p{color:var(--muted);margin-top:10px}
-
-.video-box{
-  margin:38px auto 0;
-  max-width:860px;
-  aspect-ratio:16/9;
-  border-radius:24px;
-  overflow:hidden;
-  border:1px solid var(--border);
-}
-.video-box iframe{width:100%;height:100%}
+.hero p{color:#aaa;margin-top:10px}
 
 /* SECTIONS */
 .section{max-width:1150px;margin:auto;padding:80px 20px}
 .section h2{text-align:center;margin-bottom:35px}
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:25px;
-}
-
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
 .card{
-  background:linear-gradient(145deg,#0a0a0a,#000);
+  background:#000;
   border:1px solid var(--border);
   padding:25px;
   border-radius:20px;
   cursor:pointer;
-  transition:.4s;
-  position:relative;
-  z-index:2;
 }
-.card:hover{
-  border-color:#fff;
-  transform:translateY(-6px);
-  box-shadow:
-    0 0 15px rgba(255,255,255,.3),
-    0 0 30px rgba(255,255,255,.15);
-}
-.card p{color:var(--muted)}
+.card:hover{border-color:#fff}
+.card p{color:#aaa}
 
 /* MODAL */
 .modal{
-  position:fixed;
-  inset:0;
+  position:fixed;inset:0;
   background:rgba(0,0,0,.9);
   display:none;
   align-items:center;
@@ -163,43 +68,17 @@ header{
 .modal.active{display:flex}
 
 .modal-box{
-  background:#000;
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:30px;
-  width:92%;
-  max-width:480px;
-  text-align:center;
-  position:relative;
+  background:#000;border:1px solid var(--border);
+  border-radius:24px;padding:30px;
+  width:92%;max-width:480px;
+  text-align:center;position:relative;
 }
-.close{
-  position:absolute;
-  top:14px;
-  right:18px;
-  font-size:22px;
-  color:#aaa;
-  cursor:pointer;
-}
-.close:hover{color:#fff}
+.close{position:absolute;top:14px;right:18px;font-size:22px;color:#aaa;cursor:pointer}
 
 /* PROGRESS */
-.progress{
-  height:10px;
-  background:#222;
-  border-radius:20px;
-  overflow:hidden;
-  margin:15px 0;
-}
-#bar{
-  height:100%;
-  width:0%;
-  background:#fff;
-  transition:.4s;
-}
-#percent{
-  font-size:12px;
-  color:#ccc;
-}
+.progress{height:10px;background:#222;border-radius:20px;overflow:hidden;margin:15px 0}
+#bar{height:100%;width:0%;background:#fff}
+#percent{font-size:12px;color:#ccc}
 
 /* STEPS */
 .step{
@@ -212,13 +91,8 @@ header{
   font-weight:bold;
   text-decoration:none;
 }
-.step.done{
-  background:var(--green);
-}
-.step.done::after{
-  content:"✓";
-  float:right;
-}
+.step.done{background:var(--green)}
+.step.done::after{content:"✓";float:right}
 
 /* CONTINUE */
 button{
@@ -230,20 +104,9 @@ button{
   font-weight:bold;
   opacity:.4;
 }
-button.active{
-  opacity:1;
-  cursor:pointer;
-  box-shadow:
-    0 0 10px #16ff00,
-    0 0 25px rgba(22,255,0,.6);
-}
+button.active{opacity:1;cursor:pointer}
 
-footer{
-  text-align:center;
-  padding:40px;
-  border-top:1px solid var(--border);
-  color:#666;
-}
+footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#666}
 </style>
 </head>
 
@@ -273,39 +136,29 @@ footer{
 <section id="home" class="hero">
   <h1>PoloX Scripts Hub</h1>
   <p>Clean, fast and reliable scripts for Mobile & PC.</p>
-  <div class="video-box">
-    <iframe src="https://www.youtube.com/embed/_jsAY7nEYmo" allowfullscreen></iframe>
-  </div>
 </section>
 
 <section id="scripts" class="section">
 <h2>Scripts</h2>
 <div class="grid">
-
-  <!-- SCRIPT CARD -->
   <div class="card" onclick="openScript99()">
     <h3>99 Nights In The Forest</h3>
     <p>Auto Farm, Admin, ESP</p>
   </div>
-
 </div>
 </section>
 
 <section id="keys" class="section">
 <h2>License Keys</h2>
 <div class="grid">
-
-  <!-- DAILY KEY -->
   <div class="card" onclick="openDailyKey()">
     <h3>Daily Free Key</h3>
     <p>Unlock today’s key</p>
   </div>
-
   <div class="card">
     <h3>Premium Keys</h3>
     <p>Premium access</p>
   </div>
-
 </div>
 </section>
 
@@ -320,54 +173,28 @@ footer{
     <div class="progress"><div id="bar"></div></div>
     <div id="percent">0% completed</div>
 
-    <a class="step" href="https://www.youtube.com/@PoloX_script" onclick="unlock(event,'yt')">YouTube</a>
-    <a class="step" href="https://t.me/eventpolo" onclick="unlock(event,'tg')">Telegram</a>
-    <a class="step" href="https://discord.gg/SENING_DISCORD" onclick="unlock(event,'dc')">Discord</a>
+    <!-- FIX: href ishlaydi, preventDefault YO‘Q -->
+    <a class="step" href="https://www.youtube.com/@PoloX_script" target="_blank" onclick="unlock('yt', this)">YouTube</a>
+    <a class="step" href="https://t.me/eventpolo" target="_blank" onclick="unlock('tg', this)">Telegram</a>
+    <a class="step" href="https://discord.gg/SENING_DISCORD" target="_blank" onclick="unlock('dc', this)">Discord</a>
 
     <button id="continue" onclick="finish()">Continue</button>
   </div>
 </div>
 
-<audio id="snd">
-<source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=">
-</audio>
-
 <script>
-let sound=true;
 let state={yt:false,tg:false,dc:false};
 let currentScript="";
 
-const snd=document.getElementById("snd");
+function goHome(){window.scrollTo({top:0,behavior:"smooth"})}
+function scrollToSec(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
 
-function toggleSound(){
-  sound=!sound;
-  document.getElementById("sndState").innerText=sound?"ON":"OFF";
-}
-
-function play(){
-  if(sound){
-    snd.currentTime=0;
-    snd.play().catch(()=>{});
-  }
-}
-
-function goHome(){
-  play();
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-function scrollToSec(id){
-  play();
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
-}
-
-/* ===== FIXED SCRIPT UNLOCK ===== */
 function openScript99(){
   openUnlock(
     "99 Nights In The Forest",
     'loadstring(game:HttpGet("https://pastebin.com/raw/RZK9XdtH"))()'
   );
 }
-
 function openDailyKey(){
   openUnlock(
     "Daily License Key",
@@ -376,26 +203,21 @@ function openDailyKey(){
 }
 
 function openUnlock(title,script){
-  play();
   currentScript=script;
   state={yt:false,tg:false,dc:false};
-
   document.getElementById("unlockTitle").innerText=title;
   document.getElementById("bar").style.width="0%";
   document.getElementById("percent").innerText="0% completed";
   document.querySelectorAll(".step").forEach(s=>s.classList.remove("done"));
   document.getElementById("continue").classList.remove("active");
-
   document.getElementById("gate").classList.add("active");
 }
 
-function unlock(e,type){
-  e.preventDefault();
-  play();
-
+/* ✅ FIX QILINGAN UNLOCK */
+function unlock(type,el){
   if(state[type]) return;
   state[type]=true;
-  e.currentTarget.classList.add("done");
+  el.classList.add("done");
 
   let done=Object.values(state).filter(v=>v).length;
   let p=done*33;
@@ -404,10 +226,6 @@ function unlock(e,type){
   document.getElementById("bar").style.width=p+"%";
   document.getElementById("percent").innerText=p+"% completed";
 
-  setTimeout(()=>{
-    window.open(e.currentTarget.href,"_blank");
-  },200);
-
   if(done===3){
     document.getElementById("continue").classList.add("active");
   }
@@ -415,12 +233,10 @@ function unlock(e,type){
 
 function finish(){
   if(!document.getElementById("continue").classList.contains("active")) return;
-  play();
   navigator.clipboard.writeText(currentScript);
   alert("Copied!");
   closeAll();
 }
-
 function closeAll(){
   document.getElementById("gate").classList.remove("active");
 }
