@@ -9,56 +9,144 @@
 
 <style>
 :root{
-  --bg:#000;--border:#1f1f1f;--text:#fff;--muted:#aaa;--green:#16ff00;
+  --bg:#000;
+  --border:#1f1f1f;
+  --text:#fff;
+  --muted:#aaa;
+  --green:#16ff00;
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:radial-gradient(circle at top,#111,#000 65%);color:#fff}
 
-/* NAVBAR */
+body{
+  background:radial-gradient(circle at top,#111,#000 65%);
+  color:var(--text);
+}
+
+/* ================= NAVBAR ================= */
 header{
-  position:fixed;top:0;width:100%;height:95px;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:95px;
   padding:0 32px;
-  display:grid;grid-template-columns:auto 1fr auto;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
   align-items:center;
-  background:rgba(0,0,0,.85);
+  background:rgba(0,0,0,.9);
+  backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);
   z-index:1000;
 }
-.nav-left{display:flex;align-items:center;gap:22px}
-.nav-left a{color:#aaa;font-size:19px;font-weight:600;cursor:pointer;text-decoration:none}
+
+.nav-left{
+  display:flex;
+  align-items:center;
+  gap:22px;
+}
+.nav-left a{
+  color:var(--muted);
+  font-size:19px;
+  font-weight:600;
+  cursor:pointer;
+  text-decoration:none;
+}
 .nav-left a:hover{color:#fff}
-.nav-logo{height:44px;cursor:pointer}
 
-.logo{font-size:24px;font-weight:bold;letter-spacing:3px}
+.nav-logo{
+  height:44px;
+  cursor:pointer;
+}
 
-.nav-right{display:flex;align-items:center;gap:26px}
-.socials{display:flex;gap:22px}
-.socials a{color:#fff;font-size:22px}
-.toggle{border:1px solid var(--border);padding:7px 16px;border-radius:22px;font-size:14px;cursor:pointer}
+.logo{
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+  letter-spacing:3px;
+}
 
-/* HERO */
-.hero{min-height:100vh;padding-top:150px;text-align:center}
-.hero h1{font-size:50px}
-.hero p{color:#aaa;margin-top:10px}
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:26px;
+}
+.socials{
+  display:flex;
+  gap:22px;
+}
+.socials a{
+  color:#fff;
+  font-size:22px;
+}
+.toggle{
+  border:1px solid var(--border);
+  padding:7px 16px;
+  border-radius:22px;
+  font-size:14px;
+  cursor:pointer;
+}
 
-/* SECTIONS */
-.section{max-width:1150px;margin:auto;padding:80px 20px}
-.section h2{text-align:center;margin-bottom:35px}
+/* ================= HOME ================= */
+#home{
+  min-height:100vh;
+  padding-top:140px; /* navbar uchun joy */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+.home-inner{
+  max-width:900px;
+}
+
+.home-inner h1{
+  font-size:52px;
+  margin-bottom:12px;
+}
+
+.home-inner p{
+  color:var(--muted);
+  font-size:18px;
+}
+
+/* ================= SECTIONS ================= */
+.section{
+  max-width:1150px;
+  margin:auto;
+  padding:100px 20px;
+}
+
+.section h2{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+}
+
+/* ================= CARDS ================= */
 .card{
-  background:#000;
+  background:linear-gradient(145deg,#0a0a0a,#000);
   border:1px solid var(--border);
   padding:25px;
   border-radius:20px;
   cursor:pointer;
+  transition:.3s;
 }
-.card:hover{border-color:#fff}
-.card p{color:#aaa}
+.card:hover{
+  border-color:#fff;
+  box-shadow:0 0 18px rgba(255,255,255,.2);
+}
+.card p{color:var(--muted)}
 
-/* MODAL */
+/* ================= MODAL ================= */
 .modal{
-  position:fixed;inset:0;
+  position:fixed;
+  inset:0;
   background:rgba(0,0,0,.9);
   display:none;
   align-items:center;
@@ -68,19 +156,44 @@ header{
 .modal.active{display:flex}
 
 .modal-box{
-  background:#000;border:1px solid var(--border);
-  border-radius:24px;padding:30px;
-  width:92%;max-width:480px;
-  text-align:center;position:relative;
+  width:92%;
+  max-width:480px;
+  background:#000;
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  position:relative;
 }
-.close{position:absolute;top:14px;right:18px;font-size:22px;color:#aaa;cursor:pointer}
 
-/* PROGRESS */
-.progress{height:10px;background:#222;border-radius:20px;overflow:hidden;margin:15px 0}
-#bar{height:100%;width:0%;background:#fff}
-#percent{font-size:12px;color:#ccc}
+.close{
+  position:absolute;
+  top:14px;
+  right:18px;
+  font-size:22px;
+  color:#aaa;
+  cursor:pointer;
+}
 
-/* STEPS */
+/* ================= PROGRESS ================= */
+.progress{
+  height:10px;
+  background:#222;
+  border-radius:20px;
+  overflow:hidden;
+  margin:15px 0;
+}
+#bar{
+  height:100%;
+  width:0%;
+  background:#fff;
+}
+#percent{
+  font-size:12px;
+  color:#ccc;
+}
+
+/* ================= STEPS ================= */
 .step{
   display:block;
   background:#fff;
@@ -91,10 +204,15 @@ header{
   font-weight:bold;
   text-decoration:none;
 }
-.step.done{background:var(--green)}
-.step.done::after{content:"✓";float:right}
+.step.done{
+  background:var(--green);
+}
+.step.done::after{
+  content:"✓";
+  float:right;
+}
 
-/* CONTINUE */
+/* ================= BUTTON ================= */
 button{
   width:100%;
   padding:14px;
@@ -104,9 +222,17 @@ button{
   font-weight:bold;
   opacity:.4;
 }
-button.active{opacity:1;cursor:pointer}
+button.active{
+  opacity:1;
+  cursor:pointer;
+}
 
-footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#666}
+footer{
+  text-align:center;
+  padding:40px;
+  border-top:1px solid var(--border);
+  color:#666;
+}
 </style>
 </head>
 
@@ -129,15 +255,19 @@ footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#
       <a href="https://t.me/eventpolo" target="_blank"><i class="fab fa-telegram"></i></a>
       <a href="https://discord.gg/SENING_DISCORD" target="_blank"><i class="fab fa-discord"></i></a>
     </div>
-    <div class="toggle" onclick="toggleSound()">Sound: <b id="sndState">ON</b></div>
+    <div class="toggle">Sound: ON</div>
   </div>
 </header>
 
-<section id="home" class="hero">
-  <h1>PoloX Scripts Hub</h1>
-  <p>Clean, fast and reliable scripts for Mobile & PC.</p>
+<!-- HOME -->
+<section id="home">
+  <div class="home-inner">
+    <h1>PoloX Scripts Hub</h1>
+    <p>Clean, fast and reliable scripts for Mobile & PC.</p>
+  </div>
 </section>
 
+<!-- SCRIPTS -->
 <section id="scripts" class="section">
 <h2>Scripts</h2>
 <div class="grid">
@@ -148,6 +278,7 @@ footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#
 </div>
 </section>
 
+<!-- KEYS -->
 <section id="keys" class="section">
 <h2>License Keys</h2>
 <div class="grid">
@@ -164,7 +295,7 @@ footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#
 
 <footer>© 2026 PoloX Scripts</footer>
 
-<!-- UNLOCK MODAL -->
+<!-- UNLOCKER -->
 <div id="gate" class="modal">
   <div class="modal-box">
     <span class="close" onclick="closeAll()">×</span>
@@ -173,10 +304,9 @@ footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#
     <div class="progress"><div id="bar"></div></div>
     <div id="percent">0% completed</div>
 
-    <!-- FIX: href ishlaydi, preventDefault YO‘Q -->
-    <a class="step" href="https://www.youtube.com/@PoloX_script" target="_blank" onclick="unlock('yt', this)">YouTube</a>
-    <a class="step" href="https://t.me/eventpolo" target="_blank" onclick="unlock('tg', this)">Telegram</a>
-    <a class="step" href="https://discord.gg/SENING_DISCORD" target="_blank" onclick="unlock('dc', this)">Discord</a>
+    <a class="step" href="https://www.youtube.com/@PoloX_script" target="_blank" onclick="unlock('yt',this)">YouTube</a>
+    <a class="step" href="https://t.me/eventpolo" target="_blank" onclick="unlock('tg',this)">Telegram</a>
+    <a class="step" href="https://discord.gg/SENING_DISCORD" target="_blank" onclick="unlock('dc',this)">Discord</a>
 
     <button id="continue" onclick="finish()">Continue</button>
   </div>
@@ -186,8 +316,12 @@ footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#
 let state={yt:false,tg:false,dc:false};
 let currentScript="";
 
-function goHome(){window.scrollTo({top:0,behavior:"smooth"})}
-function scrollToSec(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
+function goHome(){
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function scrollToSec(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
 
 function openScript99(){
   openUnlock(
@@ -213,7 +347,6 @@ function openUnlock(title,script){
   document.getElementById("gate").classList.add("active");
 }
 
-/* ✅ FIX QILINGAN UNLOCK */
 function unlock(type,el){
   if(state[type]) return;
   state[type]=true;
