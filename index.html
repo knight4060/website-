@@ -8,10 +8,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+:root{
+  --bg:#000;
+  --border:#1f1f1f;
+  --text:#fff;
+  --muted:#aaa;
+  --green:#16ff00;
+}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{
-  background:#000;
-  color:#fff;
+  background:radial-gradient(circle at top,#111,#000 65%);
+  color:var(--text);
 }
 
 /* NAVBAR */
@@ -19,49 +26,129 @@ header{
   position:fixed;
   top:0;
   width:100%;
-  height:80px;
+  height:95px;
+  padding:0 32px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  z-index:1000;
+}
+.nav-left{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  padding:0 30px;
-  background:#000;
-  border-bottom:1px solid #222;
-  z-index:100;
+  gap:22px;
 }
-.nav-left{display:flex;align-items:center;gap:20px}
-.nav-left img{height:40px;cursor:pointer}
-.nav-left a{color:#aaa;text-decoration:none;font-size:18px}
+.nav-left a{
+  color:var(--muted);
+  font-size:19px;
+  font-weight:600;
+  cursor:pointer;
+  text-decoration:none;
+}
 .nav-left a:hover{color:#fff}
 
-.logo{
-  font-size:22px;
-  font-weight:bold;
-  letter-spacing:2px;
-}
-
-.nav-right{display:flex;align-items:center;gap:20px}
-.nav-right a{color:#fff;font-size:20px}
-.nav-right a:hover{opacity:.7}
-
-/* SECTIONS */
-section{padding:120px 20px 80px}
-h2{text-align:center;margin-bottom:30px}
-
-/* CARDS */
-.container{max-width:1000px;margin:auto}
-.card{
-  border:1px solid #333;
-  border-radius:16px;
-  padding:20px;
-  margin-bottom:20px;
+.nav-logo{
+  height:44px;
   cursor:pointer;
   transition:.3s;
 }
+.nav-logo:hover{transform:scale(1.08)}
+
+.logo{
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+  letter-spacing:3px;
+  animation:logoGlow 2.5s infinite;
+}
+@keyframes logoGlow{
+  0%{text-shadow:0 0 6px #fff}
+  50%{text-shadow:0 0 20px #fff}
+  100%{text-shadow:0 0 6px #fff}
+}
+
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:26px;
+}
+.socials{
+  display:flex;
+  gap:22px;
+}
+.socials a{
+  color:#fff;
+  font-size:22px;
+  opacity:.85;
+  transition:.3s;
+}
+.socials a:hover{
+  opacity:1;
+  transform:scale(1.2);
+  text-shadow:
+    0 0 8px #fff,
+    0 0 16px #fff,
+    0 0 24px #fff;
+}
+
+.toggle{
+  border:1px solid var(--border);
+  padding:7px 16px;
+  border-radius:22px;
+  font-size:14px;
+  cursor:pointer;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  padding-top:150px;
+  text-align:center;
+}
+.hero h1{font-size:50px}
+.hero p{color:var(--muted);margin-top:10px}
+
+.video-box{
+  margin:38px auto 0;
+  max-width:860px;
+  aspect-ratio:16/9;
+  border-radius:24px;
+  overflow:hidden;
+  border:1px solid var(--border);
+}
+.video-box iframe{width:100%;height:100%}
+
+/* SECTIONS */
+.section{max-width:1150px;margin:auto;padding:80px 20px}
+.section h2{text-align:center;margin-bottom:35px}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+}
+
+.card{
+  background:linear-gradient(145deg,#0a0a0a,#000);
+  border:1px solid var(--border);
+  padding:25px;
+  border-radius:20px;
+  cursor:pointer;
+  transition:.4s;
+  position:relative;
+  z-index:2;
+}
 .card:hover{
   border-color:#fff;
-  box-shadow:0 0 15px rgba(255,255,255,.2);
+  transform:translateY(-6px);
+  box-shadow:
+    0 0 15px rgba(255,255,255,.3),
+    0 0 30px rgba(255,255,255,.15);
 }
-.card p{color:#aaa}
+.card p{color:var(--muted)}
 
 /* MODAL */
 .modal{
@@ -71,65 +158,90 @@ h2{text-align:center;margin-bottom:30px}
   display:none;
   align-items:center;
   justify-content:center;
-  z-index:1000;
+  z-index:9999;
 }
 .modal.active{display:flex}
 
 .modal-box{
-  width:90%;
-  max-width:420px;
   background:#000;
-  border:1px solid #333;
-  border-radius:20px;
-  padding:25px;
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:30px;
+  width:92%;
+  max-width:480px;
   text-align:center;
+  position:relative;
 }
-.modal-box h3{margin-bottom:15px}
+.close{
+  position:absolute;
+  top:14px;
+  right:18px;
+  font-size:22px;
+  color:#aaa;
+  cursor:pointer;
+}
+.close:hover{color:#fff}
 
+/* PROGRESS */
 .progress{
-  height:8px;
+  height:10px;
   background:#222;
-  border-radius:10px;
+  border-radius:20px;
   overflow:hidden;
-  margin-bottom:10px;
+  margin:15px 0;
 }
-#bar{height:100%;width:0%;background:#fff}
+#bar{
+  height:100%;
+  width:0%;
+  background:#fff;
+  transition:.4s;
+}
+#percent{
+  font-size:12px;
+  color:#ccc;
+}
 
-#percent{font-size:12px;color:#aaa;margin-bottom:10px}
-
+/* STEPS */
 .step{
   display:block;
   background:#fff;
   color:#000;
-  padding:12px;
-  margin:8px 0;
-  border-radius:14px;
+  padding:14px;
+  margin:10px 0;
+  border-radius:18px;
   font-weight:bold;
   text-decoration:none;
 }
-.step.done{background:#16ff00}
+.step.done{
+  background:var(--green);
+}
+.step.done::after{
+  content:"✓";
+  float:right;
+}
 
+/* CONTINUE */
 button{
   width:100%;
-  padding:12px;
-  margin-top:10px;
+  padding:14px;
   border:none;
-  border-radius:14px;
+  border-radius:18px;
+  background:#fff;
   font-weight:bold;
   opacity:.4;
 }
-button.active{opacity:1;cursor:pointer}
-
-.close{
-  margin-top:10px;
-  color:#aaa;
+button.active{
+  opacity:1;
   cursor:pointer;
+  box-shadow:
+    0 0 10px #16ff00,
+    0 0 25px rgba(22,255,0,.6);
 }
 
 footer{
   text-align:center;
-  padding:30px;
-  border-top:1px solid #222;
+  padding:40px;
+  border-top:1px solid var(--border);
   color:#666;
 }
 </style>
@@ -139,59 +251,71 @@ footer{
 
 <header>
   <div class="nav-left">
-    <img src="photo_2026-02-13_00-21-40.jpg" onclick="goHome()">
+    <img src="photo_2026-02-13_00-21-40.jpg" class="nav-logo" onclick="goHome()">
     <a onclick="goHome()">Home</a>
-    <a onclick="scrollTo('scripts')">Scripts</a>
-    <a onclick="scrollTo('keys')">Keys</a>
+    <a onclick="scrollToSec('scripts')">Scripts</a>
+    <a onclick="scrollToSec('keys')">Keys</a>
   </div>
 
   <div class="logo">PoloX Scripts</div>
 
   <div class="nav-right">
-    <a href="https://www.youtube.com/@PoloX_script" target="_blank"><i class="fab fa-youtube"></i></a>
-    <a href="https://t.me/eventpolo" target="_blank"><i class="fab fa-telegram"></i></a>
-    <a href="https://discord.gg/SENING_DISCORD" target="_blank"><i class="fab fa-discord"></i></a>
+    <div class="socials">
+      <a href="https://www.youtube.com/@PoloX_script" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.instagram.com/polo_bro.7p" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://t.me/eventpolo" target="_blank"><i class="fab fa-telegram"></i></a>
+      <a href="https://discord.gg/SENING_DISCORD" target="_blank"><i class="fab fa-discord"></i></a>
+    </div>
+    <div class="toggle" onclick="toggleSound()">Sound: <b id="sndState">ON</b></div>
   </div>
 </header>
 
-<section id="home">
-  <h2>Welcome to PoloX Scripts</h2>
-</section>
-
-<section id="scripts">
-  <h2>Scripts</h2>
-  <div class="container">
-    <div class="card"
-      onclick="openUnlock(
-        '99 Nights In The Forest',
-        'loadstring(game:HttpGet(\"https://pastebin.com/raw/RZK9XdtH\"))()'
-      )">
-      <h3>99 Nights In The Forest</h3>
-      <p>Auto Farm, Admin, ESP</p>
-    </div>
+<section id="home" class="hero">
+  <h1>PoloX Scripts Hub</h1>
+  <p>Clean, fast and reliable scripts for Mobile & PC.</p>
+  <div class="video-box">
+    <iframe src="https://www.youtube.com/embed/_jsAY7nEYmo" allowfullscreen></iframe>
   </div>
 </section>
 
-<section id="keys">
-  <h2>License Keys</h2>
-  <div class="container">
-    <div class="card"
-      onclick="openUnlock(
-        'Daily License Key',
-        '99nightinforest-AOHSDIBNJASCOBXVZHKLNJCVBHO'
-      )">
-      <h3>Daily Free Key</h3>
-      <p>Unlock today’s key</p>
-    </div>
+<section id="scripts" class="section">
+<h2>Scripts</h2>
+<div class="grid">
+
+  <!-- SCRIPT CARD -->
+  <div class="card" onclick="openScript99()">
+    <h3>99 Nights In The Forest</h3>
+    <p>Auto Farm, Admin, ESP</p>
   </div>
+
+</div>
+</section>
+
+<section id="keys" class="section">
+<h2>License Keys</h2>
+<div class="grid">
+
+  <!-- DAILY KEY -->
+  <div class="card" onclick="openDailyKey()">
+    <h3>Daily Free Key</h3>
+    <p>Unlock today’s key</p>
+  </div>
+
+  <div class="card">
+    <h3>Premium Keys</h3>
+    <p>Premium access</p>
+  </div>
+
+</div>
 </section>
 
 <footer>© 2026 PoloX Scripts</footer>
 
-<!-- UNLOCKER -->
-<div id="unlocker" class="modal">
+<!-- UNLOCK MODAL -->
+<div id="gate" class="modal">
   <div class="modal-box">
-    <h3 id="title">Unlock</h3>
+    <span class="close" onclick="closeAll()">×</span>
+    <h3 id="unlockTitle">Unlock</h3>
 
     <div class="progress"><div id="bar"></div></div>
     <div id="percent">0% completed</div>
@@ -201,43 +325,88 @@ footer{
     <a class="step" href="https://discord.gg/SENING_DISCORD" onclick="unlock(event,'dc')">Discord</a>
 
     <button id="continue" onclick="finish()">Continue</button>
-    <div class="close" onclick="closeUnlock()">Close</div>
   </div>
 </div>
 
+<audio id="snd">
+<source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=">
+</audio>
+
 <script>
+let sound=true;
 let state={yt:false,tg:false,dc:false};
-let current="";
+let currentScript="";
 
-function goHome(){window.scrollTo({top:0,behavior:"smooth"})}
-function scrollTo(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
+const snd=document.getElementById("snd");
 
-function openUnlock(title,content){
-  current=content;
+function toggleSound(){
+  sound=!sound;
+  document.getElementById("sndState").innerText=sound?"ON":"OFF";
+}
+
+function play(){
+  if(sound){
+    snd.currentTime=0;
+    snd.play().catch(()=>{});
+  }
+}
+
+function goHome(){
+  play();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function scrollToSec(id){
+  play();
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+/* ===== FIXED SCRIPT UNLOCK ===== */
+function openScript99(){
+  openUnlock(
+    "99 Nights In The Forest",
+    'loadstring(game:HttpGet("https://pastebin.com/raw/RZK9XdtH"))()'
+  );
+}
+
+function openDailyKey(){
+  openUnlock(
+    "Daily License Key",
+    "99nightinforest-AOHSDIBNJASCOBXVZHKLNJCVBHO"
+  );
+}
+
+function openUnlock(title,script){
+  play();
+  currentScript=script;
   state={yt:false,tg:false,dc:false};
-  document.getElementById("title").innerText=title;
+
+  document.getElementById("unlockTitle").innerText=title;
   document.getElementById("bar").style.width="0%";
   document.getElementById("percent").innerText="0% completed";
   document.querySelectorAll(".step").forEach(s=>s.classList.remove("done"));
   document.getElementById("continue").classList.remove("active");
-  document.getElementById("unlocker").classList.add("active");
+
+  document.getElementById("gate").classList.add("active");
 }
 
 function unlock(e,type){
   e.preventDefault();
+  play();
 
   if(state[type]) return;
   state[type]=true;
-  e.target.classList.add("done");
+  e.currentTarget.classList.add("done");
 
   let done=Object.values(state).filter(v=>v).length;
-  let percent=done*33;
-  if(done===3) percent=100;
+  let p=done*33;
+  if(done===3) p=100;
 
-  document.getElementById("bar").style.width=percent+"%";
-  document.getElementById("percent").innerText=percent+"% completed";
+  document.getElementById("bar").style.width=p+"%";
+  document.getElementById("percent").innerText=p+"% completed";
 
-  window.open(e.target.href,"_blank");
+  setTimeout(()=>{
+    window.open(e.currentTarget.href,"_blank");
+  },200);
 
   if(done===3){
     document.getElementById("continue").classList.add("active");
@@ -246,13 +415,14 @@ function unlock(e,type){
 
 function finish(){
   if(!document.getElementById("continue").classList.contains("active")) return;
-  navigator.clipboard.writeText(current);
+  play();
+  navigator.clipboard.writeText(currentScript);
   alert("Copied!");
-  closeUnlock();
+  closeAll();
 }
 
-function closeUnlock(){
-  document.getElementById("unlocker").classList.remove("active");
+function closeAll(){
+  document.getElementById("gate").classList.remove("active");
 }
 </script>
 
