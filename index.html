@@ -8,243 +8,128 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-:root{
-  --bg:#000;
-  --border:#1f1f1f;
-  --text:#fff;
-  --muted:#aaa;
-  --green:#16ff00;
-}
-
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{
-  background:radial-gradient(circle at top,#111,#000 65%);
-  color:var(--text);
+  background:#000;
+  color:#fff;
 }
 
-/* ================= NAVBAR ================= */
+/* NAVBAR */
 header{
   position:fixed;
   top:0;
   width:100%;
-  height:95px;
-  padding:0 32px;
-  display:grid;
-  grid-template-columns:auto 1fr auto;
-  align-items:center;
-  background:rgba(0,0,0,.85);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-  z-index:10;
-}
-
-.nav-left{
+  height:80px;
   display:flex;
   align-items:center;
-  gap:22px;
+  justify-content:space-between;
+  padding:0 30px;
+  background:#000;
+  border-bottom:1px solid #222;
+  z-index:100;
 }
-.nav-left a{
-  color:var(--muted);
-  font-size:19px;
-  font-weight:600;
-  cursor:pointer;
-  text-decoration:none;
-}
+.nav-left{display:flex;align-items:center;gap:20px}
+.nav-left img{height:40px;cursor:pointer}
+.nav-left a{color:#aaa;text-decoration:none;font-size:18px}
 .nav-left a:hover{color:#fff}
 
-/* LOGO + GLOW */
-.nav-logo{
-  height:44px;
-  cursor:pointer;
-  transition:.3s;
-}
-.nav-logo:hover{transform:scale(1.08)}
-
 .logo{
-  text-align:center;
-  font-size:24px;
-  font-weight:bold;
-  letter-spacing:3px;
-  animation:logoGlow 2.5s infinite;
-}
-@keyframes logoGlow{
-  0%{text-shadow:0 0 6px #fff}
-  50%{text-shadow:0 0 20px #fff}
-  100%{text-shadow:0 0 6px #fff}
-}
-
-.nav-right{
-  display:flex;
-  align-items:center;
-  gap:26px;
-}
-
-/* SOCIAL ICONS + GLOW */
-.socials{
-  display:flex;
-  gap:22px;
-}
-.socials a{
-  color:#fff;
   font-size:22px;
-  opacity:.85;
-  transition:.3s;
-}
-.socials a:hover{
-  opacity:1;
-  transform:scale(1.2);
-  text-shadow:
-    0 0 8px #fff,
-    0 0 16px #fff,
-    0 0 24px #fff;
+  font-weight:bold;
+  letter-spacing:2px;
 }
 
-.toggle{
-  border:1px solid var(--border);
-  padding:7px 16px;
-  border-radius:22px;
-  font-size:14px;
-  cursor:pointer;
-}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-right a{color:#fff;font-size:20px}
+.nav-right a:hover{opacity:.7}
 
-/* ================= HERO ================= */
-.hero{
-  min-height:100vh;
-  padding-top:150px;
-  text-align:center;
-}
-.hero h1{font-size:50px}
-.hero p{color:var(--muted);margin-top:10px}
+/* SECTIONS */
+section{padding:120px 20px 80px}
+h2{text-align:center;margin-bottom:30px}
 
-.video-box{
-  margin:38px auto 0;
-  max-width:860px;
-  aspect-ratio:16/9;
-  border-radius:24px;
-  overflow:hidden;
-  border:1px solid var(--border);
-}
-.video-box iframe{width:100%;height:100%}
-
-/* ================= SECTIONS ================= */
-.section{max-width:1150px;margin:auto;padding:80px 20px}
-.section h2{text-align:center;margin-bottom:35px}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:25px;
-}
-
-/* SCRIPT CARD + GLOW */
+/* CARDS */
+.container{max-width:1000px;margin:auto}
 .card{
-  background:linear-gradient(145deg,#0a0a0a,#000);
-  border:1px solid var(--border);
-  padding:25px;
-  border-radius:20px;
+  border:1px solid #333;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:20px;
   cursor:pointer;
-  transition:.4s;
+  transition:.3s;
 }
 .card:hover{
   border-color:#fff;
-  transform:translateY(-6px);
-  box-shadow:
-    0 0 15px rgba(255,255,255,.3),
-    0 0 30px rgba(255,255,255,.15);
+  box-shadow:0 0 15px rgba(255,255,255,.2);
 }
-.card p{color:var(--muted)}
+.card p{color:#aaa}
 
-/* ================= MODAL ================= */
+/* MODAL */
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.88);
+  background:rgba(0,0,0,.9);
   display:none;
   align-items:center;
   justify-content:center;
-  z-index:20;
+  z-index:1000;
 }
 .modal.active{display:flex}
 
 .modal-box{
+  width:90%;
+  max-width:420px;
   background:#000;
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:30px;
-  width:92%;
-  max-width:480px;
-  text-align:center;
-  position:relative;
-}
-
-.close{
-  position:absolute;
-  top:14px;
-  right:18px;
-  font-size:22px;
-  color:#aaa;
-  cursor:pointer;
-}
-.close:hover{color:#fff}
-
-/* PROGRESS */
-.progress{
-  height:10px;
-  background:#222;
+  border:1px solid #333;
   border-radius:20px;
-  overflow:hidden;
-  margin:15px 0;
+  padding:25px;
+  text-align:center;
 }
-#bar{
-  height:100%;
-  width:0%;
-  background:#fff;
-  transition:.4s;
-}
-#percent{font-size:12px;color:#ccc}
+.modal-box h3{margin-bottom:15px}
 
-/* STEPS */
+.progress{
+  height:8px;
+  background:#222;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:10px;
+}
+#bar{height:100%;width:0%;background:#fff}
+
+#percent{font-size:12px;color:#aaa;margin-bottom:10px}
+
 .step{
   display:block;
   background:#fff;
   color:#000;
-  padding:14px;
-  margin:10px 0;
-  border-radius:18px;
+  padding:12px;
+  margin:8px 0;
+  border-radius:14px;
   font-weight:bold;
   text-decoration:none;
 }
-.step.done{
-  background:var(--green);
-}
-.step.done::after{
-  content:"✓";
-  float:right;
-}
+.step.done{background:#16ff00}
 
-/* CONTINUE BUTTON + GLOW */
 button{
   width:100%;
-  padding:14px;
+  padding:12px;
+  margin-top:10px;
   border:none;
-  border-radius:18px;
-  background:#fff;
+  border-radius:14px;
   font-weight:bold;
   opacity:.4;
 }
-button.active{
-  opacity:1;
+button.active{opacity:1;cursor:pointer}
+
+.close{
+  margin-top:10px;
+  color:#aaa;
   cursor:pointer;
-  box-shadow:
-    0 0 10px #16ff00,
-    0 0 25px rgba(22,255,0,.6);
 }
 
 footer{
   text-align:center;
-  padding:40px;
-  border-top:1px solid var(--border);
+  padding:30px;
+  border-top:1px solid #222;
   color:#666;
 }
 </style>
@@ -254,72 +139,59 @@ footer{
 
 <header>
   <div class="nav-left">
-    <img src="photo_2026-02-13_00-21-40.jpg" class="nav-logo" onclick="goHome()">
+    <img src="photo_2026-02-13_00-21-40.jpg" onclick="goHome()">
     <a onclick="goHome()">Home</a>
-    <a onclick="scrollToSec('scripts')">Scripts</a>
-    <a onclick="scrollToSec('keys')">Keys</a>
+    <a onclick="scrollTo('scripts')">Scripts</a>
+    <a onclick="scrollTo('keys')">Keys</a>
   </div>
 
   <div class="logo">PoloX Scripts</div>
 
   <div class="nav-right">
-    <div class="socials">
-      <a href="https://www.youtube.com/@PoloX_script" target="_blank"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.instagram.com/polo_bro.7p" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://t.me/eventpolo" target="_blank"><i class="fab fa-telegram"></i></a>
-      <a href="https://discord.gg/SENING_DISCORD" target="_blank"><i class="fab fa-discord"></i></a>
-    </div>
-    <div class="toggle" onclick="toggleSound()">Sound: <b id="sndState">ON</b></div>
+    <a href="https://www.youtube.com/@PoloX_script" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a href="https://t.me/eventpolo" target="_blank"><i class="fab fa-telegram"></i></a>
+    <a href="https://discord.gg/SENING_DISCORD" target="_blank"><i class="fab fa-discord"></i></a>
   </div>
 </header>
 
-<section id="home" class="hero">
-  <h1>PoloX Scripts Hub</h1>
-  <p>Clean, fast and reliable scripts for Mobile & PC.</p>
-  <div class="video-box">
-    <iframe src="https://www.youtube.com/embed/_jsAY7nEYmo" allowfullscreen></iframe>
+<section id="home">
+  <h2>Welcome to PoloX Scripts</h2>
+</section>
+
+<section id="scripts">
+  <h2>Scripts</h2>
+  <div class="container">
+    <div class="card"
+      onclick="openUnlock(
+        '99 Nights In The Forest',
+        'loadstring(game:HttpGet(\"https://pastebin.com/raw/RZK9XdtH\"))()'
+      )">
+      <h3>99 Nights In The Forest</h3>
+      <p>Auto Farm, Admin, ESP</p>
+    </div>
   </div>
 </section>
 
-<section id="scripts" class="section">
-<h2>Scripts</h2>
-<div class="grid">
-  <div class="card"
-    onclick="openUnlock(
-      '99 Nights In The Forest',
-      'loadstring(game:HttpGet(\"https://pastebin.com/raw/RZK9XdtH\"))()'
-    )">
-    <h3>99 Nights In The Forest</h3>
-    <p>Auto Farm, Admin, ESP</p>
+<section id="keys">
+  <h2>License Keys</h2>
+  <div class="container">
+    <div class="card"
+      onclick="openUnlock(
+        'Daily License Key',
+        '99nightinforest-AOHSDIBNJASCOBXVZHKLNJCVBHO'
+      )">
+      <h3>Daily Free Key</h3>
+      <p>Unlock today’s key</p>
+    </div>
   </div>
-</div>
-</section>
-
-<section id="keys" class="section">
-<h2>License Keys</h2>
-<div class="grid">
-  <div class="card"
-    onclick="openUnlock(
-      'Daily License Key',
-      '99nightinforest-AOHSDIBNJASCOBXVZHKLNJCVBHO'
-    )">
-    <h3>Daily Free Key</h3>
-    <p>Unlock today’s key</p>
-  </div>
-  <div class="card">
-    <h3>Premium Keys</h3>
-    <p>Premium access</p>
-  </div>
-</div>
 </section>
 
 <footer>© 2026 PoloX Scripts</footer>
 
-<!-- UNLOCK MODAL -->
-<div id="gate" class="modal">
+<!-- UNLOCKER -->
+<div id="unlocker" class="modal">
   <div class="modal-box">
-    <span class="close" onclick="closeAll()">×</span>
-    <h3 id="unlockTitle">Unlock</h3>
+    <h3 id="title">Unlock</h3>
 
     <div class="progress"><div id="bar"></div></div>
     <div id="percent">0% completed</div>
@@ -329,67 +201,43 @@ footer{
     <a class="step" href="https://discord.gg/SENING_DISCORD" onclick="unlock(event,'dc')">Discord</a>
 
     <button id="continue" onclick="finish()">Continue</button>
+    <div class="close" onclick="closeUnlock()">Close</div>
   </div>
 </div>
 
-<audio id="snd">
-<source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=">
-</audio>
-
 <script>
-let sound=true;
 let state={yt:false,tg:false,dc:false};
-let currentScript="";
-const snd=document.getElementById("snd");
+let current="";
 
-function toggleSound(){
-  sound=!sound;
-  document.getElementById("sndState").innerText=sound?"ON":"OFF";
-}
+function goHome(){window.scrollTo({top:0,behavior:"smooth"})}
+function scrollTo(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
 
-function play(){
-  if(sound){
-    snd.currentTime=0;
-    snd.play().catch(()=>{});
-  }
-}
-
-function goHome(){play();window.scrollTo({top:0,behavior:"smooth"})}
-function scrollToSec(id){play();document.getElementById(id).scrollIntoView({behavior:"smooth"})}
-
-function openUnlock(title,script){
-  play();
-  currentScript=script;
+function openUnlock(title,content){
+  current=content;
   state={yt:false,tg:false,dc:false};
-
-  document.getElementById("unlockTitle").innerText=title;
+  document.getElementById("title").innerText=title;
   document.getElementById("bar").style.width="0%";
   document.getElementById("percent").innerText="0% completed";
   document.querySelectorAll(".step").forEach(s=>s.classList.remove("done"));
   document.getElementById("continue").classList.remove("active");
-
-  document.getElementById("gate").classList.add("active");
+  document.getElementById("unlocker").classList.add("active");
 }
 
 function unlock(e,type){
   e.preventDefault();
-  play();
 
   if(state[type]) return;
-
   state[type]=true;
-  e.currentTarget.classList.add("done");
+  e.target.classList.add("done");
 
   let done=Object.values(state).filter(v=>v).length;
-  let p=done*33;
-  if(done===3) p=100;
+  let percent=done*33;
+  if(done===3) percent=100;
 
-  document.getElementById("bar").style.width=p+"%";
-  document.getElementById("percent").innerText=p+"% completed";
+  document.getElementById("bar").style.width=percent+"%";
+  document.getElementById("percent").innerText=percent+"% completed";
 
-  setTimeout(()=>{
-    window.open(e.currentTarget.href,"_blank");
-  },300);
+  window.open(e.target.href,"_blank");
 
   if(done===3){
     document.getElementById("continue").classList.add("active");
@@ -398,14 +246,13 @@ function unlock(e,type){
 
 function finish(){
   if(!document.getElementById("continue").classList.contains("active")) return;
-  play();
-  navigator.clipboard.writeText(currentScript);
+  navigator.clipboard.writeText(current);
   alert("Copied!");
-  closeAll();
+  closeUnlock();
 }
 
-function closeAll(){
-  document.getElementById("gate").classList.remove("active");
+function closeUnlock(){
+  document.getElementById("unlocker").classList.remove("active");
 }
 </script>
 
