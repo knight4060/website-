@@ -5,16 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PoloX Scripts</title>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 :root{
-  --bg:#000;
-  --border:#1f1f1f;
-  --text:#fff;
-  --muted:#aaa;
+  --bg:#000;--border:#1f1f1f;--text:#fff;--muted:#aaa;
 }
-
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-
 body{
   background:radial-gradient(circle at top,#111,#000 65%);
   color:var(--text);
@@ -22,13 +19,10 @@ body{
 
 /* NAVBAR */
 header{
-  position:fixed;
-  top:0;
-  width:100%;
-  height:90px;
+  position:fixed;top:0;width:100%;height:90px;
   padding:0 30px;
   display:grid;
-  grid-template-columns:1fr auto 1fr;
+  grid-template-columns:auto 1fr auto;
   align-items:center;
   background:rgba(0,0,0,.8);
   backdrop-filter:blur(12px);
@@ -36,30 +30,39 @@ header{
   z-index:10;
 }
 
-.nav-left,.nav-right{
+/* LEFT NAV */
+.nav-left{
   display:flex;
-  align-items:center;
-  gap:18px;
+  gap:22px;
 }
-
 .nav-left a{
   color:var(--muted);
   text-decoration:none;
-  font-size:15px;
+  font-size:18px;          /* KATTAROQ QILINDI */
+  font-weight:600;
+  cursor:pointer;
 }
 .nav-left a:hover{color:#fff}
 
+/* CENTER LOGO */
 .logo{
+  text-align:center;
   font-size:22px;
   font-weight:bold;
   letter-spacing:3px;
+}
+
+/* RIGHT NAV */
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:16px;
 }
 
 /* SOCIAL ICONS */
 .socials a{
   color:#fff;
   font-size:18px;
-  text-decoration:none;
   opacity:.8;
   transition:.2s;
 }
@@ -68,12 +71,12 @@ header{
   transform:scale(1.15);
 }
 
+/* SOUND TOGGLE */
 .toggle{
-  margin-left:15px;
-  font-size:13px;
   border:1px solid var(--border);
-  padding:6px 12px;
+  padding:6px 14px;
   border-radius:20px;
+  font-size:13px;
   cursor:pointer;
 }
 
@@ -86,12 +89,10 @@ header{
   align-items:center;
   text-align:center;
 }
-
 .hero h1{
-  font-size:46px;
+  font-size:48px;
   margin-bottom:10px;
 }
-
 .hero p{
   color:var(--muted);
   max-width:650px;
@@ -106,36 +107,77 @@ header{
   border-radius:22px;
   overflow:hidden;
   border:1px solid var(--border);
-  box-shadow:0 0 40px rgba(255,255,255,.05);
 }
-
 .video-box iframe{
   width:100%;
   height:100%;
 }
 
-/* MOBILE */
+/* SECTION */
+.section{
+  max-width:1150px;
+  margin:auto;
+  padding:80px 20px;
+}
+.section h2{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+}
+.card{
+  background:linear-gradient(145deg,#0a0a0a,#000);
+  border:1px solid var(--border);
+  padding:25px;
+  border-radius:20px;
+  cursor:pointer;
+  transition:.4s;
+}
+.card:hover{
+  transform:translateY(-6px);
+  border-color:#fff;
+}
+.card p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:40px;
+  border-top:1px solid var(--border);
+  color:#666;
+}
+
+/* RESPONSIVE */
 @media(max-width:700px){
   header{height:80px}
-  .hero h1{font-size:30px}
-  .logo{font-size:18px}
+  .hero h1{font-size:32px}
+  .nav-left a{font-size:16px}
 }
 </style>
-
-<!-- ICONS (Font Awesome CDN) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
 <header>
+  <!-- LEFT -->
   <div class="nav-left">
-    <a href="#scripts">Scripts</a>
-    <a href="#keys">Keys</a>
+    <a onclick="goHome()">Home</a>
+    <a onclick="scrollToSec('scripts')">Scripts</a>
+    <a onclick="scrollToSec('keys')">Keys</a>
   </div>
 
+  <!-- CENTER -->
   <div class="logo">PoloX Scripts</div>
 
+  <!-- RIGHT -->
   <div class="nav-right">
     <div class="socials">
       <a href="https://youtube.com/@SENING_YOUTUBE" target="_blank"><i class="fab fa-youtube"></i></a>
@@ -147,20 +189,47 @@ header{
   </div>
 </header>
 
-<section class="hero">
+<!-- HOME / HERO -->
+<section id="home" class="hero">
   <h1>PoloX Scripts Hub</h1>
   <p>Clean, fast and reliable scripts for Mobile & PC.</p>
 
   <div class="video-box">
-    <iframe
-      src="https://www.youtube.com/embed/VIDEO_ID"
-      title="PoloX Scripts Video"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
+    <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
   </div>
 </section>
+
+<!-- SCRIPTS -->
+<section id="scripts" class="section">
+<h2>Scripts</h2>
+<div class="grid">
+  <div class="card">
+    <h3>99 Nights In The Forest</h3>
+    <p>Auto Farm, Admin, ESP</p>
+  </div>
+  <div class="card">
+    <h3>Escape Tsunami</h3>
+    <p>Auto Rebirth, Speed</p>
+  </div>
+</div>
+</section>
+
+<!-- KEYS -->
+<section id="keys" class="section">
+<h2>License Keys</h2>
+<div class="grid">
+  <div class="card">
+    <h3>Daily Free Key</h3>
+    <p>Unlock today’s free license key</p>
+  </div>
+  <div class="card">
+    <h3>Premium Keys</h3>
+    <p>Premium access (unchanged)</p>
+  </div>
+</div>
+</section>
+
+<footer>© 2026 PoloX Scripts</footer>
 
 <audio id="snd">
   <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=">
@@ -173,7 +242,23 @@ const snd=document.getElementById("snd");
 function toggleSound(){
   sound=!sound;
   document.getElementById("sndState").innerText=sound?"ON":"OFF";
-  if(sound){snd.play().catch(()=>{})}
+}
+
+function play(){
+  if(sound){
+    snd.currentTime=0;
+    snd.play().catch(()=>{});
+  }
+}
+
+function goHome(){
+  play();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function scrollToSec(id){
+  play();
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 </script>
 
