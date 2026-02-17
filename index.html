@@ -5,10 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PoloX Scripts</title>
 
-  <!-- FAVICON -->
+<!-- ✅ FAVICON -->
 <link rel="icon" type="image/png" href="photo_2026-02-13_00-21-40-fotor-2026021312851.png">
 <link rel="shortcut icon" href="photo_2026-02-13_00-21-40-fotor-2026021312851.png">
-
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -20,11 +19,17 @@
   --muted:#aaa;
   --green:#16ff00;
 }
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
 
 body{
   background:radial-gradient(circle at top,#111,#000 65%);
-  color:#fff;
+  color:var(--text);
 }
 
 /* NAVBAR */
@@ -48,6 +53,7 @@ header{
   align-items:center;
   gap:22px;
 }
+
 .nav-left a{
   color:var(--muted);
   font-size:19px;
@@ -55,7 +61,15 @@ header{
   cursor:pointer;
   text-decoration:none;
 }
-.nav-left a:hover{color:#fff}
+
+.nav-left a:hover{
+  color:#fff;
+}
+
+.nav-logo{
+  height:44px;
+  cursor:pointer;
+}
 
 .logo{
   text-align:center;
@@ -70,16 +84,22 @@ header{
   gap:26px;
 }
 
+.socials{
+  display:flex;
+  gap:22px;
+}
+
+.socials a{
+  color:#fff;
+  font-size:22px;
+}
+
 .toggle{
   border:1px solid var(--border);
   padding:7px 16px;
   border-radius:22px;
   font-size:14px;
   cursor:pointer;
-}
-.toggle.active{
-  background:var(--green);
-  color:#000;
 }
 
 /* HOME */
@@ -106,7 +126,23 @@ header{
   font-size:18px;
 }
 
-/* SECTION */
+.video-box{
+  margin:35px auto 0;
+  max-width:880px;
+  aspect-ratio:16/9;
+  border-radius:26px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:0 0 25px rgba(255,255,255,.15);
+}
+
+.video-box iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+/* SECTIONS */
 .section{
   max-width:1150px;
   margin:auto;
@@ -124,21 +160,29 @@ header{
   gap:25px;
 }
 
+/* 🔥 GLOW CARD EFFECT */
 .card{
   background:linear-gradient(145deg,#0a0a0a,#000);
   border:1px solid var(--border);
   padding:25px;
   border-radius:20px;
+  cursor:pointer;
+  transition:all .3s ease;
+  position:relative;
+  overflow:hidden;
 }
 
-.card button{
-  width:100%;
-  padding:12px;
-  margin-top:12px;
-  border:none;
-  border-radius:25px;
-  font-weight:bold;
-  cursor:pointer;
+.card:hover{
+  border-color:#16ff00;
+  box-shadow:
+    0 0 15px rgba(22,255,0,0.6),
+    0 0 30px rgba(22,255,0,0.3),
+    inset 0 0 10px rgba(22,255,0,0.2);
+  transform:translateY(-5px);
+}
+
+.card p{
+  color:var(--muted);
 }
 
 /* MODAL */
@@ -151,11 +195,14 @@ header{
   justify-content:center;
   z-index:9999;
 }
-.modal.active{display:flex}
+
+.modal.active{
+  display:flex;
+}
 
 .modal-box{
   width:92%;
-  max-width:500px;
+  max-width:480px;
   background:#000;
   border:1px solid var(--border);
   border-radius:24px;
@@ -164,68 +211,73 @@ header{
   position:relative;
 }
 
-.modal-close{
+.close{
   position:absolute;
-  top:15px;
-  right:20px;
-  font-size:20px;
-  cursor:pointer;
+  top:14px;
+  right:18px;
+  font-size:22px;
   color:#aaa;
+  cursor:pointer;
 }
-.modal-close:hover{color:#fff}
 
-/* PROGRESS */
 .progress{
-  height:12px;
+  height:10px;
   background:#222;
   border-radius:20px;
   overflow:hidden;
   margin:15px 0;
 }
-#eventBar{
+
+#bar{
   height:100%;
   width:0%;
   background:linear-gradient(90deg,#16ff00,#00ffcc);
-  transition:0.5s;
+  transition:0.4s;
 }
 
-/* BUTTONS */
-.pro-btn{
+#percent{
+  font-size:12px;
+  color:#ccc;
+}
+
+.step{
+  display:block;
+  background:#fff;
+  color:#000;
+  padding:14px;
+  margin:10px 0;
+  border-radius:18px;
+  font-weight:bold;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.step:hover{
+  box-shadow:0 0 10px #16ff00;
+}
+
+.step.done{
+  background:var(--green);
+}
+
+.step.done::after{
+  content:"✓";
+  float:right;
+}
+
+button{
   width:100%;
   padding:14px;
   border:none;
-  border-radius:30px;
-  background:linear-gradient(90deg,#16ff00,#00ffcc);
+  border-radius:18px;
+  background:#fff;
   font-weight:bold;
-  font-size:15px;
-  color:#000;
-  cursor:pointer;
-  transition:.3s;
-  margin-bottom:10px;
-}
-.pro-btn:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 15px #16ff00;
-}
-.pro-btn:disabled{
-  background:#333;
-  color:#777;
-  cursor:not-allowed;
+  opacity:.4;
 }
 
-.cancel-btn{
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:30px;
-  background:#111;
-  border:1px solid #333;
-  color:#aaa;
+button.active{
+  opacity:1;
   cursor:pointer;
-}
-.cancel-btn:hover{
-  background:#222;
-  color:#fff;
 }
 
 footer{
@@ -241,15 +293,22 @@ footer{
 
 <header>
   <div class="nav-left">
+    <img src="photo_2026-02-13_00-21-40.jpg" class="nav-logo" onclick="goHome()">
     <a onclick="goHome()">Home</a>
     <a onclick="scrollToSec('scripts')">Scripts</a>
-    <a onclick="scrollToSec('keys')">License & Rewards</a>
+    <a onclick="scrollToSec('keys')">Keys</a>
   </div>
 
   <div class="logo">PoloX Scripts</div>
 
   <div class="nav-right">
-    <div class="toggle" onclick="toggleSound()" id="soundBtn">Sound: OFF</div>
+    <div class="socials">
+      <a href="https://www.youtube.com/@PoloX_script" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.instagram.com/polo_bro.7p" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://t.me/eventpolo" target="_blank"><i class="fab fa-telegram"></i></a>
+      <a href="https://discord.gg/SENING_DISCORD" target="_blank"><i class="fab fa-discord"></i></a>
+    </div>
+    <div class="toggle">Sound: ON</div>
   </div>
 </header>
 
@@ -258,6 +317,16 @@ footer{
   <div class="home-inner">
     <h1>PoloX Scripts Hub</h1>
     <p>Clean, fast and reliable scripts for Mobile & PC.</p>
+
+    <!-- VIDEO QAYTARILDI -->
+    <div class="video-box">
+      <iframe 
+        src="https://www.youtube.com/embed/_jsAY7nEYmo"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+
   </div>
 </section>
 
@@ -265,140 +334,111 @@ footer{
 <section id="scripts" class="section">
 <h2>Scripts</h2>
 <div class="grid">
-  <div class="card">
+  <div class="card" onclick="openScript99()">
     <h3>99 Nights In The Forest</h3>
     <p>Auto Farm, Admin, ESP</p>
   </div>
 </div>
 </section>
 
-<!-- LICENSE & REWARDS -->
+<!-- KEYS -->
 <section id="keys" class="section">
-<h2>License & Rewards</h2>
+<h2>License Keys</h2>
 <div class="grid">
-
-  <div class="card">
+  <div class="card" onclick="openDailyKey()">
     <h3>Daily Free Key</h3>
-    <p>Unlock today’s key access.</p>
-    <button onclick="buyRobux()">Buy Robux</button>
+    <p>Unlock today’s key</p>
   </div>
-
   <div class="card">
-    <h3>Premium Access</h3>
-    <p>Exclusive features & community benefits.</p>
-    <button onclick="openEvent()">Join Giveaway</button>
+    <h3>Premium Keys</h3>
+    <p>Premium access</p>
   </div>
-
 </div>
 </section>
 
 <footer>© 2026 PoloX Scripts</footer>
 
-<!-- GIVEAWAY MODAL -->
-<div id="eventModal" class="modal">
+<!-- UNLOCKER -->
+<div id="gate" class="modal">
   <div class="modal-box">
+    <span class="close" onclick="closeAll()">×</span>
+    <h3 id="unlockTitle">Unlock</h3>
 
-    <span class="modal-close" onclick="closeEvent()">✕</span>
+    <div class="progress"><div id="bar"></div></div>
+    <div id="percent">0% completed</div>
 
-    <h3>Community Giveaway Event</h3>
-    <p>
-    Thank you for visiting our website.  
-    Polo is about to reach 5,000 subscribers and is hosting a special community giveaway event.  
-    If you would like to participate, click the participate button below.
-    </p>
+    <a class="step" href="https://www.youtube.com/@PoloX_script" target="_blank" onclick="unlock('yt',this)">YouTube</a>
+    <a class="step" href="https://t.me/eventpolo" target="_blank" onclick="unlock('tg',this)">Telegram</a>
+    <a class="step" href="https://discord.gg/SENING_DISCORD" target="_blank" onclick="unlock('dc',this)">Discord</a>
 
-    <div class="progress">
-      <div id="eventBar"></div>
-    </div>
-    <p><span id="count">0</span> / 200 Participants</p>
-
-    <div id="joinedText" style="display:none;color:#16ff00;font-weight:bold;margin-bottom:10px;">
-      You have successfully joined ✅
-    </div>
-
-    <button id="joinBtn" class="pro-btn" onclick="joinEvent()">Participate</button>
-    <button class="cancel-btn" onclick="closeEvent()">Cancel</button>
-
+    <button id="continue" onclick="finish()">Continue</button>
   </div>
 </div>
 
-<audio id="bgMusic" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-/* NAVIGATION */
+let state={yt:false,tg:false,dc:false};
+let currentScript="";
+
 function goHome(){
   window.scrollTo({top:0,behavior:"smooth"});
 }
+
 function scrollToSec(id){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
-/* SOUND */
-let music=document.getElementById("bgMusic");
-let soundBtn=document.getElementById("soundBtn");
-let playing=false;
-
-function toggleSound(){
-  if(playing){
-    music.pause();
-    soundBtn.innerText="Sound: OFF";
-    soundBtn.classList.remove("active");
-  }else{
-    music.play();
-    soundBtn.innerText="Sound: ON";
-    soundBtn.classList.add("active");
-  }
-  playing=!playing;
+function openScript99(){
+  openUnlock(
+    "99 Nights In The Forest",
+    'loadstring(game:HttpGet("https://pastebin.com/raw/RZK9XdtH"))()'
+  );
 }
 
-/* BUY ROBUX */
-function buyRobux(){
-  window.open("https://www.roblox.com/upgrades/robux","_blank");
+function openDailyKey(){
+  openUnlock(
+    "Daily License Key",
+    "99nightinforest-AOHSDIBNJASCOBXVZHKLNJCVBHO"
+  );
 }
 
-/* GIVEAWAY SYSTEM */
-let max=200;
-let count=parseInt(localStorage.getItem("giveawayCount")) || 0;
-let joined=localStorage.getItem("joinedEvent") === "true";
-
-function updateBar(){
-  document.getElementById("count").innerText=count;
-  let percent=(count/max)*100;
-  document.getElementById("eventBar").style.width=percent+"%";
+function openUnlock(title,script){
+  currentScript=script;
+  state={yt:false,tg:false,dc:false};
+  document.getElementById("unlockTitle").innerText=title;
+  document.getElementById("bar").style.width="0%";
+  document.getElementById("percent").innerText="0% completed";
+  document.querySelectorAll(".step").forEach(s=>s.classList.remove("done"));
+  document.getElementById("continue").classList.remove("active");
+  document.getElementById("gate").classList.add("active");
 }
 
-function openEvent(){
-  document.getElementById("eventModal").classList.add("active");
-  updateBar();
+function unlock(type,el){
+  if(state[type]) return;
+  state[type]=true;
+  el.classList.add("done");
 
-  if(joined){
-    document.getElementById("joinBtn").disabled=true;
-    document.getElementById("joinedText").style.display="block";
+  let done=Object.values(state).filter(v=>v).length;
+  let p=done*33;
+  if(done===3) p=100;
+
+  document.getElementById("bar").style.width=p+"%";
+  document.getElementById("percent").innerText=p+"% completed";
+
+  if(done===3){
+    document.getElementById("continue").classList.add("active");
   }
 }
 
-function closeEvent(){
-  document.getElementById("eventModal").classList.remove("active");
+function finish(){
+  if(!document.getElementById("continue").classList.contains("active")) return;
+  navigator.clipboard.writeText(currentScript);
+  alert("Copied!");
+  closeAll();
 }
 
-function joinEvent(){
-  if(joined || count>=max) return;
-
-  count++;
-  joined=true;
-
-  localStorage.setItem("giveawayCount",count);
-  localStorage.setItem("joinedEvent",true);
-
-  updateBar();
-
-  document.getElementById("joinBtn").disabled=true;
-  document.getElementById("joinedText").style.display="block";
+function closeAll(){
+  document.getElementById("gate").classList.remove("active");
 }
-
-updateBar();
 </script>
 
 </body>
