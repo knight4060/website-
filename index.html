@@ -44,6 +44,20 @@ header{height:auto;padding:15px;grid-template-columns:1fr;text-align:center}
 .nav-right{flex-direction:column}
 }
 
+  .toggle{
+  border:1px solid var(--border);
+  padding:7px 16px;
+  border-radius:22px;
+  font-size:14px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.toggle:hover{
+  border-color:#fff;
+}
+
+  
 /* HOME */
 #home{min-height:100vh;padding-top:140px;display:flex;align-items:center;justify-content:center;text-align:center}
 .home-inner{max-width:900px}
@@ -125,6 +139,7 @@ footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#
 </div>
 <div class="logo">PoloX Scripts</div>
 <div class="nav-right">
+  <div class="toggle" id="soundToggle">Sound: OFF</div>
 <div class="socials">
 <a href="https://www.youtube.com/@PoloX_script" target="_blank"><i class="fab fa-youtube"></i></a>
 <a href="https://www.instagram.com/polo_bro.7p" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -303,19 +318,28 @@ return current+1;
 document.addEventListener("DOMContentLoaded", function() {
 
   const bgMusic = document.getElementById("bgMusic");
-  bgMusic.volume = 0.4; // ovoz pastroq
+  const toggleBtn = document.getElementById("soundToggle");
+
+  bgMusic.volume = 0.4;
 
   let playing = false;
 
-  document.body.addEventListener("click", function startMusic() {
-    if (!playing) {
+  toggleBtn.addEventListener("click", function() {
+
+    if(!playing){
       bgMusic.play().catch(()=>{});
+      toggleBtn.innerText = "Sound: ON";
       playing = true;
+    } else {
+      bgMusic.pause();
+      toggleBtn.innerText = "Sound: OFF";
+      playing = false;
     }
-    document.body.removeEventListener("click", startMusic);
+
   });
 
 });
 </script>
+
 </body>
 </html>
