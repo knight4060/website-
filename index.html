@@ -39,12 +39,7 @@ z-index:1000;
 
 /* MOBILE FIX */
 @media(max-width:768px){
-header{
-  height:auto;
-  padding:15px;
-  grid-template-columns:1fr;
-  text-align:center;
-}
+header{height:auto;padding:15px;grid-template-columns:1fr;text-align:center}
 .nav-left{flex-wrap:wrap;justify-content:center}
 .nav-right{flex-direction:column}
 }
@@ -95,6 +90,22 @@ border-radius:24px;padding:30px;text-align:center;position:relative;
 .step.done::after{content:"✓";float:right}
 button{width:100%;padding:14px;border:none;border-radius:18px;background:#fff;font-weight:bold;opacity:.4}
 button.active{opacity:1;cursor:pointer}
+
+/* FIXED EVENT BUTTON */
+.event-btn{
+  opacity:1 !important;
+  background:#fff;
+  color:#000;
+  cursor:pointer;
+  transition:0.3s;
+}
+.event-btn:hover{background:#eaeaea}
+.event-btn:disabled{
+  background:#555;
+  color:#ccc;
+  cursor:not-allowed;
+}
+
 footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#666}
 </style>
 </head>
@@ -153,7 +164,7 @@ footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#
 </div>
 </section>
 
-<!-- ROBUX NEW -->
+<!-- ROBUX -->
 <section id="robux" class="section">
 <h2>Robux</h2>
 <div class="grid">
@@ -170,7 +181,7 @@ footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#
 
 <footer>© 2026 PoloX Scripts</footer>
 
-<!-- EXISTING UNLOCKER -->
+<!-- UNLOCKER -->
 <div id="gate" class="modal">
 <div class="modal-box">
 <span class="close" onclick="closeAll()">×</span>
@@ -184,15 +195,19 @@ footer{text-align:center;padding:40px;border-top:1px solid var(--border);color:#
 </div>
 </div>
 
-<!-- NEW EVENT MODAL -->
+<!-- EVENT MODAL -->
 <div id="eventModalNew" class="modal">
 <div class="modal-box">
 <span class="close" onclick="closeEventNew()">×</span>
 <h3>5,000 Subscribers Celebration</h3>
-<p>Click participate to join the event.</p>
+<p style="color:#aaa;margin-top:10px;">
+Hello and thank you for visiting our website.  
+Polo is about to reach 5,000 subscribers and is hosting a special celebration event.  
+If you would like to participate, please click the Participate button below.
+</p>
 <div class="progress"><div id="eventBarNew"></div></div>
 <p><span id="countNew">0</span> / 200 Participants</p>
-<button id="joinBtnNew">Participate</button>
+<button id="joinBtnNew" class="event-btn">Participate</button>
 </div>
 </div>
 
@@ -239,14 +254,15 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const firebaseConfig = {
-apiKey:"PASTE_KEY",
-authDomain:"PASTE_AUTH",
-databaseURL:"PASTE_DB_URL",
-projectId:"PASTE_ID",
-storageBucket:"PASTE_BUCKET",
-messagingSenderId:"PASTE_MSG",
-appId:"PASTE_APP"
+  apiKey: "AIzaSyAiauU_cZFMX5_15tKJV3gr74sDz-IrpYU",
+  authDomain: "polo-site-9b345.firebaseapp.com",
+  projectId: "polo-site-9b345",
+  storageBucket: "polo-site-9b345.firebasestorage.app",
+  messagingSenderId: "986440836110",
+  appId: "1:986440836110:web:b1cb7e64e95b90a2fdc85f",
+  measurementId: "G-DDVF40K79G"
 };
+
 
 const app=initializeApp(firebaseConfig);
 const db=getDatabase(app);
