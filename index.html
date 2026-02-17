@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PoloX Scripts</title>
 
-<!-- ✅ FAVICON -->
+<!-- FAVICON -->
 <link rel="icon" type="image/png" href="photo_2026-02-13_00-21-40-fotor-2026021312851.png">
 <link rel="shortcut icon" href="photo_2026-02-13_00-21-40-fotor-2026021312851.png">
 
@@ -17,7 +17,6 @@
   --border:#1f1f1f;
   --text:#fff;
   --muted:#aaa;
-  --green:#16ff00;
 }
 
 *{
@@ -29,7 +28,7 @@
 
 body{
   background:radial-gradient(circle at top,#111,#000 65%);
-  color:var(--text);
+  color:#fff;
 }
 
 /* NAVBAR */
@@ -44,7 +43,7 @@ header{
   align-items:center;
   background:rgba(0,0,0,.9);
   backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid #1f1f1f;
   z-index:1000;
 }
 
@@ -55,7 +54,7 @@ header{
 }
 
 .nav-left a{
-  color:var(--muted);
+  color:#aaa;
   font-size:19px;
   font-weight:600;
   cursor:pointer;
@@ -94,14 +93,6 @@ header{
   font-size:22px;
 }
 
-.toggle{
-  border:1px solid var(--border);
-  padding:7px 16px;
-  border-radius:22px;
-  font-size:14px;
-  cursor:pointer;
-}
-
 /* HOME */
 #home{
   min-height:100vh;
@@ -122,7 +113,7 @@ header{
 }
 
 .home-inner p{
-  color:var(--muted);
+  color:#aaa;
   font-size:18px;
 }
 
@@ -132,7 +123,7 @@ header{
   aspect-ratio:16/9;
   border-radius:26px;
   overflow:hidden;
-  border:1px solid var(--border);
+  border:1px solid #1f1f1f;
   box-shadow:0 0 25px rgba(255,255,255,.15);
 }
 
@@ -142,7 +133,7 @@ header{
   border:none;
 }
 
-/* SECTIONS */
+/* SECTION */
 .section{
   max-width:1150px;
   margin:auto;
@@ -160,29 +151,27 @@ header{
   gap:25px;
 }
 
-/* 🔥 GLOW CARD EFFECT */
+/* 🔥 WHITE GLOW CARD */
 .card{
   background:linear-gradient(145deg,#0a0a0a,#000);
-  border:1px solid var(--border);
+  border:1px solid #1f1f1f;
   padding:25px;
   border-radius:20px;
   cursor:pointer;
   transition:all .3s ease;
-  position:relative;
-  overflow:hidden;
 }
 
 .card:hover{
-  border-color:#16ff00;
+  border-color:#fff;
   box-shadow:
-    0 0 15px rgba(22,255,0,0.6),
-    0 0 30px rgba(22,255,0,0.3),
-    inset 0 0 10px rgba(22,255,0,0.2);
-  transform:translateY(-5px);
+    0 0 15px rgba(255,255,255,0.8),
+    0 0 30px rgba(255,255,255,0.4),
+    inset 0 0 10px rgba(255,255,255,0.2);
+  transform:translateY(-6px);
 }
 
 .card p{
-  color:var(--muted);
+  color:#aaa;
 }
 
 /* MODAL */
@@ -204,7 +193,7 @@ header{
   width:92%;
   max-width:480px;
   background:#000;
-  border:1px solid var(--border);
+  border:1px solid #1f1f1f;
   border-radius:24px;
   padding:30px;
   text-align:center;
@@ -231,7 +220,7 @@ header{
 #bar{
   height:100%;
   width:0%;
-  background:linear-gradient(90deg,#16ff00,#00ffcc);
+  background:#fff;
   transition:0.4s;
 }
 
@@ -249,15 +238,10 @@ header{
   border-radius:18px;
   font-weight:bold;
   text-decoration:none;
-  transition:0.3s;
-}
-
-.step:hover{
-  box-shadow:0 0 10px #16ff00;
 }
 
 .step.done{
-  background:var(--green);
+  background:#fff;
 }
 
 .step.done::after{
@@ -283,7 +267,7 @@ button.active{
 footer{
   text-align:center;
   padding:40px;
-  border-top:1px solid var(--border);
+  border-top:1px solid #1f1f1f;
   color:#666;
 }
 </style>
@@ -308,7 +292,6 @@ footer{
       <a href="https://t.me/eventpolo" target="_blank"><i class="fab fa-telegram"></i></a>
       <a href="https://discord.gg/SENING_DISCORD" target="_blank"><i class="fab fa-discord"></i></a>
     </div>
-    <div class="toggle">Sound: ON</div>
   </div>
 </header>
 
@@ -318,11 +301,9 @@ footer{
     <h1>PoloX Scripts Hub</h1>
     <p>Clean, fast and reliable scripts for Mobile & PC.</p>
 
-    <!-- VIDEO QAYTARILDI -->
     <div class="video-box">
       <iframe 
         src="https://www.youtube.com/embed/_jsAY7nEYmo"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
       </iframe>
     </div>
@@ -358,86 +339,13 @@ footer{
 
 <footer>© 2026 PoloX Scripts</footer>
 
-<!-- UNLOCKER -->
-<div id="gate" class="modal">
-  <div class="modal-box">
-    <span class="close" onclick="closeAll()">×</span>
-    <h3 id="unlockTitle">Unlock</h3>
-
-    <div class="progress"><div id="bar"></div></div>
-    <div id="percent">0% completed</div>
-
-    <a class="step" href="https://www.youtube.com/@PoloX_script" target="_blank" onclick="unlock('yt',this)">YouTube</a>
-    <a class="step" href="https://t.me/eventpolo" target="_blank" onclick="unlock('tg',this)">Telegram</a>
-    <a class="step" href="https://discord.gg/SENING_DISCORD" target="_blank" onclick="unlock('dc',this)">Discord</a>
-
-    <button id="continue" onclick="finish()">Continue</button>
-  </div>
-</div>
-
 <script>
-let state={yt:false,tg:false,dc:false};
-let currentScript="";
-
 function goHome(){
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function scrollToSec(id){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
-}
-
-function openScript99(){
-  openUnlock(
-    "99 Nights In The Forest",
-    'loadstring(game:HttpGet("https://pastebin.com/raw/RZK9XdtH"))()'
-  );
-}
-
-function openDailyKey(){
-  openUnlock(
-    "Daily License Key",
-    "99nightinforest-AOHSDIBNJASCOBXVZHKLNJCVBHO"
-  );
-}
-
-function openUnlock(title,script){
-  currentScript=script;
-  state={yt:false,tg:false,dc:false};
-  document.getElementById("unlockTitle").innerText=title;
-  document.getElementById("bar").style.width="0%";
-  document.getElementById("percent").innerText="0% completed";
-  document.querySelectorAll(".step").forEach(s=>s.classList.remove("done"));
-  document.getElementById("continue").classList.remove("active");
-  document.getElementById("gate").classList.add("active");
-}
-
-function unlock(type,el){
-  if(state[type]) return;
-  state[type]=true;
-  el.classList.add("done");
-
-  let done=Object.values(state).filter(v=>v).length;
-  let p=done*33;
-  if(done===3) p=100;
-
-  document.getElementById("bar").style.width=p+"%";
-  document.getElementById("percent").innerText=p+"% completed";
-
-  if(done===3){
-    document.getElementById("continue").classList.add("active");
-  }
-}
-
-function finish(){
-  if(!document.getElementById("continue").classList.contains("active")) return;
-  navigator.clipboard.writeText(currentScript);
-  alert("Copied!");
-  closeAll();
-}
-
-function closeAll(){
-  document.getElementById("gate").classList.remove("active");
 }
 </script>
 
