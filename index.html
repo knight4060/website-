@@ -14,8 +14,7 @@
         }
 
         :root {
-            --bg-dark: #09040f;
-            --panel-bg: rgba(20, 10, 30, 0.75);
+            --panel-bg: rgba(20, 10, 30, 0.8);
             --sakura-pink: #ff7ebb;
             --neon-purple: #bd00ff;
             --text-light: #ffffff;
@@ -25,7 +24,13 @@
         }
 
         body {
-            background: linear-gradient(135deg, var(--bg-dark), #150724);
+            /* SIZ BERGAN RASMNI ORQA FONGA O'RNATISH (BACKGROUND IMAGE) */
+            background: linear-gradient(rgba(9, 4, 15, 0.55), rgba(21, 7, 36, 0.65)), url('image_d51556.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            
             color: var(--text-light);
             overflow-x: hidden;
             min-height: 100vh;
@@ -50,7 +55,7 @@
             position: absolute;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(189, 0, 255, 0.12) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(189, 0, 255, 0.15) 0%, transparent 70%);
             top: -150px;
             left: 50%;
             transform: translateX(-50%);
@@ -58,39 +63,58 @@
             filter: blur(60px);
         }
 
-        /* HEADER LAYOUT (RESTORED TO ORIGINAL BACKPACK POSITION) */
+        /* NEW HEADER LAYOUT WITH CENTERED BRANDING & LEFT LOGO */
         header {
             position: relative;
             z-index: 10;
             width: 100%;
             max-width: 1200px;
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr; /* Uchta teng bo'linma mukammal markazlash uchun */
             align-items: center;
-            padding: 25px 40px;
-            background: rgba(9, 4, 15, 0.8);
-            border-bottom: 1px solid rgba(255, 126, 187, 0.15);
-            backdrop-filter: blur(12px);
+            padding: 20px 40px;
+            background: rgba(9, 4, 15, 0.85);
+            border-bottom: 1px solid rgba(255, 126, 187, 0.2);
+            backdrop-filter: blur(16px);
             border-radius: 0 0 16px 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
         }
 
-        .logo {
-            font-size: 26px;
+        /* Left Side: Premium Glowing Logo Graphic */
+        .logo-graphic {
+            display: flex;
+            align-items: center;
+            color: var(--sakura-pink);
+            filter: drop-shadow(0 0 8px var(--neon-purple));
+        }
+
+        .logo-graphic svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+        }
+
+        /* Center Side: Logo Text Moved Here */
+        .logo-text {
+            font-size: 28px;
             font-weight: 800;
             color: var(--text-light);
             text-shadow: 0 0 12px var(--neon-purple);
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
+            text-align: center;
             cursor: pointer;
         }
 
-        .logo span {
+        .logo-text span {
             color: var(--sakura-pink);
             text-shadow: 0 0 12px var(--sakura-pink);
         }
 
+        /* Right Side: Navigation Menu */
         nav {
             display: flex;
             gap: 10px;
+            justify-content: flex-end;
         }
 
         /* UNIFIED BUTTON STYLE */
@@ -137,13 +161,13 @@
             transform: translateY(-2px);
         }
 
-        /* MAIN WRAPPER (PERFECT CENTERED GLOBAL LAYOUT) */
+        /* MAIN WRAPPER */
         main {
             position: relative;
             z-index: 10;
             width: 100%;
             max-width: 1100px;
-            margin: 50px auto;
+            margin: 60px auto;
             padding: 0 20px;
             display: flex;
             justify-content: center;
@@ -167,11 +191,11 @@
         /* PREMIUM PANEL (GLASSMORPHISM) */
         .glass-panel {
             background: var(--panel-bg);
-            border: 1px solid rgba(255, 126, 187, 0.12);
+            border: 1px solid rgba(255, 126, 187, 0.15);
             border-radius: 20px;
             padding: 45px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(25px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
             text-align: center;
         }
 
@@ -199,14 +223,14 @@
             margin-bottom: 35px;
         }
 
-        /* BEAUTIFUL SOCIAL LINKS COMPONENT (BOTTOM INTEGRATED) */
+        /* SOCIAL LINKS FOOTER CONTAINER */
         .social-container {
             margin-top: 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 15px;
-            border-top: 1px solid rgba(255, 126, 187, 0.1);
+            border-top: 1px solid rgba(255, 126, 187, 0.15);
             padding-top: 30px;
             width: 100%;
         }
@@ -230,8 +254,8 @@
             justify-content: center;
             width: 46px;
             height: 46px;
-            background: rgba(9, 4, 15, 0.6);
-            border: 1px solid rgba(255, 126, 187, 0.15);
+            background: rgba(9, 4, 15, 0.7);
+            border: 1px solid rgba(255, 126, 187, 0.2);
             border-radius: 12px;
             color: var(--text-muted);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -246,7 +270,7 @@
         .social-link:hover {
             color: var(--text-light);
             border-color: var(--sakura-pink);
-            background: rgba(255, 126, 187, 0.1);
+            background: rgba(255, 126, 187, 0.15);
             box-shadow: var(--neon-glow);
             transform: translateY(-4px);
         }
@@ -260,8 +284,8 @@
         }
 
         .card {
-            background: rgba(12, 6, 18, 0.9);
-            border: 1px solid rgba(255, 126, 187, 0.08);
+            background: rgba(12, 6, 18, 0.92);
+            border: 1px solid rgba(255, 126, 187, 0.1);
             border-radius: 14px;
             padding: 25px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -273,7 +297,7 @@
 
         .card:hover {
             border-color: var(--sakura-pink);
-            box-shadow: 0 0 20px rgba(255, 126, 187, 0.15);
+            box-shadow: 0 0 20px rgba(255, 126, 187, 0.2);
             transform: translateY(-5px);
         }
 
@@ -302,7 +326,7 @@
             overflow-x: auto;
             white-space: nowrap;
             margin-bottom: 18px;
-            border: 1px solid rgba(189, 0, 255, 0.2);
+            border: 1px solid rgba(189, 0, 255, 0.25);
         }
 
         /* KEY SYSTEM INTERFACE */
@@ -365,9 +389,19 @@
     <div class="glow-orb"></div>
     <canvas class="sakura-bg" id="sakuraCanvas"></canvas>
 
-    <!-- NAVIGATION CONTEXT LAYER (RESTORED TO ORIGINAL LAYOUT) -->
+    <!-- NAVIGATION CONTEXT LAYER -->
     <header>
-        <div class="logo" onclick="openTab('home')">YUKIO<span>.hub</span></div>
+        <!-- Left Section: Logo Graphic Icon -->
+        <div class="logo-graphic">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.41l8.2-1.192z"/>
+            </svg>
+        </div>
+
+        <!-- Center Section: Brand Text -->
+        <div class="logo-text" onclick="openTab('home')">YUKIO<span>.hub</span></div>
+
+        <!-- Right Section: Tab Controller Buttons -->
         <nav>
             <button class="btn active" onclick="openTab('home')">Home</button>
             <button class="btn" onclick="openTab('scripts')">Scripts</button>
@@ -384,7 +418,7 @@
                 <p>Access next-generation Roblox software engines. Perfectly optimized modules wrapped in high-fidelity custom neon typography interfaces designed to ensure seamless script execution.</p>
                 <button class="btn btn-primary" style="padding: 14px 45px;" onclick="openTab('scripts')">Explore Scripts</button>
 
-                <!-- SOCIAL LINKS BEAUTIFUL PLACEMENT -->
+                <!-- SOCIAL LINKS INTEGRATION -->
                 <div class="social-container">
                     <div class="social-title">Join Our Community</div>
                     <div class="social-icons">
