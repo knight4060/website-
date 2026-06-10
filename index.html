@@ -21,20 +21,20 @@
             --text-muted: #cbbcd4;
             --neon-glow: 0 0 15px rgba(255, 126, 187, 0.4);
             --neon-glow-strong: 0 0 25px rgba(189, 0, 255, 0.6);
+            --premium-gold: #ffd700;
+            --gold-glow: 0 0 20px rgba(255, 215, 0, 0.5);
         }
 
         body {
-            background: linear-gradient(rgba(10, 5, 18, 0.45), rgba(10, 5, 18, 0.55)), 
+            background: linear-gradient(rgba(10, 5, 18, 0.55), rgba(10, 5, 18, 0.65)), 
                         url('sakura.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            
             color: var(--text-light);
             overflow-x: hidden;
             min-height: 100vh;
-            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -63,7 +63,7 @@
             filter: blur(60px);
         }
 
-        /* FIXED NAVBAR LAYOUT (TUGMALAR QISILMASLIGI UCHUN TUZATILDI) */
+        /* HEADER NAVIGATION */
         header {
             position: relative;
             z-index: 10;
@@ -72,7 +72,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 30px; /* Balandlik biroz ixchamlashtirildi */
+            padding: 15px 30px;
             background: rgba(9, 4, 15, 0.85);
             border-bottom: 1px solid rgba(255, 126, 187, 0.2);
             backdrop-filter: blur(16px);
@@ -80,21 +80,19 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
         }
 
-        /* Logotip rasm joylashadigan qism */
         .logo-graphic {
             display: flex;
             align-items: center;
+            color: var(--sakura-pink);
             filter: drop-shadow(0 0 8px var(--neon-purple));
         }
 
-        .logo-graphic .custom-logo {
-            width: 32px;
-            height: 32px;
-            object-fit: cover;
-            border-radius: 50%;
+        .logo-graphic svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
         }
 
-        /* Brend nomi (to'liq markazda turishi uchun mukammallashtirildi) */
         .logo-text {
             font-size: 24px;
             font-weight: 800;
@@ -112,31 +110,32 @@
             text-shadow: 0 0 12px var(--sakura-pink);
         }
 
-        /* O'ng tomondagi tablar (qisilib ketmaydigan va bir qatorda chiroyli turadigan qilindi) */
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
         nav {
             display: flex;
             gap: 12px;
-            align-items: center;
-            flex-wrap: nowrap;
         }
 
-        /* OPTIMIZED BUTTONS */
+        /* NAVIGATION BUTTONS */
         .btn {
             background: rgba(255, 126, 187, 0.08);
             border: 1px solid rgba(255, 126, 187, 0.3);
             color: var(--text-light);
-            padding: 8px 18px; /* Tugma ichidagi bo'shliq optimallashtirildi */
+            padding: 8px 20px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             border-radius: 8px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap; /* Matn pastga tushib ketmaydi */
-            display: inline-block;
+            white-space: nowrap;
         }
 
         .btn:hover {
-            color: var(--text-light);
             border-color: var(--sakura-pink);
             background: rgba(255, 126, 187, 0.18);
             box-shadow: var(--neon-glow);
@@ -144,42 +143,76 @@
         }
 
         .btn.active {
-            color: var(--text-light);
             background: linear-gradient(90deg, var(--sakura-pink), var(--neon-purple));
             border-color: transparent;
             box-shadow: var(--neon-glow-strong);
         }
 
-        .btn-primary {
-            background: linear-gradient(90deg, var(--sakura-pink), var(--neon-purple));
-            color: var(--text-light);
-            border-color: transparent;
+        /* PREMIUM GOLD TAB BUTTON */
+        .btn-premium {
+            background: rgba(255, 215, 0, 0.08);
+            border-color: rgba(255, 215, 0, 0.3);
+            color: var(--premium-gold);
             font-weight: 700;
-            box-shadow: var(--neon-glow-strong);
         }
 
-        .btn-primary:hover {
-            background: linear-gradient(90deg, var(--neon-purple), var(--sakura-pink));
-            box-shadow: 0 0 30px rgba(255, 126, 187, 0.6);
-            transform: translateY(-2px);
+        .btn-premium:hover {
+            border-color: var(--premium-gold);
+            background: rgba(255, 215, 0, 0.15);
+            box-shadow: var(--gold-glow);
         }
 
-        /* PANELS & LAYOUT */
+        .btn-premium.active {
+            background: linear-gradient(90deg, var(--premium-gold), #ffa500);
+            border-color: transparent;
+            color: #000000;
+            box-shadow: var(--gold-glow);
+        }
+
+        /* MUSIC CONTROLLER TUGMASI (IXCHAM KVADRAT LAYOUT) */
+        .btn-music {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 24, 24, 0.08);
+            border: 1px solid rgba(255, 24, 24, 0.3);
+            color: #ff5555;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .btn-music svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        /* Boshlanishida yoqilgan holat (yashil neon effekti) */
+        .btn-music.playing {
+            background: rgba(0, 255, 204, 0.08);
+            border-color: rgba(0, 255, 204, 0.4);
+            color: #00ffcc;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+        }
+
+        /* MAIN CONTENT WRAPPER */
         main {
             position: relative;
             z-index: 10;
             width: 100%;
-            max-width: 1100px;
+            max-width: 900px;
             margin: 60px auto;
             padding: 0 20px;
-            display: flex;
-            justify-content: center;
         }
 
         .tab-content {
             display: none;
             width: 100%;
-            animation: fade 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation: fade 0.5s ease forwards;
         }
 
         .tab-content.active {
@@ -187,149 +220,194 @@
         }
 
         @keyframes fade {
-            from { opacity: 0; transform: translateY(25px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* UNIFIED PREMIUM CARD (GLASSMORPHISM) */
         .glass-panel {
             background: var(--panel-bg);
             border: 1px solid rgba(255, 126, 187, 0.2);
             border-radius: 20px;
-            padding: 45px;
+            padding: 55px 45px 45px 45px;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
             text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 44px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(189, 0, 255, 0.5);
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 17px;
-            line-height: 1.7;
-            margin-bottom: 35px;
-        }
-
-        /* SOCIALS */
-        .social-container {
-            margin-top: 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-            border-top: 1px solid rgba(255, 126, 187, 0.2);
+        }
+
+        .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 18px; text-shadow: 0 0 20px rgba(189, 0, 255, 0.5); }
+        .hero p { color: var(--text-muted); font-size: 16px; line-height: 1.7; margin-bottom: 30px; max-width: 600px; }
+        .tab-title { font-size: 28px; font-weight: 700; margin-bottom: 30px; text-shadow: 0 0 10px rgba(255, 126, 187, 0.3); text-align: center; }
+
+        /* COMMUNITY SECTION WITH FIXED YOUTUBE SVG */
+        .social-container {
+            margin-top: 45px;
             padding-top: 30px;
+            border-top: 1px solid rgba(255, 126, 187, 0.15);
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
         }
 
         .social-title {
-            font-size: 13px;
+            font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--text-muted);
             font-weight: 700;
+            opacity: 0.8;
         }
 
         .social-icons {
             display: flex;
-            gap: 20px;
+            gap: 18px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .social-link {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 46px;
-            height: 46px;
-            background: rgba(9, 4, 15, 0.8);
-            border: 1px solid rgba(255, 126, 187, 0.25);
-            border-radius: 12px;
+            width: 52px;
+            height: 52px;
+            background: rgba(9, 4, 15, 0.6);
+            border: 1px solid rgba(255, 126, 187, 0.2);
+            border-radius: 14px;
             color: var(--text-light);
-            transition: all 0.3s;
+            transition: all 0.25s ease;
         }
 
         .social-link svg {
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             fill: currentColor;
+            transition: transform 0.2s ease;
         }
 
         .social-link:hover {
             border-color: var(--sakura-pink);
-            background: rgba(255, 126, 187, 0.2);
+            background: rgba(255, 126, 187, 0.15);
             box-shadow: var(--neon-glow);
             transform: translateY(-4px);
         }
 
-        /* CODE BOX & GRID */
+        .social-link:hover svg { transform: scale(1.08); }
+        .roblox-svg { width: 22px !important; height: 22px !important; }
+
+        /* SCRIPTS GRID SYSTEM */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-            gap: 30px;
-            width: 100%;
+            gap: 25px;
         }
 
         .card {
-            background: rgba(12, 6, 18, 0.94);
+            background: rgba(14, 7, 21, 0.94);
             border: 1px solid rgba(255, 126, 187, 0.15);
             border-radius: 14px;
             padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: border-color 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .card h3 {
-            margin-bottom: 12px;
-            color: var(--sakura-pink);
-            text-shadow: 0 0 5px rgba(255, 126, 187, 0.2);
+        .card:hover { border-color: var(--sakura-pink); }
+        
+        /* PREMIUM GOLD CARDS */
+        .card.premium-card {
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            background: rgba(22, 16, 5, 0.94);
+        }
+        .card.premium-card:hover {
+            border-color: var(--premium-gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
         }
 
-        .card p {
-            color: var(--text-muted);
-            font-size: 14.5px;
-            margin-bottom: 22px;
-            line-height: 1.6;
-        }
+        .card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: #ffffff; }
 
-        .code-box {
+        /* OUTPUT BOX SETUP */
+        .output-box {
             background: #040106;
             border-radius: 8px;
             padding: 15px;
             font-family: 'Consolas', monospace;
-            font-size: 13px;
+            font-size: 12px;
             color: #00ffcc;
             overflow-x: auto;
-            margin-bottom: 18px;
+            margin-bottom: 15px;
             border: 1px solid rgba(189, 0, 255, 0.25);
             white-space: nowrap;
+        }
+        
+        .output-box.premium-code {
+            color: var(--premium-gold);
+            border-color: rgba(255, 215, 0, 0.4);
+        }
+
+        .output-box.key-code {
+            color: #ffcc00;
+            border-color: rgba(189, 0, 255, 0.4);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px rgba(255, 204, 0, 0.3);
+            text-align: center;
+        }
+
+        /* PREMIUM LOCK SYSTEM */
+        .premium-lock-container {
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.1), inset 0 0 20px rgba(255, 215, 0, 0.02);
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .premium-lock-container h2 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--premium-gold);
+            text-shadow: var(--gold-glow);
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .key-input-wrapper {
+            width: 100%;
+            position: relative;
+            margin: 25px 0 15px 0;
         }
 
         .key-input {
             width: 100%;
             padding: 16px 20px;
-            background: #040106;
-            border: 1px solid rgba(255, 126, 187, 0.25);
-            border-radius: 10px;
-            color: white;
+            background: rgba(5, 2, 10, 0.85);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            color: var(--premium-gold);
             text-align: center;
-            margin: 25px 0;
-            font-size: 16px;
-            letter-spacing: 2px;
+            font-size: 14px;
+            font-family: 'Consolas', monospace;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
         }
 
         .key-input:focus {
             outline: none;
-            border-color: var(--neon-purple);
-            box-shadow: 0 0 15px rgba(189, 0, 255, 0.4);
+            border-color: var(--premium-gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
         }
 
+        /* NOTIFICATION TOAST */
         .toast {
             position: fixed;
             bottom: -80px;
@@ -338,10 +416,12 @@
             border-left: 4px solid var(--sakura-pink);
             padding: 15px 30px;
             border-radius: 8px;
-            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: #ffffff;
+            transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 100;
-            font-size: 14px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             font-weight: 600;
+            font-size: 14px;
         }
         
         .toast.active { bottom: 30px; }
@@ -349,21 +429,33 @@
 </head>
 <body>
 
+    <audio id="bgMusic" loop>
+        <source src="fonmusic.m4a" type="audio/mpeg">
+    </audio>
+
     <div class="glow-orb"></div>
     <canvas class="sakura-bg" id="sakuraCanvas"></canvas>
 
     <header>
         <div class="logo-graphic">
-            <img src="my-logo.png" alt="Logo" class="custom-logo">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.41l8.2-1.192z"/>
+            </svg>
         </div>
-        
-        <div class="logo-text" onclick="openTab('home', event)">YUKIO<span>.hub</span></div>
-        
-        <nav>
-            <button class="btn active" onclick="openTab('home', event)">Home</button>
-            <button class="btn" onclick="openTab('scripts', event)">Scripts</button>
-            <button class="btn" onclick="openTab('keys', event)">Key System</button>
-        </nav>
+        <div class="logo-text" onclick="openTab('home')">YUKIO<span>.hub</span></div>
+        <div class="nav-container">
+            <nav>
+                <button class="btn active" onclick="openTab('home')">Home</button>
+                <button class="btn" onclick="openTab('scripts')">Scripts</button>
+                <button class="btn" onclick="openTab('keys')">Keys</button>
+                <button class="btn btn-premium" onclick="openTab('premium')">✨ Premium</button>
+            </nav>
+            <button id="musicToggleBtn" class="btn-music playing" onclick="toggleMusic()" title="Musiqani yoqish/o'chirish">
+                <svg id="musicIcon" viewBox="0 0 24 24">
+                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h6V3h-6z"/>
+                </svg>
+            </button>
+        </div>
     </header>
 
     <main>
@@ -371,91 +463,270 @@
             <div class="glass-panel hero">
                 <h1>Yukio Scripts <span style="color: var(--sakura-pink);">Sakura Edition</span></h1>
                 <p>Access next-generation Roblox software engines. Perfectly optimized modules wrapped in high-fidelity custom neon typography interfaces.</p>
-                <button class="btn btn-primary" style="padding: 14px 45px;" onclick="document.querySelector('nav .btn:nth-child(2)').click()">Explore Scripts</button>
+                
+                <button class="btn btn-primary" style="padding: 12px 40px; font-size: 15px;" onclick="openTab('scripts')">Explore Scripts</button>
 
                 <div class="social-container">
                     <div class="social-title">Join Our Community</div>
                     <div class="social-icons">
-                        <a href="#" class="social-link"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.7-2.46 2.75-2.67.01-.03.01-.15-.06-.21a.25.25 0 0 0-.22-.04c-.1.02-1.63 1.04-4.61 3.05-.44.3-.84.45-1.21.44-.4-.01-1.18-.23-1.75-.41-.7-.23-1.26-.35-1.21-.74.03-.2.31-.41.83-.62 3.23-1.41 5.39-2.34 6.48-2.78 3.08-1.26 3.72-1.48 4.14-1.48.09 0 .3.02.44.13.11.09.15.22.16.31v.13z"/></svg></a>
-                        <a href="#" class="social-link"><svg viewBox="0 0 24 24"><path d="M19.27 4.73a16.5 16.5 0 0 0-4.07-1.26.1.1 0 0 0-.1.05c-.18.33-.38.74-.51 1.06a15.22 15.22 0 0 0-5.18 0c-.14-.32-.34-.73-.52-1.06a.1.1 0 0 0-.1-.05 16.5 16.5 0 0 0-4.07 1.26.1.1 0 0 0-.04.04A16.63 16.63 0 0 0 1.15 16.4a.1.1 0 0 0 .04.07 16.69 16.69 0 0 0 5.07 2.56.1.1 0 0 0 .11-.04c.39-.53.73-1.11 1.02-1.71a.1.1 0 0 0-.06-.14 10.9 10.9 0 0 1-1.59-.76.1.1 0 0 1-.01-.17c.1-.08.21-.15.31-.23a.1.1 0 0 1 .11-.01c3.55 1.62 7.4 1.62 10.9 0a.1.1 0 0 1 .12.01c.1.08.21.16.31.23a.1.1 0 0 1-.01.17 10.93 10.93 0 0 1-1.59.76.1.1 0 0 0-.06 Dec 14c.29.61.63 1.18 1.02 1.71a.1.1 0 0 0 .11-.04 16.66 16.66 0 0 0 5.07-2.56.1.1 0 0 0 .04-.07 16.6 16.6 0 0 0-3.6-11.63.1.1 0 0 0-.04-.04zM8.52 14.15c-.99 0-1.81-.91-1.81-2.04s.8-2.04 1.81-2.04 1.81.91 1.81 2.04-.8 2.04-1.81 2.04zm6.96 0c-.99 0-1.81-.91-1.81-2.04s.8-2.04 1.81-2.04 1.81.91 1.81 2.04-.8 2.04-1.81 2.04z"/></svg></a>
+                        <a href="https://t.me/your_telegram" target="_blank" class="social-link" title="Telegram">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.7-2.46 2.75-2.67.01-.03.01-.15-.06-.21a.25.25 0 0 0-.22-.04c-.1.02-1.63 1.04-4.61 3.05-.44.3-.84.45-1.21.44-.4-.01-1.18-.23-1.75-.41-.7-.23-1.26-.35-1.21-.74.03-.2.31-.41.83-.62 3.23-1.41 5.39-2.34 6.48-2.78 3.08-1.26 3.72-1.48 4.14-1.48.09 0 .3.02.44.13.11.09.15.22.16.31v.13z"/></svg>
+                        </a>
+                        <a href="https://discord.gg/your_discord" target="_blank" class="social-link" title="Discord">
+                            <svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.85-11.11,68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.65-2a75.58,75.58,0,0,0,72.93,0c.85.69,1.74,1.37,2.65,2a68.42,68.42,0,0,1-10.85,5.18,74.37,74.37,0,0,0,6.85,11.11,105.73,105.73,0,0,0,31-18.83C129.24,47.92,123.47,25.09,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.92,46,53.72,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.16,46,96,53,91,65.69,84.69,65.69Z"/></svg>
+                        </a>
+                        <a href="https://youtube.com/your_channel" target="_blank" class="social-link" title="YouTube">
+                            <svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.507 9.388.507 9.388.507s7.518 0 9.388-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </a>
+                        <a href="https://www.roblox.com/groups/your_group" target="_blank" class="social-link" title="Roblox">
+                            <svg class="roblox-svg" viewBox="0 0 24 24"><path d="M18.524 24L0 19.006 5.476 0 24 4.994l-5.476 19.006zm-4.708-13.31l-3.32-.895-.896 3.323 3.32.895.896-3.323z"/></svg>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="scripts" class="tab-content">
-            <h2 style="margin-bottom: 30px; text-shadow: 0 0 12px var(--sakura-pink); text-align: center;">Premium Software Base</h2>
+            <h2 class="tab-title">Premium Combat Modules</h2>
             <div class="grid">
                 <div class="card">
-                    <div>
-                        <h3>PoloX Aimbot & ESP</h3>
-                        <p>Advanced real-time calculations handling precise dynamic vector updates.</p>
-                    </div>
-                    <div>
-                        <div class="code-box" id="script1">loadstring(game:HttpGet("https://yukio.io/polox"))()</div>
-                        <button class="btn" style="width: 100%;" onclick="copyToClipboard('script1')">Copy Script</button>
-                    </div>
+                    <h3>[FPS] One Tap</h3>
+                    <p style="margin-bottom: 15px; color: var(--text-muted);">Eliminate delays and optimize client-side hit registration. Engineered for instant trigger responses.</p>
+                    <div class="output-box" id="script1">loadstring(game:HttpGet("https://pastebin.com/raw/CgK8na0G"))()</div>
+                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('script1', 'Script copied to clipboard!')">Copy Script</button>
+                </div>
+                <div class="card">
+                    <h3>ESP worked any games</h3>
+                    <p style="margin-bottom: 15px; color: var(--text-muted);">Universal ESP module. Real-time player silhouettes, distance indicators, and tracers across any dynamic engine environment.</p>
+                    <div class="output-box" id="script2">loadstring(game:HttpGet("https://pastebin.com/raw/1TRHZCbA"))()</div>
+                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('script2', 'Script copied to clipboard!')">Copy Script</button>
+                </div>
+                <div class="card">
+                    <h3>Bloxstrike</h3>
+                    <p style="margin-bottom: 15px; color: var(--text-muted);">Combat automation software for Bloxstrike. Automated targeting vectors and recoil reduction.</p>
+                    <div class="output-box" id="script3">loadstring(game:HttpGet("https://pastebin.com/raw/2U0dfsm3"))()</div>
+                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('script3', 'Script copied to clipboard!')">Copy Script</button>
+                </div>
+                <div class="card">
+                    <h3>Avatar Changer V17</h3>
+                    <p style="margin-bottom: 15px; color: var(--text-muted);">Advanced client-side catalog. Unlock, modify, and inject premium asset bundles, rarity items.</p>
+                    <div class="output-box" id="script4">loadstring(game:HttpGet("https://pastebin.com/raw/a148jU62"))()</div>
+                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('script4', 'Script copied to clipboard!')">Copy Script</button>
+                </div>
+                <div class="card">
+                    <h3>Arsenal Script V5.1</h3>
+                    <p style="margin-bottom: 15px; color: var(--text-muted);">The ultimate Arsenal builds. Silent aimbot, auto-wall, and streamlined movement mechanics.</p>
+                    <div class="output-box" id="script5">loadstring(game:HttpGet("https://pastebin.com/raw/ZKWy8DYp"))()</div>
+                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('script5', 'Script copied to clipboard!')">Copy Script</button>
                 </div>
             </div>
         </div>
 
         <div id="keys" class="tab-content">
-            <div class="glass-panel" style="max-width: 500px; margin: 0 auto;">
-                <h2>Access Gateway</h2>
-                <p style="color: var(--text-muted); margin-top: 8px; font-size: 14px;">Enter your authentication key to activate the system.</p>
-                <input type="text" class="key-input" placeholder="YUKIO-XXXX-XXXX">
-                <button class="btn btn-primary" style="width: 100%;">Activate Engine</button>
+            <h2 class="tab-title">Yukio Hub Premium License Keys</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>PoloX Premium Access</h3>
+                    <p style="margin-bottom: 15px; color: var(--text-muted);">Activate premium modules for a unique PoloX simulation experience.</p>
+                    <div class="output-box key-code" id="key1">YUKIO-PREM-XXXX-PoloX-01</div>
+                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('key1', 'Key code copied!')">Copy Key</button>
+                </div>
+                <div class="card">
+                    <h3>ESP Universale Access</h3>
+                    <p style="margin-bottom: 15px; color: var(--text-muted);">Access the full suite of ESP and simulation tools. Full validity matrix enabled.</p>
+                    <div class="output-box key-code" id="key2">YUKIO-PREM-YYYY-ESP-02</div>
+                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('key2', 'Key code copied!')">Copy Key</button>
+                </div>
+                <div class="card">
+                    <h3>Arsenal Elite Bypass Key</h3>
+                    <p style="margin-bottom: 15px; color: var(--text-muted);">Unlocks the specialized high-frequency silent aim vectors and custom hitbox expands.</p>
+                    <div class="output-box key-code" id="key3">YUKIO-ELIT-ZZZZ-ARSN-03</div>
+                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('key3', 'Key code copied!')">Copy Key</button>
+                </div>
+                <div class="card">
+                    <h3>Bloxstrike Trigger Key</h3>
+                    <p style="margin-bottom: 15px; color: var(--text-muted);">Authorizes automatic recoil damping matrix and frame-perfect target tracking.</p>
+                    <div class="output-box key-code" id="key4">YUKIO-TRIG-WWWW-BLXS-04</div>
+                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('key4', 'Key code copied!')">Copy Key</button>
+                </div>
+                <div class="card">
+                    <h3>Avatar Changer Ultra Key</h3>
+                    <p style="margin-bottom: 15px; color: var(--text-muted);">Grants read/write server permissions for restricted catalog packages and legacy asset injection.</p>
+                    <div class="output-box key-code" id="key5">YUKIO-AVTR-VVVV-CHNG-05</div>
+                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('key5', 'Key code copied!')">Copy Key</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="premium" class="tab-content">
+            <div id="premiumLocked" class="glass-panel premium-lock-container">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--premium-gold); filter: drop-shadow(var(--gold-glow));">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <h2>Premium Access Required</h2>
+                <p style="color: var(--text-muted); font-size: 14px; margin-top: 5px;">This sector contains high-tier encrypted bypasses. Please enter your valid Premium Key to unlock the permission layout.</p>
+                
+                <div class="key-input-wrapper">
+                    <input type="text" id="premiumKeyInput" class="key-input" placeholder="ENTER PREMIUM ACCESS KEY">
+                </div>
+                <button class="btn btn-premium" style="width: 100%; padding: 12px; font-size: 14px;" onclick="checkPremiumKey()">Verify Authorization</button>
+            </div>
+
+            <div id="premiumUnlocked" style="display: none;">
+                <h2 class="tab-title" style="color: var(--premium-gold); text-shadow: var(--gold-glow);">✨ Unlocked Premium Softwares</h2>
+                <div class="grid">
+                    <div class="card premium-card">
+                        <h3>Yukio Ultra Bypass V2</h3>
+                        <p style="margin-bottom: 15px; color: var(--text-muted);">High-tier anticheat bypass matrix. Clears memory footprints instantly without triggering internal flags.</p>
+                        <div class="output-box premium-code" id="premScript1">loadstring(game:HttpGet("https://pastebin.com/raw/premiumBypass"))()</div>
+                        <button class="btn btn-premium" style="width: 100%; color: #fff;" onclick="copyToClipboard('premScript1', 'Premium Script copied!')">Copy Premium Script</button>
+                    </div>
+                    <div class="card premium-card">
+                        <h3>Server Hop crasher Suite</h3>
+                        <p style="margin-bottom: 15px; color: var(--text-muted);">Advanced multi-threaded client package. Injects silent vectors designed for stress simulation testing.</p>
+                        <div class="output-box premium-code" id="premScript2">loadstring(game:HttpGet("https://pastebin.com/raw/serverHop"))()</div>
+                        <button class="btn btn-premium" style="width: 100%; color: #fff;" onclick="copyToClipboard('premScript2', 'Premium Script copied!')">Copy Premium Script</button>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <div class="toast" id="toastNotification">Copied!</div>
+    <div class="toast" id="toastNotification">Action Successful</div>
 
     <script>
-        /* NAVIGATOR (LOGOTIP BOSILGANDA XATO BERMASLIGI UCHUN EVENT OPTIMALLASHTIRILDI) */
-        function openTab(tabId, event) {
+        // PREMIUM SECURITY LAYOUT
+        let hasPremium = false;
+        const VALID_PREMIUM_KEY = "YUKIO-JDSA-11NI-ADKP-MOAS-7777";
+
+        const music = document.getElementById('bgMusic');
+        const btn = document.getElementById('musicToggleBtn');
+        const icon = document.getElementById('musicIcon');
+
+        // Ovoz balandligini o'rtacha qilish
+        music.volume = 0.4;
+
+        // SAYT YUKLANIShIDA MUSIQANI AVTOMATIK CHALISH FUNKSIYASI
+        function startAutoplay() {
+            music.play().then(() => {
+                // Agar muvaffaqiyatli chalsa, tugma holatini yangilaymiz
+                btn.classList.add('playing');
+                icon.innerHTML = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h6V3h-6z"/>';
+            }).catch(err => {
+                console.log("Brauzer autoplayni chekladi, foydalanuvchi ekranga bosishi kutilmoqda.");
+                // Brauzer cheklovini aylanib o'tish uchun foydalanuvchi ekranga birinchi marta bosganda musiqani yoqish
+                document.addEventListener('click', forceMusicPlay, { once: true });
+            });
+        }
+
+        function forceMusicPlay() {
+            if (music.paused) {
+                music.play().then(() => {
+                    btn.classList.add('playing');
+                    icon.innerHTML = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h6V3h-6z"/>';
+                });
+            }
+        }
+
+        // Sayt yuklanishi bilan autoplayni ishga tushirishga urinish
+        window.addEventListener('DOMContentLoaded', startAutoplay);
+
+
+        // TUGMA BOSILGANDA MUSIQANI YOQISH/O'CHIRISH (MANUAL TOGGLE)
+        function toggleMusic() {
+            // Agar birinchi klik autoplay triggerga tushsa, manual nazoratni saqlab qolish uchun eventni tozalaymiz
+            document.removeEventListener('click', forceMusicPlay);
+
+            if (music.paused) {
+                music.play().then(() => {
+                    btn.classList.add('playing');
+                    icon.innerHTML = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h6V3h-6z"/>';
+                });
+            } else {
+                music.pause();
+                btn.classList.remove('playing');
+                icon.innerHTML = '<path d="M16.5 12c0-1.77-1.02-3.25-2.5-4.01v8.01c1.48-.76 2.5-2.24 2.5-4.01zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zM3 9v6h4l5 5V4L7 9H3z"/>';
+            }
+        }
+
+        // Tab System Navigation
+        function openTab(tabId) {
             document.querySelectorAll('nav .btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             
-            if (event && event.currentTarget.tagName === 'BUTTON') {
-                event.currentTarget.classList.add('active');
-            } else {
-                // Agar brend nomi bosilsa, Home tugmasi faollashadi
-                document.querySelector('nav .btn:nth-child(1)').classList.add('active');
-            }
+            const targetBtn = Array.from(document.querySelectorAll('nav .btn')).find(btn => {
+                if (tabId === 'premium') return btn.classList.contains('btn-premium');
+                return btn.textContent.toLowerCase() === (tabId === 'home' ? 'home' : tabId === 'keys' ? 'keys' : tabId);
+            });
+            if(targetBtn) targetBtn.classList.add('active');
             
             document.getElementById(tabId).classList.add('active');
+
+            if (tabId === 'premium') {
+                renderPremiumTab();
+            }
         }
 
-        /* CLIPBOARD MODULE */
-        function copyToClipboard(elementId) {
+        function renderPremiumTab() {
+            const lockedView = document.getElementById('premiumLocked');
+            const unlockedView = document.getElementById('premiumUnlocked');
+
+            if (hasPremium) {
+                lockedView.style.display = 'none';
+                unlockedView.style.display = 'block';
+            } else {
+                lockedView.style.display = 'flex';
+                unlockedView.style.display = 'none';
+            }
+        }
+
+        function checkPremiumKey() {
+            const inputVal = document.getElementById('premiumKeyInput').value.trim();
+            const toast = document.getElementById('toastNotification');
+
+            if (inputVal === VALID_PREMIUM_KEY) {
+                hasPremium = true; 
+                toast.innerText = "✨ Premium Access Granted! Enjoy.";
+                toast.classList.add('active');
+                setTimeout(() => toast.classList.remove('active'), 3000);
+                renderPremiumTab(); 
+            } else {
+                toast.innerText = "❌ Invalid Premium Key. Try again!";
+                toast.classList.add('active');
+                setTimeout(() => toast.classList.remove('active'), 3000);
+            }
+        }
+
+        function copyToClipboard(elementId, message) {
             const text = document.getElementById(elementId).innerText;
             navigator.clipboard.writeText(text).then(() => {
                 const toast = document.getElementById('toastNotification');
+                toast.innerText = message;
                 toast.classList.add('active');
                 setTimeout(() => toast.classList.remove('active'), 3000);
             });
         }
 
-        /* SAKURA PETALS EFFECT */
+        /* BACKGROUND ENGINE: SAKURA PETALS GENERATOR */
         const canvas = document.getElementById('sakuraCanvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
-
+        const petals = [];
+        
         window.addEventListener('resize', () => {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
         });
 
-        const petals = [];
         for (let i = 0; i < 25; i++) {
             petals.push({
                 x: Math.random() * width,
                 y: Math.random() * height,
                 size: Math.random() * 5 + 3,
-                speedY: Math.random() * 1 + 0.5,
-                speedX: Math.random() * 0.5 - 0.2,
+                speedY: Math.random() * 0.8 + 0.4,
+                speedX: Math.random() * 0.4 - 0.2,
                 r: Math.random() * Math.PI
             });
         }
@@ -467,14 +738,19 @@
                 ctx.translate(p.x, p.y);
                 ctx.rotate(p.r);
                 ctx.beginPath();
-                ctx.ellipse(0, 0, p.size, p.size * 1.5, 0, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 183, 213, 0.6)';
+                ctx.ellipse(0, 0, p.size, p.size * 1.4, 0, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 126, 187, 0.45)';
                 ctx.fill();
                 ctx.restore();
-
+                
                 p.y += p.speedY;
                 p.x += p.speedX;
-                if (p.y > height) { p.y = -10; p.x = Math.random() * width; }
+                p.r += 0.005;
+                
+                if (p.y > height) { 
+                    p.y = -10; 
+                    p.x = Math.random() * width; 
+                }
             });
             requestAnimationFrame(loop);
         }
