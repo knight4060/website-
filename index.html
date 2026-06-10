@@ -1,43 +1,41 @@
-Mana o'sha siz aytgan **Sakura** estetikasidagi, to'q binafsha ranglar uyg'unligi, neon pushti yorug'liklar va ekran bo'ylab chiroyli tushib turadigan sakura barglari (cherry blossom) effektiga ega bo'lgan to'liq veb-sayt.
-
-Siz so'raganingizdek, **HTML, CSS (animatsiyalari bilan) va JavaScript (funksiyalari bilan) hammasi 1 ta fayl ichiga** yozildi.
-
-Buni shunchaki kompyuteringizda `index.html` deb saqlab, istalgan brauzerda ochishingiz kifoya. Mobil telefonlarda ham juda silliq ishlaydi.
-
-```html
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yukio Hub | Sakura Edition</title>
+    <title>Yukio Hub | Sakura Premium Edition</title>
     <style>
-        /* ASOSIY PARAMETRLAR */
+        /* CORE RESET & VARIABLES */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
         }
 
         :root {
-            --bg-dark: #0b0512;
-            --panel-bg: rgba(23, 11, 34, 0.75);
+            --bg-dark: #09040f;
+            --panel-bg: rgba(20, 10, 30, 0.75);
             --sakura-pink: #ff7ebb;
             --neon-purple: #bd00ff;
             --text-light: #ffffff;
-            --text-muted: #a491b5;
+            --text-muted: #9e8ba9;
+            --neon-glow: 0 0 15px rgba(255, 126, 187, 0.4);
+            --neon-glow-strong: 0 0 25px rgba(189, 0, 255, 0.6);
         }
 
         body {
-            background: linear-gradient(135deg, var(--bg-dark), #19092b);
+            background: linear-gradient(135deg, var(--bg-dark), #150724);
             color: var(--text-light);
             overflow-x: hidden;
             min-height: 100vh;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* ORQA FONDAGI EFFEKTLAR (NEON GLOW & CANVAS) */
+        /* BACKGROUND EFFECTS */
         .sakura-bg {
             position: fixed;
             top: 0;
@@ -50,26 +48,30 @@ Buni shunchaki kompyuteringizda `index.html` deb saqlab, istalgan brauzerda ochi
 
         .glow-orb {
             position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(189, 0, 255, 0.15) 0%, transparent 70%);
-            top: -100px;
-            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(189, 0, 255, 0.12) 0%, transparent 70%);
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 0;
-            filter: blur(50px);
+            filter: blur(60px);
         }
 
-        /* HEADER VA NAVIGATSIYA */
+        /* HEADER & NAVIGATION */
         header {
             position: relative;
             z-index: 10;
+            width: 100%;
+            max-width: 1200px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 8%;
-            background: rgba(11, 5, 18, 0.85);
-            border-bottom: 1px solid rgba(255, 126, 187, 0.2);
+            padding: 25px 40px;
+            background: rgba(9, 4, 15, 0.8);
+            border-bottom: 1px solid rgba(255, 126, 187, 0.15);
             backdrop-filter: blur(12px);
+            border-radius: 0 0 16px 16px;
         }
 
         .logo {
@@ -77,223 +79,222 @@ Buni shunchaki kompyuteringizda `index.html` deb saqlab, istalgan brauzerda ochi
             font-weight: 800;
             color: var(--text-light);
             text-shadow: 0 0 12px var(--neon-purple);
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
         .logo span {
             color: var(--sakura-pink);
-            text-shadow: 0 0 10px var(--sakura-pink);
+            text-shadow: 0 0 12px var(--sakura-pink);
         }
 
         nav {
             display: flex;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .tab-btn {
-            background: transparent;
-            border: 1px solid transparent;
+        /* UNIFIED BUTTON STYLE */
+        .btn {
+            background: rgba(255, 126, 187, 0.05);
+            border: 1px solid rgba(255, 126, 187, 0.3);
             color: var(--text-muted);
-            padding: 10px 22px;
+            padding: 12px 26px;
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            display: inline-block;
         }
 
-        .tab-btn:hover {
-            color: var(--sakura-pink);
-            text-shadow: 0 0 8px var(--sakura-pink);
-        }
-
-        .tab-btn.active {
+        .btn:hover {
             color: var(--text-light);
-            background: rgba(255, 126, 187, 0.12);
-            border: 1px solid rgba(255, 126, 187, 0.35);
-            box-shadow: 0 0 15px rgba(255, 126, 187, 0.1), inset 0 0 8px rgba(189, 0, 255, 0.2);
+            border-color: var(--sakura-pink);
+            background: rgba(255, 126, 187, 0.1);
+            box-shadow: var(--neon-glow);
+            transform: translateY(-2px);
         }
 
-        /* ASOSIY BLOK (MAIN CONTAINER) */
+        .btn.active {
+            color: var(--text-light);
+            background: linear-gradient(90deg, var(--sakura-pink), var(--neon-purple));
+            border-color: transparent;
+            box-shadow: var(--neon-glow-strong);
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--sakura-pink), var(--neon-purple));
+            color: var(--text-light);
+            border-color: transparent;
+            font-weight: 700;
+            box-shadow: var(--neon-glow-strong);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(90deg, var(--neon-purple), var(--sakura-pink));
+            box-shadow: 0 0 30px rgba(255, 126, 187, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* MAIN WRAPPER (PERFECT CENTERED GLOBAL LAYOUT) */
         main {
             position: relative;
             z-index: 10;
+            width: 100%;
             max-width: 1100px;
-            margin: 50px auto;
+            margin: 60px auto;
             padding: 0 20px;
+            display: flex;
+            justify-content: center;
         }
 
         .tab-content {
             display: none;
-            animation: slideUp 0.4s ease forwards;
+            width: 100%;
+            animation: cubicBezierFade 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
         .tab-content.active {
             display: block;
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes cubicBezierFade {
+            from { opacity: 0; transform: translateY(25px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* SHINA PANEL ESTETIKASI (GLASSMORPHISM) */
+        /* PREMIUM PANEL (GLASSMORPHISM) */
         .glass-panel {
             background: var(--panel-bg);
-            border: 1px solid rgba(255, 126, 187, 0.1);
-            border-radius: 16px;
-            padding: 35px;
-            backdrop-filter: blur(16px);
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 126, 187, 0.12);
+            border-radius: 20px;
+            padding: 45px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+            text-align: center;
         }
 
-        /* HOME TAB */
+        /* HOME CONTENT */
         .hero {
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
-            padding: 50px 20px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .hero h1 {
-            font-size: 44px;
+            font-size: 46px;
             font-weight: 800;
             margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(189, 0, 255, 0.6);
+            text-shadow: 0 0 20px rgba(189, 0, 255, 0.5);
+            letter-spacing: 0.5px;
         }
 
         .hero p {
             color: var(--text-muted);
-            font-size: 17px;
-            max-width: 600px;
+            font-size: 18px;
+            line-height: 1.7;
             margin-bottom: 35px;
-            line-height: 1.6;
         }
 
-        .cta-btn {
-            background: linear-gradient(90deg, var(--sakura-pink), var(--neon-purple));
-            color: white;
-            border: none;
-            padding: 14px 38px;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(189, 0, 255, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .cta-btn:hover {
-            transform: scale(1.04);
-            box-shadow: 0 0 30px rgba(255, 126, 187, 0.6);
-        }
-
-        /* SCRIPTS TAB GRID TIZIMI */
+        /* SCRIPTS CONTENT & GRID TIZIMI */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 30px;
+            width: 100%;
         }
 
         .card {
-            background: rgba(14, 7, 22, 0.9);
+            background: rgba(12, 6, 18, 0.9);
             border: 1px solid rgba(255, 126, 187, 0.08);
-            border-radius: 12px;
-            padding: 22px;
-            transition: all 0.3s ease;
+            border-radius: 14px;
+            padding: 25px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .card:hover {
             border-color: var(--sakura-pink);
-            box-shadow: 0 0 18px rgba(255, 126, 187, 0.15);
-            transform: translateY(-4px);
+            box-shadow: 0 0 20px rgba(255, 126, 187, 0.15);
+            transform: translateY(-5px);
         }
 
         .card h3 {
             margin-bottom: 12px;
-            font-size: 20px;
+            font-size: 21px;
             color: var(--sakura-pink);
             text-shadow: 0 0 5px rgba(255, 126, 187, 0.2);
         }
 
         .card p {
             color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 20px;
-            line-height: 1.5;
+            font-size: 14.5px;
+            margin-bottom: 22px;
+            line-height: 1.6;
         }
 
-        /* SCRIPT KOD BOXI (EXECUTOR KO'RINISHI) */
+        /* MONOSPACE CODE BOX (EXECUTOR STYLED) */
         .code-box {
-            background: #050208;
+            background: #040106;
             border-radius: 8px;
-            padding: 14px;
+            padding: 15px;
             font-family: 'Consolas', 'Courier New', Courier, monospace;
             font-size: 13px;
             color: #00ffcc;
             overflow-x: auto;
             white-space: nowrap;
-            margin-bottom: 15px;
-            border: 1px solid rgba(189, 0, 255, 0.15);
+            margin-bottom: 18px;
+            border: 1px solid rgba(189, 0, 255, 0.2);
         }
 
-        .action-btn {
-            width: 100%;
-            background: rgba(255, 126, 187, 0.08);
-            border: 1px solid var(--sakura-pink);
-            color: white;
-            padding: 11px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .action-btn:hover {
-            background: var(--sakura-pink);
-            color: var(--bg-dark);
-            box-shadow: 0 0 12px var(--sakura-pink);
-            font-weight: 700;
-        }
-
-        /* KEYS SYSTEM TAB */
-        .key-box {
-            max-width: 500px;
-            margin: 30px auto;
-            text-align: center;
+        /* KEY SYSTEM INTERFACE */
+        .key-wrapper {
+            max-width: 550px;
+            margin: 0 auto;
         }
 
         .key-input {
             width: 100%;
-            padding: 14px 20px;
-            background: #050208;
+            padding: 16px 20px;
+            background: #040106;
             border: 1px solid rgba(255, 126, 187, 0.25);
-            border-radius: 8px;
+            border-radius: 10px;
             color: white;
             font-size: 16px;
-            margin: 20px 0;
+            margin: 25px 0;
             text-align: center;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            transition: all 0.3s;
         }
 
         .key-input:focus {
             outline: none;
             border-color: var(--neon-purple);
-            box-shadow: 0 0 12px rgba(189, 0, 255, 0.4);
+            box-shadow: 0 0 15px rgba(189, 0, 255, 0.4);
         }
 
-        /* BILDIRIShNOMA (NOTIFICATION TIZIMI) */
+        .key-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        /* MODERN TOAST NOTIFICATION */
         .toast {
             position: fixed;
             bottom: -80px;
-            right: 20px;
-            background: #170a22;
+            right: 30px;
+            background: #150920;
             border-left: 4px solid var(--sakura-pink);
-            padding: 14px 26px;
-            border-radius: 6px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             z-index: 100;
             transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             font-size: 14px;
@@ -301,114 +302,115 @@ Buni shunchaki kompyuteringizda `index.html` deb saqlab, istalgan brauzerda ochi
         }
         
         .toast.active {
-            bottom: 20px;
+            bottom: 30px;
         }
     </style>
 </head>
 <body>
 
-    <!-- VISUAL EFFEKTLAR -->
     <div class="glow-orb"></div>
     <canvas class="sakura-bg" id="sakuraCanvas"></canvas>
 
-    <!-- SAYT TEPASI (HEADER) -->
     <header>
         <div class="logo">YUKIO<span>.hub</span></div>
         <nav>
-            <button class="tab-btn active" onclick="openTab('home')">Home</button>
-            <button class="tab-btn" onclick="openTab('scripts')">Scripts</button>
-            <button class="tab-btn" onclick="openTab('keys')">Key System</button>
+            <button class="btn active" onclick="openTab('home')">Home</button>
+            <button class="btn" onclick="openTab('scripts')">Scripts</button>
+            <button class="btn" onclick="openTab('keys')">Key System</button>
         </nav>
     </header>
 
-    <!-- ASOSIY SAHIFALAR -->
     <main>
-        <!-- HOME TAB -->
-        <div id="home" class="tab-content active hero glass-panel">
-            <h1>Yukio Scripts <span style="color: var(--sakura-pink);">Sakura Edition</span></h1>
-            <p>Roblox uchun mukammal darajada optimizatsiya qilingan, draggabledan tortib neon yorug'liklarigacha qoplangan eng xavfsiz va tezkor skriptlar to'plami.</p>
-            <button class="cta-btn" onclick="openTab('scripts')">Skriptlarni Tekshirish</button>
+        <div id="home" class="tab-content active">
+            <div class="glass-panel hero">
+                <h1>Yukio Scripts <span style="color: var(--sakura-pink);">Sakura Edition</span></h1>
+                <p>Access next-generation Roblox software engines. Perfectly optimized modules wrapped in high-fidelity custom neon typography interfaces designed to ensure seamless script execution.</p>
+                <button class="btn btn-primary" style="padding: 14px 45px;" onclick="openTab('scripts')">Explore Scripts</button>
+            </div>
         </div>
 
-        <!-- SCRIPTS TAB -->
         <div id="scripts" class="tab-content">
-            <h2 style="margin-bottom: 25px; text-shadow: 0 0 10px var(--sakura-pink); font-weight: 700;">Mavjud Skriptlar</h2>
+            <h2 style="margin-bottom: 30px; text-shadow: 0 0 12px var(--sakura-pink); font-weight: 700; text-align: center;">Premium Software Base</h2>
             <div class="grid">
-                <!-- Card 1 -->
                 <div class="card">
-                    <h3>PoloX Aimbot & ESP</h3>
-                    <p>Cursor orqasidan silliq ergashuvchi mukammal FOV aylana va devor ortidagi dushmanlarni neon qizil rangda ko'rsatuvchi vizual tizim.</p>
-                    <div class="code-box" id="script1">loadstring(game:HttpGet("https://yukio.io/polox"))()</div>
-                    <button class="action-btn" onclick="copyToClipboard('script1')">Kodni Nusxalash</button>
+                    <div>
+                        <h3>PoloX Aimbot & ESP</h3>
+                        <p>Advanced real-time calculations handling precise dynamic vector updates paired with a customizable neon HUD overlay.</p>
+                    </div>
+                    <div>
+                        <div class="code-box" id="script1">loadstring(game:HttpGet("https://yukio.io/polox"))()</div>
+                        <button class="btn" style="width: 100%;" onclick="copyToClipboard('script1')">Copy Script</button>
+                    </div>
                 </div>
-                <!-- Card 2 -->
                 <div class="card">
-                    <h3>Sakura Game Manager</h3>
-                    <p>O'yin raundlarini avtomatik boshqarish, xaritalarni kechikishlarsiz (anti-lag) yuklash va logotiplar bazasini nazorat qilish skripti.</p>
-                    <div class="code-box" id="script2">loadstring(game:HttpGet("https://yukio.io/gamemanager"))()</div>
-                    <button class="action-btn" onclick="copyToClipboard('script2')">Kodni Nusxalash</button>
+                    <div>
+                        <h3>Sakura Game Manager</h3>
+                        <p>Fully secure background thread executing precise server reconciliation and performance acceleration filters instantly.</p>
+                    </div>
+                    <div>
+                        <div class="code-box" id="script2">loadstring(game:HttpGet("https://yukio.io/gamemanager"))()</div>
+                        <button class="btn" style="width: 100%;" onclick="copyToClipboard('script2')">Copy Script</button>
+                    </div>
                 </div>
-                <!-- Card 3 -->
                 <div class="card">
-                    <h3>Clipboard Link Copier UI</h3>
-                    <p>O'yin ichidagi UI paneliga Discord yoki ijtimoiy tarmoq havolalarini joylash va bir klikda clipboardga nusxalash funktsiyasi.</p>
-                    <div class="code-box" id="script3">loadstring(game:HttpGet("https://yukio.io/linkcopier"))()</div>
-                    <button class="action-btn" onclick="copyToClipboard('script3')">Kodni Nusxalash</button>
+                    <div>
+                        <h3>Universal Clipboard Linker</h3>
+                        <p>Modular event pipeline optimizing fast client-to-clipboard interactions bypassing typical game sandbox execution limits.</p>
+                    </div>
+                    <div>
+                        <div class="code-box" id="script3">loadstring(game:HttpGet("https://yukio.io/linkcopier"))()</div>
+                        <button class="btn" style="width: 100%;" onclick="copyToClipboard('script3')">Copy Script</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- KEYS TAB -->
-        <div id="keys" class="tab-content key-box glass-panel">
-            <h2 style="color: var(--sakura-pink); text-shadow: 0 0 10px rgba(255,126,187,0.3);">Premium Key System</h2>
-            <p style="color: var(--text-muted); margin-top: 8px; font-size: 15px;">Premium skriptlarimizni faollashtirish uchun pastga kalitni kiriting.</p>
-            <input type="text" class="key-input" placeholder="YUKIO-XXXX-XXXX" id="keyInput">
-            <div style="display: flex; gap: 15px; justify-content: center;">
-                <button class="cta-btn" style="padding: 11px 28px; font-size: 15px;" onclick="checkKey()">Aktivlashtirish</button>
-                <button class="action-btn" style="width: auto; padding: 11px 28px; font-size: 15px;" onclick="window.open('https://linkvertise.com')">Get Free Key</button>
+        <div id="keys" class="tab-content">
+            <div class="glass-panel key-wrapper">
+                <h2 style="color: var(--sakura-pink); text-shadow: 0 0 10px rgba(255,126,187,0.3);">Access Gateway</h2>
+                <p style="color: var(--text-muted); margin-top: 8px;">Insert your active authentication key below to activate developer tools.</p>
+                <input type="text" class="key-input" placeholder="YUKIO-XXXX-XXXX-XXXX" id="keyInput">
+                <div class="key-actions">
+                    <button class="btn btn-primary" style="flex: 1;" onclick="checkKey()">Activate Engine</button>
+                    <button class="btn" style="flex: 1;" onclick="window.open('https://linkvertise.com')">Generate Key</button>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- TOAST BILDIRIShNOMA -->
-    <div class="toast" id="toastNotification">Matn nusxalandi!</div>
+    <div class="toast" id="toastNotification">Script copied successfully!</div>
 
-    <!-- JAVASCRIPT LOGIKA TIZIMI -->
     <script>
-        /* TABLARNI ALMASHTIRISH */
+        /* CORE CLIENT NAVIGATION LOGIC */
         function openTab(tabId) {
-            // Hamma tab tugmalaridan active klassini olib tashlash
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            // Hamma kontentlarni yashirish
+            document.querySelectorAll('nav .btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             
-            // Bosilgan tugmaga active klassini berish
-            const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.getAttribute('onclick').includes(tabId));
-            if (targetBtn) targetBtn.classList.add('active');
+            const selectedBtn = Array.from(document.querySelectorAll('nav .btn')).find(btn => btn.getAttribute('onclick').includes(tabId));
+            if (selectedBtn) selectedBtn.classList.add('active');
             
-            // Tanlangan sahifani ko'rsatish
             document.getElementById(tabId).classList.add('active');
         }
 
-        /* SCRIPT KODINI NUSXALASH */
+        /* TEXT INTERACTION CONTROLLER */
         function copyToClipboard(elementId) {
-            const code = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(code).then(() => {
-                triggerToast("Skript muvaffaqiyatli nusxalandi! Uni executorga qo'ying.");
+            const dataString = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(dataString).then(() => {
+                triggerToast("Script copied! Paste it inside your executor.");
             });
         }
 
-        /* KALITNI TEKSHIRISH */
+        /* KEY GATEWAY VERIFIER */
         function checkKey() {
-            const keyVal = document.getElementById('keyInput').value;
-            if(keyVal.trim() === "") {
-                triggerToast("Iltimos, kalitni maydonga kiriting!");
+            const keyString = document.getElementById('keyInput').value;
+            if(keyString.trim() === "") {
+                triggerToast("Authentication string field cannot be empty!");
             } else {
-                triggerToast("Tizim tekshirilmoqda... Kalit noto'g'ri.");
+                triggerToast("Processing token... Handshake verification failed.");
             }
         }
 
-        /* TOAST BILDIRISHNOMA CHIQARISH */
+        /* CLIENT ENGINE TOAST FEEDBACK SYSTEMS */
         function triggerToast(message) {
             const toast = document.getElementById('toastNotification');
             toast.innerText = message;
@@ -418,70 +420,79 @@ Buni shunchaki kompyuteringizda `index.html` deb saqlab, istalgan brauzerda ochi
             }, 3000);
         }
 
-        /* SAKURA DARAXTI BARGLARI EFFEKTI (CANVAS OPTIMIZED) */
+        /* HIGH-PERFORMANCE CHERRY BLOSSOM LEAF INTERPOLATION */
         const canvas = document.getElementById('sakuraCanvas');
         const ctx = canvas.getContext('2d');
 
-        let w = canvas.width = window.innerWidth;
-        let h = canvas.height = window.innerHeight;
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
 
         window.addEventListener('resize', () => {
-            w = canvas.width = window.innerWidth;
-            h = canvas.height = window.innerHeight;
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
         });
 
-        const maxPetals = 35; // Ekrandagi barglar soni
-        const petalArray = [];
+        const petalDensity = 30;
+        const petalStorage = [];
 
         class SakuraPetal {
             constructor() {
-                this.x = Math.random() * w;
-                this.y = Math.random() * h - h;
-                this.size = Math.random() * 4 + 3; // Barg o'lchami
-                this.speedY = Math.random() * 1.2 + 0.8; // Tushish tezligi
-                this.speedX = Math.random() * 0.8 - 0.4; // Yon tomonga tebranishi
-                this.opacity = Math.random() * 0.5 + 0.4;
+                this.reset();
+                this.y = Math.random() * height; // Distribute across vertical viewport space initially
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = -20;
+                this.size = Math.random() * 6 + 4;
+                this.speedY = Math.random() * 1.0 + 0.6;
+                this.speedX = Math.random() * 1.0 - 0.5;
+                this.rotation = Math.random() * Math.PI;
+                this.rotationSpeed = Math.random() * 0.02 - 0.01;
+                this.alpha = Math.random() * 0.4 + 0.4;
             }
 
             draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 183, 213, ${this.opacity})`; // Sakura pushtisi
+                
+                // Formulate algorithmic sakura petal vector math coordinates instead of standard arcs
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(-this.size, -this.size, -this.size, this.size, 0, this.size * 1.5);
+                ctx.bezierCurveTo(this.size, this.size, this.size, -this.size, 0, 0);
+                
+                ctx.fillStyle = `rgba(255, 183, 213, ${this.alpha})`;
                 ctx.fill();
+                ctx.restore();
             }
 
             update() {
                 this.y += this.speedY;
                 this.x += this.speedX;
+                this.rotation += this.rotationSpeed;
 
-                // Agar ekran pastiga tushib ketsa, tepaday yangitdan paydo bo'lish
-                if (this.y > h) {
-                    this.y = -10;
-                    this.x = Math.random() * w;
-                    this.speedY = Math.random() * 1.2 + 0.8;
-                    this.speedX = Math.random() * 0.8 - 0.4;
+                if (this.y > height + 20 || this.x > width + 20 || this.x < -20) {
+                    this.reset();
                 }
             }
         }
 
-        // Massivni barglar bilan to'ldirish
-        for (let i = 0; i < maxPetals; i++) {
-            petalArray.push(new SakuraPetal());
+        for (let i = 0; i < petalDensity; i++) {
+            petalStorage.push(new SakuraPetal());
         }
 
-        // Animatsiya sikli
-        function startAnimation() {
-            ctx.clearRect(0, 0, w, h);
-            petalArray.forEach(petal => {
+        function executionLoop() {
+            ctx.clearRect(0, 0, width, height);
+            petalStorage.forEach(petal => {
                 petal.draw();
                 petal.update();
             });
-            requestAnimationFrame(startAnimation);
+            requestAnimationFrame(executionLoop);
         }
 
-        startAnimation();
+        executionLoop();
     </script>
 </body>
 </html>
-
-```
