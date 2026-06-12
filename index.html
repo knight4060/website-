@@ -3,884 +3,2763 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yukio Hub | Sakura Premium Edition</title>
-    <link rel="icon" type="image/png" href="yukiohub.png">
+    <title>Sakura Hub | Premium Scripting Platform</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;600;700;800;900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* CORE RESET & VARIABLES */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        /* ==========================================================================
+           1. CSS ARCHITECTURE ARCHETYPE - SAKURA HUB ENGINE CORNERSTONE
+           ========================================================================== */
+        :root {
+            /* Color Metrics & Structural Hex Core Layouts */
+            --bg-dark-absolute: #07040a;
+            --bg-dark-gradient-start: #0f0a1a;
+            --bg-dark-gradient-end: #050308;
+            --bg-light-absolute: #f5f0fa;
+            --bg-light-gradient-start: #fbf8fe;
+            --bg-light-gradient-end: #efe6f8;
+            
+            /* High Glass Glassmorphic Layering Variables */
+            --glass-bg-dark: rgba(22, 14, 33, 0.65);
+            --glass-bg-light: rgba(255, 255, 255, 0.75);
+            --glass-border-dark: rgba(255, 126, 187, 0.16);
+            --glass-border-light: rgba(76, 29, 149, 0.12);
+            --glass-glow-dark: rgba(255, 126, 187, 0.04);
+            --glass-glow-light: rgba(139, 92, 246, 0.03);
+            
+            /* Primary Aesthetic Tone Accent Mappings */
+            --pink-primary: #ff7ebb;
+            --pink-glow: #ff4fa3;
+            --pink-deep: #d43f83;
+            --purple-accent: #8b5cf6;
+            --purple-deep: #4c1d95;
+            --purple-dark: #2e1065;
+            --purple-glow: #a78bfa;
+            --text-dark-primary: #f5f2fa;
+            --text-dark-muted: #a39cb0;
+            --text-light-primary: #1c1524;
+            --text-light-muted: #625970;
+            
+            /* Status Indicators Configurations */
+            --status-working: #10b981;
+            --status-working-bg: rgba(16, 185, 129, 0.15);
+            --status-updated: #3b82f6;
+            --status-updated-bg: rgba(59, 130, 246, 0.15);
+            --status-patched: #ef4444;
+            --status-patched-bg: rgba(239, 68, 68, 0.15);
+            --gold-premium: #f59e0b;
+            --gold-premium-glow: #d97706;
+            
+            /* Core Engine Adaptive System Variable Mapping */
+            --main-bg: var(--bg-dark-absolute);
+            --main-bg-gradient: linear-gradient(135deg, var(--bg-dark-gradient-start), var(--bg-dark-gradient-end));
+            --panel-bg: var(--glass-bg-dark);
+            --panel-border: var(--glass-border-dark);
+            --panel-glow: var(--glass-glow-dark);
+            --text-main: var(--text-dark-primary);
+            --text-muted: var(--text-dark-muted);
+            --shadow-matrix: rgba(0, 0, 0, 0.65);
+            --canvas-mix-mode: screen;
+            --card-blur: 20px;
+            --transition-timing: cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        :root {
-            --panel-bg: rgba(13, 6, 20, 0.82);
-            --sakura-pink: #ff7ebb;
-            --neon-purple: #bd00ff;
-            --text-light: #ffffff;
-            --text-muted: #cbbcd4;
-            --neon-glow: 0 0 15px rgba(255, 126, 187, 0.4);
-            --neon-glow-strong: 0 0 25px rgba(189, 0, 255, 0.6);
-            --premium-gold: #ffd700;
-            --gold-glow: 0 0 20px rgba(255, 215, 0, 0.5);
+        /* Ambient Dynamic Light Variant Layout Rules overrides */
+        .light-theme {
+            --main-bg: var(--bg-light-absolute);
+            --main-bg-gradient: linear-gradient(135deg, var(--bg-light-gradient-start), var(--bg-light-gradient-end));
+            --panel-bg: var(--glass-bg-light);
+            --panel-border: var(--glass-border-light);
+            --panel-glow: var(--glass-glow-light);
+            --text-main: var(--text-light-primary);
+            --text-muted: var(--text-light-muted);
+            --shadow-matrix: rgba(76, 29, 149, 0.08);
+            --canvas-mix-mode: multiply;
+        }
+
+        /* ==========================================================================
+           2. RESET ENGINE & LAYOUT DIRECTIVES
+           ========================================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background: linear-gradient(rgba(10, 5, 18, 0.55), rgba(10, 5, 18, 0.65)), 
-                        url('sakura.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            color: var(--text-light);
-            overflow-x: hidden;
+            background-color: var(--main-bg);
+            background-image: var(--main-bg-gradient);
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            transition: background-color 0.5s var(--transition-timing), color 0.5s var(--transition-timing);
+            line-height: 1.6;
         }
 
-        /* BACKGROUND EFFECTS */
-        .sakura-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .container {
             width: 100%;
-            height: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Layout Framework Spacers for High-End Grid Alignment */
+        section {
+            padding: 60px 0;
+            position: relative;
+        }
+
+        /* Custom Vector Scroll Track Interface Elements */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--main-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--purple-deep), var(--pink-primary), var(--purple-accent));
+            border-radius: 20px;
+            border: 2px solid var(--main-bg);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, var(--purple-accent), var(--pink-glow), var(--purple-deep));
+        }
+
+        /* ==========================================================================
+           3. EXPERT-TIER GLOBAL GLASSMORPHISM COMPONENT BLUEPRINTS
+           ========================================================================== */
+        .glass-panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(var(--card-blur));
+            -webkit-backdrop-filter: blur(var(--card-blur));
+            border: 1px solid var(--panel-border);
+            border-radius: 24px;
+            box-shadow: 0 16px 40px -10px var(--shadow-matrix), inset 0 1px 0 rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+            background-clip: padding-box;
+            transition: transform 0.4s var(--transition-timing), box-shadow 0.4s var(--transition-timing), border-color 0.4s var(--transition-timing);
+        }
+
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--panel-glow) 0%, transparent 60%);
             pointer-events: none;
             z-index: 1;
         }
 
-        .glow-orb {
+        /* Standardized High-Performance Typography Anchors */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+        }
+
+        p {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: all 0.3s var(--transition-timing);
+        }
+
+        /* Structural Text Formatting Accent Modifiers */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--pink-primary) 10%, var(--pink-glow) 40%, var(--purple-accent) 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .pink-accent-text { color: var(--pink-primary); }
+        .purple-accent-text { color: var(--purple-accent); }
+        .gold-accent-text { color: var(--gold-premium); }
+
+        /* ==========================================================================
+           4. LOADER ARCHITECTURE WITH ANIME CANVAS SCALING
+           ========================================================================== */
+        .loader-wrapper {
+            position: fixed;
+            inset: 0;
+            background-color: var(--bg-dark-absolute);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1), visibility 0.8s;
+        }
+
+        .sakura-loader-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+        }
+
+        .outer-loader-ring {
             position: absolute;
+            inset: 0;
+            border: 2px dashed rgba(255, 126, 187, 0.2);
+            border-radius: 50%;
+            animation: spinClockwise 12s linear infinite;
+        }
+
+        .inner-loader-ring {
+            position: absolute;
+            inset: 15px;
+            border: 3px solid transparent;
+            border-top-color: var(--pink-primary);
+            border-bottom-color: var(--purple-accent);
+            border-radius: 50%;
+            animation: spinCounterClockwise 1.5s cubic-bezier(0.53, 0.21, 0.29, 0.67) infinite;
+        }
+
+        .central-loader-petal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: var(--pink-glow);
+            animation: pulsePulse 2s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
+            text-shadow: 0 0 15px var(--pink-glow);
+        }
+
+        .loader-wrapper h2 {
+            color: #ffffff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .loader-progress-bar {
+            width: 200px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-top: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--purple-accent), var(--pink-primary));
+            box-shadow: 0 0 8px var(--pink-primary);
+            transition: width 0.1s linear;
+        }
+
+        @keyframes spinClockwise { to { transform: rotate(360deg); } }
+        @keyframes spinCounterClockwise { to { transform: rotate(-360deg); } }
+        @keyframes pulsePulse { 0%, 100% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.7; } 50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; } }
+
+        /* ==========================================================================
+           5. CANVAS PARTICLES & GLOW INTERACTION SYSTEM OVERLAYS
+           ========================================================================== */
+        .canvas-container {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        #sakura-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            mix-blend-mode: var(--canvas-mix-mode);
+            opacity: 0.85;
+            transition: mix-blend-mode 0.5s var(--transition-timing);
+        }
+
+        .mouse-glow-canvas {
+            position: fixed;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(189, 0, 255, 0.15) 0%, transparent 70%);
-            top: -150px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 0;
-            filter: blur(60px);
+            background: radial-gradient(circle, rgba(255, 126, 187, 0.06) 0%, rgba(139, 92, 246, 0.03) 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -2;
+            transform: translate(-50%, -50%);
+            top: -1000px;
+            left: -1000px;
+            transition: opacity 0.3s;
         }
 
-        /* HEADER NAVIGATION */
-        header {
-            position: relative;
-            z-index: 10;
+        /* ==========================================================================
+           6. NAVBAR LAYER INFRASTRUCTURE & LAYOUT FLOWS
+           ========================================================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 1200px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background: rgba(9, 4, 15, 0.85);
-            border-bottom: 1px solid rgba(255, 126, 187, 0.2);
+            z-index: 999;
+            background: rgba(7, 4, 10, 0.35);
             backdrop-filter: blur(16px);
-            border-radius: 0 0 16px 16px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--panel-border);
+            transition: background 0.4s, padding 0.4s var(--transition-timing);
+            padding: 24px 0;
         }
 
-        /* Brend qismini guruhlash */
-        .brand-container {
+        .light-theme .navbar {
+            background: rgba(245, 240, 250, 0.35);
+        }
+
+        .navbar.scrolled {
+            padding: 14px 0;
+            background: rgba(7, 4, 10, 0.75);
+            box-shadow: 0 10px 30px -10px var(--shadow-matrix);
+        }
+
+        .light-theme .navbar.scrolled {
+            background: rgba(245, 240, 250, 0.8);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-area {
+            font-size: 1.75rem;
+            font-weight: 900;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.5px;
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .logo-graphic {
+        .logo-area i {
+            font-size: 1.6rem;
+            filter: drop-shadow(0 0 8px rgba(255, 126, 187, 0.6));
+            animation: continuousWobble 4s ease-in-out infinite;
+        }
+
+        @keyframes continuousWobble {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(6deg); }
+            75% { transform: rotate(-6deg); }
+        }
+
+        .nav-menu {
             display: flex;
             align-items: center;
-            color: var(--sakura-pink);
-            filter: drop-shadow(0 0 8px var(--neon-purple));
+            gap: 6px;
+            background: rgba(0,0,0,0.15);
+            padding: 6px;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.03);
         }
 
-        .logo-graphic svg {
-            width: 28px;
-            height: 28px;
-            fill: currentColor;
+        .light-theme .nav-menu {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.02);
         }
 
-        .logo-text {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--text-light);
-            text-shadow: 0 0 12px var(--neon-purple);
-            letter-spacing: 2px;
-            cursor: pointer;
-        }
-
-        .logo-text span {
-            color: var(--sakura-pink);
-            text-shadow: 0 0 12px var(--sakura-pink);
-        }
-
-        .nav-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        nav {
-            display: flex;
-            gap: 12px;
-        }
-
-        /* NAVIGATION BUTTONS */
-        .btn {
-            background: rgba(255, 126, 187, 0.08);
-            border: 1px solid rgba(255, 126, 187, 0.3);
-            color: var(--text-light);
-            padding: 8px 20px;
-            font-size: 14px;
+        .nav-item {
+            font-size: 0.95rem;
             font-weight: 600;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-        }
-
-        .btn:hover {
-            border-color: var(--sakura-pink);
-            background: rgba(255, 126, 187, 0.18);
-            box-shadow: var(--neon-glow);
-            transform: translateY(-2px);
-        }
-
-        .btn.active {
-            background: linear-gradient(90deg, var(--sakura-pink), var(--neon-purple));
-            border-color: transparent;
-            box-shadow: var(--neon-glow-strong);
-        }
-
-        /* PREMIUM GOLD TAB BUTTON */
-        .btn-premium {
-            background: rgba(255, 215, 0, 0.08);
-            border-color: rgba(255, 215, 0, 0.3);
-            color: var(--premium-gold);
-            font-weight: 700;
-        }
-
-        .btn-premium:hover {
-            border-color: var(--premium-gold);
-            background: rgba(255, 215, 0, 0.15);
-            box-shadow: var(--gold-glow);
-        }
-
-        .btn-premium.active {
-            background: linear-gradient(90deg, var(--premium-gold), #ffa500);
-            border-color: transparent;
-            color: #000000;
-            box-shadow: var(--gold-glow);
-        }
-
-        /* MUSIC CONTROLLER TUGMASI */
-        .btn-music {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 24, 24, 0.08);
-            border: 1px solid rgba(255, 24, 24, 0.3);
-            color: #ff5555;
-            width: 32px;
-            height: 32px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            padding: 0;
-        }
-
-        .btn-music svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-
-        .btn-music.playing {
-            background: rgba(0, 255, 204, 0.08);
-            border-color: rgba(0, 255, 204, 0.4);
-            color: #00ffcc;
-            box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
-        }
-
-        /* MAIN CONTENT WRAPPER */
-        main {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            max-width: 900px;
-            margin: 60px auto;
-            padding: 0 20px;
-        }
-
-        .tab-content {
-            display: none;
-            width: 100%;
-            animation: fade 0.5s ease forwards;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fade {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* UNIFIED PREMIUM CARD (GLASSMORPHISM) */
-        .glass-panel {
-            background: var(--panel-bg);
-            border: 1px solid rgba(255, 126, 187, 0.2);
-            border-radius: 20px;
-            padding: 55px 45px 45px 45px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 18px; text-shadow: 0 0 20px rgba(189, 0, 255, 0.5); }
-        .hero p { color: var(--text-muted); font-size: 16px; line-height: 1.7; margin-bottom: 30px; max-width: 600px; }
-        .tab-title { font-size: 28px; font-weight: 700; margin-bottom: 30px; text-shadow: 0 0 10px rgba(255, 126, 187, 0.3); text-align: center; }
-
-        /* COMMUNITY SECTION WITH FIXED YOUTUBE SVG */
-        .social-container {
-            margin-top: 45px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 126, 187, 0.15);
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .social-title {
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            padding: 10px 22px;
+            border-radius: 30px;
             color: var(--text-muted);
-            font-weight: 700;
-            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
         }
 
-        .social-icons {
+        .nav-item i {
+            font-size: 0.85rem;
+            transition: transform 0.3s;
+        }
+
+        .nav-item:hover i {
+            transform: scale(1.15) translateY(-1px);
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--pink-primary);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, rgba(255, 126, 187, 0.12), rgba(139, 92, 246, 0.12));
+            box-shadow: inset 0 0 0 1px rgba(255, 126, 187, 0.25);
+        }
+
+        .nav-actions-cluster {
             display: flex;
-            gap: 18px;
-            justify-content: center;
             align-items: center;
+            gap: 12px;
+        }
+
+        .nav-social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.1rem;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .nav-social-btn::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: inherit;
+            opacity: 0;
+            z-index: -1;
+            transform: scale(0.9);
+            transition: transform 0.4s var(--transition-timing), opacity 0.4s;
+        }
+
+        .nav-social-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .nav-social-btn:hover::after {
+            opacity: 0.4;
+            transform: scale(1.2);
+        }
+
+        .nav-social-btn.discord { background: #5865F2; }
+        .nav-social-btn.youtube { background: #FF0000; }
+        .nav-social-btn.tiktok { background: #000000; border: 1px solid rgba(255,255,255,0.15); }
+        .nav-social-btn.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+
+        .system-control-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px var(--shadow-matrix);
+            transition: all 0.3s;
+        }
+
+        .system-control-btn:hover {
+            color: var(--pink-primary);
+            border-color: var(--pink-primary);
+            transform: scale(1.05);
+        }
+
+        .mobile-menu-trigger {
+            display: none;
+        }
+
+        /* ==========================================================================
+           7. REUSABLE CORE INTERACTION COMPONENT GENERATORS
+           ========================================================================== */
+        .btn-blueprint {
+            padding: 14px 32px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            border-radius: 14px;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.4s var(--transition-timing);
+        }
+
+        .btn-blueprint::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+            transform: translateX(-100%);
+            z-index: -1;
+        }
+
+        .btn-blueprint:hover::before {
+            animation: buttonGlint 1.5s var(--transition-timing);
+        }
+
+        @keyframes buttonGlint {
+            100% { transform: translateX(100%); }
+        }
+
+        .btn-solid-premium {
+            background: linear-gradient(135deg, var(--pink-primary), var(--pink-glow));
+            color: #ffffff;
+            box-shadow: 0 6px 24px -4px rgba(255, 126, 187, 0.45);
+        }
+
+        .btn-solid-premium:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px -4px rgba(255, 126, 187, 0.6);
+            filter: brightness(1.05);
+        }
+
+        .btn-outline-glow {
+            background: rgba(139, 92, 246, 0.08);
+            border: 1px solid rgba(139, 92, 246, 0.35);
+            color: var(--purple-glow);
+        }
+
+        .light-theme .btn-outline-glow {
+            color: var(--purple-deep);
+            border-color: rgba(76, 29, 149, 0.25);
+        }
+
+        .btn-outline-glow:hover {
+            background: rgba(139, 92, 246, 0.16);
+            border-color: var(--pink-primary);
+            color: var(--pink-primary);
+            transform: translateY(-3px);
+        }
+
+        .badge-marker {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .badge-premium-pink {
+            background: rgba(255, 126, 187, 0.12);
+            border: 1px solid rgba(255, 126, 187, 0.3);
+            color: var(--pink-primary);
+        }
+
+        /* ==========================================================================
+           8. TAB STRUCTURAL GRID DISPATCH CORES
+           ========================================================================== */
+        .main-tab-orchestrator {
+            margin-top: 130px;
+            min-height: 70vh;
+        }
+
+        .tab-panel-node {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s var(--transition-timing), transform 0.5s var(--transition-timing);
+        }
+
+        .tab-panel-node.active-node {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==========================================================================
+           9. HOME VIEW TAB ARCHITECTURE SCHEMA
+           ========================================================================== */
+        .hero-banner-composite {
+            padding: 80px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, rgba(22, 14, 33, 0.8), rgba(10, 6, 15, 0.9));
+        }
+
+        .light-theme .hero-banner-composite {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(239, 230, 248, 0.9));
+        }
+
+        .hero-text-engine h1 {
+            font-size: 3.75rem;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            font-weight: 900;
+        }
+
+        .hero-text-engine p {
+            font-size: 1.15rem;
+            margin-bottom: 36px;
+            line-height: 1.7;
+            max-width: 680px;
+        }
+
+        .hero-cta-box {
+            display: flex;
+            gap: 16px;
             flex-wrap: wrap;
         }
 
-        .social-link {
+        .hero-gfx-viewport {
+            position: relative;
             display: flex;
-            align-items: center;
             justify-content: center;
-            width: 52px;
-            height: 52px;
-            background: rgba(9, 4, 15, 0.6);
-            border: 1px solid rgba(255, 126, 187, 0.2);
-            border-radius: 14px;
-            color: var(--text-light);
-            transition: all 0.25s ease;
+            align-items: center;
         }
 
-        .social-link svg {
-            width: 24px;
-            height: 24px;
-            fill: currentColor;
-            transition: transform 0.2s ease;
+        .gfx-glowing-back-orb {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 126, 187, 0.3) 0%, transparent 70%);
+            filter: blur(20px);
+            animation: floatSlowly 6s ease-in-out infinite alternate;
         }
 
-        .social-link:hover {
-            border-color: var(--sakura-pink);
-            background: rgba(255, 126, 187, 0.15);
-            box-shadow: var(--neon-glow);
+        .gfx-render-showcase {
+            width: 100%;
+            max-width: 320px;
+            filter: drop-shadow(0 15px 35px rgba(0,0,0,0.5));
+            animation: coreFloat 4s ease-in-out infinite alternate;
+            z-index: 2;
+        }
+
+        @keyframes coreFloat {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-15px) rotate(3deg); }
+        }
+        @keyframes floatSlowly {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(15px, 15px) scale(1.15); }
+        }
+
+        /* Incremental Metrics Framework Elements */
+        .metrics-bar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+
+        .metric-node-card {
+            padding: 36px;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+        }
+
+        .metric-node-card:hover {
+            border-bottom-color: var(--pink-primary);
             transform: translateY(-4px);
         }
 
-        .social-link:hover svg { transform: scale(1.08); }
-        .roblox-svg { width: 22px !important; height: 22px !important; }
-
-        /* SCRIPTS GRID SYSTEM */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: rgba(14, 7, 21, 0.94);
-            border: 1px solid rgba(255, 126, 187, 0.15);
-            border-radius: 14px;
-            padding: 25px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            transition: border-color 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card:hover { border-color: var(--sakura-pink); }
-        
-        /* PREMIUM GOLD CARDS */
-        .card.premium-card {
-            border: 1px solid rgba(255, 215, 0, 0.25);
-            background: rgba(22, 16, 5, 0.94);
-        }
-        .card.premium-card:hover {
-            border-color: var(--premium-gold);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
-        }
-
-        .card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: #ffffff; }
-
-        /* OUTPUT BOX SETUP */
-        .output-box {
-            background: #040106;
-            border-radius: 8px;
-            padding: 15px;
-            font-family: 'Consolas', monospace;
-            font-size: 12px;
-            color: #00ffcc;
-            overflow-x: auto;
-            margin-bottom: 15px;
-            border: 1px solid rgba(189, 0, 255, 0.25);
-            white-space: nowrap;
-        }
-        
-        .output-box.premium-code {
-            color: var(--premium-gold);
-            border-color: rgba(255, 215, 0, 0.4);
-        }
-
-        .output-box.key-code {
-            color: #ffcc00;
-            border-color: rgba(189, 0, 255, 0.4);
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-shadow: 0 0 5px rgba(255, 204, 0, 0.3);
-            text-align: center;
-        }
-
-        /* PREMIUM LOCK SYSTEM */
-        .premium-lock-container {
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.1), inset 0 0 20px rgba(255, 215, 0, 0.02);
-            max-width: 550px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .premium-lock-container h2 {
-            font-size: 28px;
+        .metric-node-card h3 {
+            font-size: 3.2rem;
             font-weight: 800;
-            color: var(--premium-gold);
-            text-shadow: var(--gold-glow);
-            margin-top: 15px;
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 6px;
+        }
+
+        .metric-node-card p {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Split Auxiliary Modular Blocks */
+        .split-dashboard-layout {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 30px;
+            margin-bottom: 6px;
+        }
+
+        .dashboard-announcements-panel {
+            padding: 40px;
+        }
+
+        .dashboard-header-title {
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding-bottom: 14px;
+        }
+
+        .light-theme .dashboard-header-title {
+            border-bottom-color: rgba(0,0,0,0.06);
+        }
+
+        .announcement-entry-node {
+            padding-left: 20px;
+            border-left: 2px solid rgba(139, 92, 246, 0.3);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .announcement-entry-node::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--pink-primary);
+            box-shadow: 0 0 8px var(--pink-primary);
+        }
+
+        .announcement-entry-node:last-child {
+            margin-bottom: 0;
+        }
+
+        .announcement-meta-stamp {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--pink-primary);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .announcement-entry-node h4 {
+            font-size: 1.25rem;
             margin-bottom: 10px;
         }
 
-        .key-input-wrapper {
-            width: 100%;
-            position: relative;
-            margin: 25px 0 15px 0;
+        .announcement-entry-node p {
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
-        .key-input {
-            width: 100%;
-            padding: 16px 20px;
-            background: rgba(5, 2, 10, 0.85);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 12px;
-            color: var(--premium-gold);
+        .features-stack-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature-stack-item {
+            padding: 30px;
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .feature-stack-item:hover {
+            border-color: rgba(255, 126, 187, 0.3);
+            transform: translateX(4px);
+        }
+
+        .feature-icon-container {
+            font-size: 1.75rem;
+            color: var(--pink-primary);
+            background: rgba(255, 126, 187, 0.08);
+            padding: 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 126, 187, 0.15);
+            flex-shrink: 0;
+        }
+
+        .feature-stack-item h4 {
+            font-size: 1.15rem;
+            margin-bottom: 6px;
+        }
+
+        .feature-stack-item p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* ==========================================================================
+           10. SCRIPTS TAB LAYOUT COMPONENT SPECIFICATION
+           ========================================================================== */
+        .section-intro-header {
             text-align: center;
-            font-size: 14px;
-            font-family: 'Consolas', monospace;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
+            max-width: 700px;
+            margin: 0 auto 50px auto;
         }
 
-        .key-input:focus {
-            outline: none;
-            border-color: var(--premium-gold);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+        .section-intro-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
         }
 
-        /* BUY KEY TUGMASI DIZAYNI */
-        .btn-buy-key {
+        .section-intro-header p {
+            font-size: 1.05rem;
+        }
+
+        .scripts-filtering-control-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            margin-bottom: 40px;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .search-input-field-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 12px 20px;
+            border-radius: 14px;
+            width: 380px;
+            max-width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: border-color 0.3s;
+        }
+
+        .light-theme .search-input-field-wrapper {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.03);
+        }
+
+        .search-input-field-wrapper:focus-within {
+            border-color: var(--pink-primary);
+        }
+
+        .search-input-field-wrapper i {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .search-input-field-wrapper input {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            width: 100%;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+
+        .filter-tags-cluster {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-pill-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-main);
+            padding: 10px 22px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s var(--transition-timing);
+        }
+
+        .light-theme .filter-pill-btn {
+            background: rgba(0,0,0,0.02);
+            border-color: rgba(0,0,0,0.05);
+        }
+
+        .filter-pill-btn:hover, .filter-pill-btn.pill-active {
+            background: linear-gradient(135deg, var(--pink-primary), var(--pink-glow));
+            color: #ffffff;
+            border-color: transparent;
+            box-shadow: 0 6px 16px rgba(255, 126, 187, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .scripts-grid-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 30px;
+        }
+
+        .script-card-blueprint {
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 320px;
+        }
+
+        .script-card-blueprint:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 45px -10px var(--shadow-matrix);
+            border-color: rgba(255, 126, 187, 0.25);
+        }
+
+        /* Premium Script Lock Overlay Styling */
+        .script-card-blueprint.premium-locked-script {
+            position: relative;
+        }
+
+        .script-card-blueprint.premium-locked-script::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 6, 16, 0.82);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 22px;
+            z-index: 10;
+            transition: opacity 0.5s ease;
+        }
+
+        .light-theme .script-card-blueprint.premium-locked-script::after {
+            background: rgba(240, 235, 246, 0.88);
+        }
+
+        .premium-lock-indicator-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 11;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .premium-lock-indicator-overlay i {
+            font-size: 2.8rem;
+            color: var(--gold-premium);
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+            margin-bottom: 16px;
+            animation: floatSlowly 4s ease-in-out infinite alternate;
+        }
+
+        .premium-lock-indicator-overlay h4 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .premium-lock-indicator-overlay p {
+            font-size: 0.85rem;
+            max-width: 260px;
+            margin-bottom: 0;
+        }
+
+        .script-card-blueprint.premium-unlocked-state::after,
+        .script-card-blueprint.premium-unlocked-state .premium-lock-indicator-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .card-top-identity {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            gap: 16px;
+        }
+
+        .card-top-identity h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .card-functional-badge {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid transparent;
+            flex-shrink: 0;
+        }
+
+        .card-functional-badge.badge-state-working {
+            background: var(--status-working-bg);
+            color: var(--status-working);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .card-functional-badge.badge-state-updated {
+            background: var(--status-updated-bg);
+            color: var(--status-updated);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .card-functional-badge.badge-state-premium {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--gold-premium);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .script-card-blueprint p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-metadata-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            padding-top: 16px;
+        }
+
+        .light-theme .card-metadata-row {
+            border-top-color: rgba(0,0,0,0.04);
+        }
+
+        .card-metadata-row span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-action-copy-script {
+            width: 100%;
+            padding: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--panel-border);
+            color: var(--text-main);
+            border-radius: 12px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            width: 100%;
-            padding: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            color: #ffffff;
-            background: rgba(255, 215, 0, 0.05);
-            border: 1px dashed rgba(255, 215, 0, 0.4);
-            border-radius: 12px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            margin-top: 12px;
+            transition: all 0.3s;
         }
 
-        .btn-buy-key:hover {
-            border-style: solid;
-            border-color: var(--premium-gold);
-            background: rgba(255, 215, 0, 0.15);
-            box-shadow: var(--gold-glow);
-            color: var(--premium-gold);
-            transform: translateY(-2px);
+        .light-theme .btn-action-copy-script {
+            background: rgba(0,0,0,0.01);
         }
 
-        /* NOTIFICATION TOAST */
-        .toast {
-            position: fixed;
-            bottom: -80px;
-            right: 30px;
-            background: #150920;
-            border-left: 4px solid var(--sakura-pink);
-            padding: 15px 30px;
-            border-radius: 8px;
+        .btn-action-copy-script:hover {
+            background: linear-gradient(135deg, var(--pink-primary), var(--purple-accent));
             color: #ffffff;
-            transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 100;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            font-weight: 600;
-            font-size: 14px;
+            border-color: transparent;
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
         }
-        
-        .toast.active { bottom: 30px; }
 
         /* ==========================================================================
-           RESPONSIVE MEDIA QUERIES (TELEFONLAR VA PLANSHETLAR UCHUN MAXSUS TUZATISH)
+           11. NEW REAL KEY SYSTEM IMPLEMENTATION ARCHITECTURE
            ========================================================================== */
+        .key-verification-dashboard-mesh {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Split Verification Input Panel */
+        .key-input-verifier-card {
+            padding: 50px;
+            text-align: center;
+            position: relative;
+        }
+
+        .verifier-status-animation-container {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .verifier-status-animation-container i {
+            font-size: 4.5rem;
+            transition: all 0.4s var(--transition-timing);
+        }
+
+        .verifier-icon-idle {
+            color: var(--purple-glow);
+            text-shadow: 0 0 25px rgba(167, 139, 250, 0.2);
+        }
+
+        .verifier-icon-success {
+            color: var(--status-working);
+            text-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+            animation: bounceScaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .verifier-icon-error {
+            color: var(--status-patched);
+            text-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
+            animation: shakeError 0.4s ease-in-out double;
+        }
+
+        @keyframes shakeError {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+        .key-input-field-group-row {
+            display: flex;
+            gap: 16px;
+            max-width: 680px;
+            margin: 30px auto 20px auto;
+            background: rgba(0,0,0,0.25);
+            padding: 8px;
+            border-radius: 18px;
+            border: 1px solid var(--panel-border);
+            transition: border-color 0.3s;
+        }
+
+        .light-theme .key-input-field-group-row {
+            background: rgba(0,0,0,0.03);
+        }
+
+        .key-input-field-group-row:focus-within {
+            border-color: var(--pink-primary);
+        }
+
+        .key-input-field-group-row input {
+            background: transparent;
+            border: none;
+            padding: 0 20px;
+            color: var(--text-main);
+            font-family: 'Space Grotesk', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        .key-input-field-group-row .btn-blueprint {
+            padding: 14px 28px;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .verification-feedback-status-msg {
+            font-size: 1rem;
+            font-weight: 600;
+            min-height: 24px;
+            margin-top: 10px;
+            transition: color 0.3s;
+        }
+
+        /* Real Key Cards Core Matrix Grid */
+        .real-key-cards-database-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .key-card-node-blueprint {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: rgba(16, 11, 26, 0.45);
+            min-height: 240px;
+        }
+
+        .light-theme .key-card-node-blueprint {
+            background: rgba(255,255,255,0.45);
+        }
+
+        .key-card-node-blueprint:hover {
+            border-color: rgba(139, 92, 246, 0.25);
+            transform: translateY(-4px);
+        }
+
+        .key-card-header-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            gap: 12px;
+        }
+
+        .key-card-header-block h4 {
+            font-size: 1.25rem;
+            line-height: 1.2;
+        }
+
+        .key-card-status-pill {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid transparent;
+        }
+
+        .key-card-status-pill.status-active-true {
+            background: var(--status-working-bg);
+            color: var(--status-working);
+            border-color: rgba(16, 185, 129, 0.25);
+        }
+
+        .key-card-status-pill.status-active-false {
+            background: var(--status-patched-bg);
+            color: var(--status-patched);
+            border-color: rgba(239, 68, 68, 0.25);
+        }
+
+        .key-card-node-blueprint p {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .key-card-token-string-action-row {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.03);
+            padding: 10px 16px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .light-theme .key-card-token-string-action-row {
+            background: rgba(0,0,0,0.02);
+            border-color: rgba(0,0,0,0.04);
+        }
+
+        .key-card-token-string-action-row span {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .key-card-token-string-action-row button {
+            background: transparent;
+            border: none;
+            color: var(--pink-primary);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s, color 0.2s;
+            flex-shrink: 0;
+            padding: 2px;
+        }
+
+        .key-card-token-string-action-row button:hover {
+            transform: scale(1.15);
+            color: var(--pink-glow);
+        }
+
+        /* Loading Verification Spinner Wheel Configuration */
+        .loading-verification-spinner-wheel {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,126,187,0.1);
+            border-top-color: var(--pink-primary);
+            border-bottom-color: var(--purple-accent);
+            border-radius: 50%;
+            animation: spinClockwise 1s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+            margin-bottom: 20px;
+        }
+
+        .verification-success-icon-shield {
+            font-size: 4.5rem;
+            color: var(--status-working);
+            margin-bottom: 16px;
+            animation: bounceScaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes bounceScaleIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* ==========================================================================
+           12. PREMIUM TAB PRICE CARD TABLES MATRIX
+           ========================================================================== */
+        .premium-plans-pricing-matrix {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 950px;
+            margin: 0 auto 60px auto;
+        }
+
+        .pricing-tier-card-blueprint {
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .pricing-tier-card-blueprint.featured-tier-flag {
+            border-color: var(--pink-primary);
+            box-shadow: 0 20px 50px -10px rgba(255, 126, 187, 0.2);
+        }
+
+        .featured-ribbon-tag {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, var(--pink-primary), var(--pink-glow));
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 900;
+            padding: 6px 18px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(255, 126, 187, 0.4);
+        }
+
+        .pricing-tier-card-blueprint .tier-name-label {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .pricing-tier-card-blueprint .tier-price-computation-row {
+            font-size: 3rem;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 30px;
+            line-height: 1;
+        }
+
+        .pricing-tier-card-blueprint .tier-price-computation-row span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .tier-entitlements-listing-stack {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .tier-entitlements-listing-stack li {
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tier-entitlements-listing-stack li i.fa-check { color: var(--status-working); }
+        .tier-entitlements-listing-stack li i.fa-xmark { color: var(--status-patched); opacity: 0.5; }
+
+        .pricing-tier-card-blueprint .btn-blueprint {
+            width: 100%;
+        }
+
+        /* Matrix Tabular Comparison Engine Elements */
+        .comparison-matrix-wrapper-block {
+            padding: 45px;
+            margin-top: 50px;
+        }
+
+        .comparison-matrix-wrapper-block h3 {
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+        }
+
+        .responsive-table-scroll-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .matrix-data-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .matrix-data-table th, .matrix-data-table td {
+            padding: 18px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .light-theme .matrix-data-table th, .light-theme .matrix-data-table td {
+            border-bottom-color: rgba(0,0,0,0.04);
+        }
+
+        .matrix-data-table th {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            background: rgba(0,0,0,0.15);
+            color: var(--text-main);
+        }
+
+        .light-theme .matrix-data-table th {
+            background: rgba(0,0,0,0.02);
+        }
+
+        .matrix-data-table td:first-child {
+            font-weight: 500;
+        }
+
+        /* ==========================================================================
+           13. GRID SOCIAL MEDIA COMMUNITY SECTIONS
+           ========================================================================== */
+        .socials-community-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .social-card-node-anchor {
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .social-card-node-anchor:hover {
+            transform: translateY(-4px);
+        }
+
+        .social-card-node-anchor .social-avatar-icon {
+            font-size: 2.2rem;
+            padding: 16px;
+            border-radius: 16px;
+            flex-shrink: 0;
+        }
+
+        .social-card-node-anchor.discord-anchor-card:hover { border-color: #5865F2; box-shadow: 0 10px 25px -10px rgba(88, 101, 242, 0.4); }
+        .social-card-node-anchor.discord-anchor-card .social-avatar-icon { background: rgba(88, 101, 242, 0.1); color: #5865F2; }
+
+        .social-card-node-anchor.youtube-anchor-card:hover { border-color: #FF0000; box-shadow: 0 10px 25px -10px rgba(255, 0, 0, 0.4); }
+        .social-card-node-anchor.youtube-anchor-card .social-avatar-icon { background: rgba(255, 0, 0, 0.1); color: #FF0000; }
+
+        .social-card-node-anchor.tiktok-anchor-card:hover { border-color: var(--pink-primary); box-shadow: 0 10px 25px -10px rgba(255, 126, 187, 0.3); }
+        .social-card-node-anchor.tiktok-anchor-card .social-avatar-icon { background: rgba(255,255,255,0.05); color: var(--text-main); }
+        .light-theme .social-card-node-anchor.tiktok-anchor-card .social-avatar-icon { background: rgba(0,0,0,0.03); }
+
+        .social-card-node-anchor h4 {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .social-card-node-anchor p {
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        /* ==========================================================================
+           14. ACCORDION FAQ BLOCK DEFINITIONS
+           ========================================================================== */
+        .faq-accordion-stack-block {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .faq-accordion-node-item {
+            padding: 24px 30px;
+            cursor: pointer;
+        }
+
+        .faq-accordion-interactive-trigger-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+        }
+
+        .faq-accordion-interactive-trigger-row i {
+            font-size: 0.9rem;
+            color: var(--pink-primary);
+            transition: transform 0.4s var(--transition-timing);
+        }
+
+        .faq-accordion-hidden-answer-viewport {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s var(--transition-timing), opacity 0.4s var(--transition-timing), margin-top 0.4s;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .faq-accordion-node-item.accordion-node-open .faq-accordion-interactive-trigger-row i {
+            transform: rotate(180deg);
+        }
+
+        .faq-accordion-node-item.accordion-node-open .faq-accordion-hidden-answer-viewport {
+            max-height: 160px;
+            opacity: 1;
+            margin-top: 16px;
+        }
+
+        /* ==========================================================================
+           15. CONTACT INTERACTION SYSTEM BLOCK
+           ========================================================================== */
+        .contact-form-layout-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px;
+        }
+
+        .contact-form-grid-mesh {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .input-group-node-blueprint {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-group-node-blueprint label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .input-group-node-blueprint input, .input-group-node-blueprint textarea {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 14px 20px;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        .light-theme .input-group-node-blueprint input, .light-theme .input-group-node-blueprint textarea {
+            background: rgba(0,0,0,0.02);
+        }
+
+        .input-group-node-blueprint input:focus, .input-group-node-blueprint textarea:focus {
+            border-color: var(--pink-primary);
+        }
+
+        .input-group-node-blueprint textarea {
+            resize: none;
+            height: 140px;
+        }
+
+        .contact-form-layout-wrapper .btn-blueprint {
+            width: 100%;
+        }
+
+        /* ==========================================================================
+           16. FOOTER CORE LAYOUT SETUPS
+           ========================================================================== */
+        footer {
+            background: rgba(5, 3, 8, 0.85);
+            border-top: 1px solid var(--panel-border);
+            padding: 40px 0;
+            margin-top: 80px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .light-theme footer {
+            background: rgba(239, 230, 248, 0.85);
+        }
+
+        .footer-flex-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-navigation-shortcuts {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-navigation-shortcuts a {
+            font-weight: 500;
+        }
+
+        .footer-navigation-shortcuts a:hover {
+            color: var(--pink-primary);
+        }
+
+        /* Floating Back To Top Button Navigation Element */
+        #scroll-to-top-floating-btn {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink-primary), var(--pink-glow));
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(255, 126, 187, 0.4);
+            z-index: 998;
+            font-size: 1.05rem;
+            transition: transform 0.3s var(--transition-timing);
+        }
+
+        #scroll-to-top-floating-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        /* ==========================================================================
+           17. SYSTEM TOAST NOTIFICATION STACK HOOKS
+           ========================================================================== */
+        .toast-notifications-hub-container {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            z-index: 100000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            pointer-events: none;
+        }
+
+        .toast-notification-instance {
+            background: rgba(15, 10, 24, 0.92);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--panel-border);
+            border-left: 4px solid var(--pink-primary);
+            color: #ffffff;
+            padding: 16px 28px;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            pointer-events: auto;
+            transform: translateX(50px);
+            opacity: 0;
+            animation: toastSlideIn 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            transition: opacity 0.4s, transform 0.4s;
+        }
+
+        .light-theme .toast-notification-instance {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-light-primary);
+        }
+
+        @keyframes toastSlideIn {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* ==========================================================================
+           18. ADAPTIVE PLATFORM RESPONSIVE MEDIA BREAKPOINTS MATRIX
+           ========================================================================== */
+        @media (max-width: 1200px) {
+            .hero-banner-composite { padding: 50px; grid-template-columns: 1.1fr 0.9fr; }
+            .hero-text-engine h1 { font-size: 3rem; }
+        }
+
+        @media (max-width: 992px) {
+            .hero-banner-composite { grid-template-columns: 1fr; text-align: center; }
+            .hero-cta-box { justify-content: center; }
+            .hero-gfx-viewport { display: none; }
+            .split-dashboard-layout { grid-template-columns: 1fr; }
+            .premium-plans-pricing-matrix { grid-template-columns: 1fr; max-width: 500px; }
+            .socials-community-grid { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                align-items: flex-start; /* Elementlarni chap tomonga tekislaydi */
-                padding: 15px 20px;
-                border-radius: 0 0 12px 12px;
-                gap: 15px;
-            }
-
-            .brand-container {
-                width: 100%;
-                justify-content: flex-start;
-            }
-
-            .logo-text {
-                font-size: 22px;
-            }
-
-            .nav-container {
-                width: 100%;
-                justify-content: space-between;
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-
-            nav {
-                width: auto;
-                flex: 1;
+            .container { padding: 0 24px; }
+            section { padding: 40px 0; }
+            
+            .mobile-menu-trigger {
                 display: flex;
-                gap: 6px;
-                overflow-x: auto; /* Agar tugmalar sig'masa, surish imkoniyati */
-                padding-bottom: 2px;
             }
 
-            .btn {
-                padding: 6px 12px;
-                font-size: 12px;
-                flex: 0 0 auto;
-                text-align: center;
+            .nav-menu {
+                position: fixed;
+                top: 90px;
+                left: -100%;
+                width: calc(100% - 48px);
+                background: rgba(15, 10, 24, 0.98);
+                backdrop-filter: blur(24px);
+                -webkit-backdrop-filter: blur(24px);
+                flex-direction: column;
+                padding: 30px;
+                border-radius: 20px;
+                border: 1px solid var(--panel-border);
+                gap: 12px;
+                transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+                box-shadow: 0 20px 40px var(--shadow-matrix);
             }
 
-            .btn-music {
-                width: 32px;
-                height: 32px;
-                flex-shrink: 0;
+            .light-theme .nav-menu {
+                background: rgba(255, 255, 255, 0.98);
             }
 
-            main {
-                margin: 30px auto;
-                padding: 0 12px;
+            .nav-menu.mobile-active {
+                left: 24px;
             }
 
-            .glass-panel {
-                padding: 35px 20px 25px 20px;
-                border-radius: 16px;
+            .nav-item {
+                width: 100%;
+                justify-content: center;
+                padding: 14px;
             }
 
-            .hero h1 {
-                font-size: 28px;
+            .nav-actions-cluster .nav-social-btn {
+                display: none;
             }
 
-            .hero p {
-                font-size: 14px;
-            }
-
-            .tab-title {
-                font-size: 22px;
-                margin-bottom: 20px;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .card {
-                padding: 20px;
-            }
-
-            .toast {
-                right: 15px;
-                left: 15px;
-                text-align: center;
-            }
+            .metrics-bar-grid { grid-template-columns: 1fr; }
+            .scripts-filtering-control-panel { flex-direction: column; align-items: stretch; }
+            .search-input-field-wrapper { width: 100%; }
+            .contact-form-grid-mesh { grid-template-columns: 1fr; }
+            .footer-flex-container { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <audio id="bgMusic" loop>
-        <source src="fonmusic.m4a" type="audio/mpeg">
-    </audio>
-
-    <div class="glow-orb"></div>
-    <canvas class="sakura-bg" id="sakuraCanvas"></canvas>
-
-    <header>
-        <div class="brand-container">
-            <div class="logo-graphic">
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.41l8.2-1.192z"/>
-                </svg>
-            </div>
-            <div class="logo-text" onclick="openTab('home')">YUKIO<span>.hub</span></div>
+    <div class="loader-wrapper" id="platform-global-loader">
+        <div class="sakura-loader-container">
+            <div class="outer-loader-ring"></div>
+            <div class="inner-loader-ring"></div>
+            <i class="fa-solid fa-feather-pointed central-loader-petal"></i>
         </div>
-        
-        <div class="nav-container">
-            <nav>
-                <button class="btn active" onclick="openTab('home')">Home</button>
-                <button class="btn" onclick="openTab('scripts')">Scripts</button>
-                <button class="btn" onclick="openTab('keys')">Keys</button>
-                <button class="btn btn-premium" onclick="openTab('premium')">✨ Premium</button>
+        <h2>Sakura Hub</h2>
+        <div class="loader-progress-bar">
+            <div class="loader-progress-fill" id="loader-progress-bar-fill"></div>
+        </div>
+    </div>
+
+    <div class="canvas-container">
+        <canvas id="sakura-canvas"></canvas>
+    </div>
+    <div class="mouse-glow-canvas" id="interactive-mouse-glow-element"></div>
+
+    <div class="toast-notifications-hub-container" id="toast-hub-routing-box"></div>
+
+    <header class="navbar" id="platform-header-navbar">
+        <div class="container nav-wrapper">
+            <a href="#" class="logo-area trigger-node-route" data-route="home-tab">
+                <i class="fa-solid fa-snowflake pink-accent-text"></i> Sakura<span class="gradient-text">Hub</span>
+            </a>
+            
+            <nav class="nav-menu" id="mobile-nav-collapsible-menu">
+                <a href="#home" class="nav-item active trigger-node-route" data-route="home-tab"><i class="fa-solid fa-house-chimney"></i> Home</a>
+                <a href="#scripts" class="nav-item trigger-node-route" data-route="scripts-tab"><i class="fa-solid fa-laptop-code"></i> Scripts</a>
+                <a href="#keys" class="nav-item trigger-node-route" data-route="keys-tab"><i class="fa-solid fa-key"></i> Keys</a>
+                <a href="#premium" class="nav-item trigger-node-route" data-route="premium-tab"><i class="fa-solid fa-crown gold-accent-text"></i> Premium</a>
             </nav>
-            <button id="musicToggleBtn" class="btn-music playing" onclick="toggleMusic()" title="Musiqani yoqish/o'chirish">
-                <svg id="musicIcon" viewBox="0 0 24 24">
-                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h6V3h-6z"/>
-                </svg>
-            </button>
+
+            <div class="nav-actions-cluster">
+                <a href="https://discord.gg" target="_blank" class="nav-social-btn discord" title="Join Discord Guild server"><i class="fa-brands fa-discord"></i></a>
+                <a href="https://youtube.com" target="_blank" class="nav-social-btn youtube" title="Watch Execution Showcases"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://tiktok.com" target="_blank" class="nav-social-btn tiktok" title="TikTok Shorts UI previews"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://instagram.com" target="_blank" class="nav-social-btn instagram" title="Follow Developer Handles"><i class="fa-brands fa-instagram"></i></a>
+                
+                <button class="system-control-btn" id="theme-toggle-hardware-hook" title="Toggle Light/Dark Ambience"><i class="fa-solid fa-moon"></i></button>
+                <button class="system-control-btn mobile-menu-trigger" id="mobile-hamburger-toggle-hook" title="Toggle Navigation Menu"><i class="fa-solid fa-bars"></i></button>
+            </div>
         </div>
     </header>
 
-    <main>
-        <div id="home" class="tab-content active">
-            <div class="glass-panel hero">
-                <h1>Yukio Scripts <span style="color: var(--sakura-pink);">Sakura Edition</span></h1>
-                <p>Access next-generation Roblox software engines. Perfectly optimized modules wrapped in high-fidelity custom neon typography interfaces.</p>
-                
-                <button class="btn btn-primary" style="padding: 12px 40px; font-size: 15px;" onclick="openTab('scripts')">Explore Scripts</button>
+    <main class="main-tab-orchestrator container">
 
-                <div class="social-container">
-                    <div class="social-title">Join Our Community</div>
-                    <div class="social-icons">
-                        <a href="https://t.me/YukioHub" target="_blank" class="social-link" title="Telegram">
-                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.7-2.46 2.75-2.67.01-.03.01-.15-.06-.21a.25.25 0 0 0-.22-.04c-.1.02-1.63 1.04-4.61 3.05-.44.3-.84.45-1.21.44-.4-.01-1.18-.23-1.75-.41-.7-.23-1.26-.35-1.21-.74.03-.2.31-.41.83-.62 3.23-1.41 5.39-2.34 6.48-2.78 3.08-1.26 3.72-1.48 4.14-1.48.09 0 .3.02.44.13.11.09.15.22.16.31v.13z"/></svg>
-                        </a>
-                        <a href="https://discord.gg/XwFv5r2x" target="_blank" class="social-link" title="Discord">
-                            <svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.85-11.11,68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.65-2a75.58,75.58,0,0,0,72.93,0c.85.69,1.74,1.37,2.65,2a68.42,68.42,0,0,1-10.85,5.18,74.37,74.37,0,0,0,6.85,11.11,105.73,105.73,0,0,0,31-18.83C129.24,47.92,123.47,25.09,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.92,46,53.72,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.16,46,96,53,91,65.69,84.69,65.69Z"/></svg>
-                        </a>
-                        <a href="https://www.youtube.com/@Yukio12221" target="_blank" class="social-link" title="YouTube">
-                            <svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.507 9.388.507 9.388.507s7.518 0 9.388-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                        </a>
-                        <a href="https://www.roblox.com/users/9387000310/profile?friendshipSourceType=PlayerSearch" target="_blank" class="social-link" title="Roblox">
-                            <svg class="roblox-svg" viewBox="0 0 24 24"><path d="M18.524 24L0 19.006 5.476 0 24 4.994l-5.476 19.006zm-4.708-13.31l-3.32-.895-.896 3.323 3.32.895.896-3.323z"/></svg>
-                        </a>
+        <section id="home-tab" class="tab-panel-node active-node">
+            <div class="hero-banner-composite glass-panel">
+                <div class="hero-text-engine">
+                    <span class="badge-marker badge-premium-pink">YUKIO ENGINE UPDATE v3.4</span>
+                    <h1>Next-Gen Execution <br>Meets <span class="gradient-text">Sakura Aesthetic</span></h1>
+                    <p>Experience cross-platform script efficiency coupled with premium interface canvases. Engineered specifically for performance telemetry preservation, high visibility canvas rendering parameters, and robust anti-cheat bypass profiles.</p>
+                    <div class="hero-cta-box">
+                        <button class="btn-blueprint btn-solid-premium trigger-node-route" data-route="scripts-tab">Explore Scripts Database <i class="fa-solid fa-wand-magic-sparkles"></i></button>
+                        <button class="btn-blueprint btn-outline-glow trigger-node-route" data-route="keys-tab">Validate License Key <i class="fa-solid fa-unlock-keyhole"></i></button>
+                    </div>
+                </div>
+                <div class="hero-gfx-viewport">
+                    <div class="gfx-glowing-back-orb"></div>
+                    <svg class="gfx-render-showcase" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="sakuraGfxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ff7ebb" />
+                                <stop offset="100%" stop-color="#8b5cf6" />
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#sakuraGfxGrad)" d="M44.3,-76.1C57.4,-68.8,68.1,-57.3,75.9,-44C83.7,-30.7,88.5,-15.3,87.7,-0.5C86.8,14.4,80.3,28.8,72.1,41.4C63.9,54.1,54.1,65,41.8,72.1C29.6,79.2,14.8,82.4,-0.4,83C-15.6,83.7,-31.1,81.7,-44,74.8C-56.9,67.8,-67.1,55.9,-74.6,42.3C-82,28.7,-86.6,13.4,-85.7,-1.5C-84.9,-16.4,-78.6,-31,-69.9,-43.1C-61.2,-55.1,-50.2,-64.7,-37.6,-72.3C-25,-79.9,-12.5,-85.4,1.8,-88.1C16.1,-90.8,31.3,-83.4,44.3,-76.1Z" transform="translate(100 100)" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="metrics-bar-grid">
+                <div class="metric-node-card glass-panel">
+                    <h3 class="platform-numerical-counter" data-target-value="184350">0</h3>
+                    <p>Registered Accounts</p>
+                </div>
+                <div class="metric-node-card glass-panel">
+                    <h3 class="platform-numerical-counter" data-target-value="142">0</h3>
+                    <p>Optimized Scripts</p>
+                </div>
+                <div class="metric-node-card glass-panel">
+                    <h3 class="platform-numerical-counter" data-target-value="99.98" data-decimal-points="2">0</h3>
+                    <p>Core Engine Uptime</p>
+                </div>
+            </div>
+
+            <div class="split-dashboard-layout">
+                <div class="dashboard-announcements-panel glass-panel">
+                    <h3 class="dashboard-header-title"><i class="fa-solid fa-bullhorn pink-accent-text"></i> System Bulletins & Development logs</h3>
+                    
+                    <div class="announcement-entry-node">
+                        <span class="announcement-meta-stamp">June 12, 2026</span>
+                        <h4>Yukio Scripts Rebrand & UI Architecture Integration</h4>
+                        <p>We have safely completed our systemic transition from legacy frameworks to the modern unified architectural baseline. This implementation brings absolute synchronization with sub-tick drawing vectors, optimizing rendering safety by 40% across high-density particle calculations.</p>
+                    </div>
+
+                    <div class="announcement-entry-node">
+                        <span class="announcement-meta-stamp">June 04, 2026</span>
+                        <h4>Aimbot Prediction Correction & Anchor Alignments</h4>
+                        <p>Corrected a computational issue where tracking smoothing parameters were executing inverse geometric translation scaling logic. Vector crosshair positions now properly trace custom FOV constraints with precise cursor alignment across non-standard resolutions.</p>
+                    </div>
+
+                    <div class="announcement-entry-node">
+                        <span class="announcement-meta-stamp">May 28, 2026</span>
+                        <h4>Premium Gateway Shortener Bypass Frameworks</h4>
+                        <p>To maximize convenience metrics for tier contributors, authentication check loops for premium licenses are now delegated to instant internal keyless secure handshakes.</p>
+                    </div>
+                </div>
+
+                <div class="features-stack-container">
+                    <div class="feature-stack-item glass-panel">
+                        <div class="feature-icon-container"><i class="fa-solid fa-bolt-lightning"></i></div>
+                        <div>
+                            <h4>Sub-Millisecond Compilation</h4>
+                            <p>Immediate thread scheduling handles script injections without causing garbage collector frame stalls.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-stack-item glass-panel">
+                        <div class="feature-icon-container"><i class="fa-solid fa-shield-cat"></i></div>
+                        <div>
+                            <h4>Advanced Anti-Detection</h4>
+                            <p>Polymorphic virtualization routines protect runtime variables from memory scanner instrumentation layers.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-stack-item glass-panel">
+                        <div class="feature-icon-container"><i class="fa-solid fa-palette"></i></div>
+                        <div>
+                            <h4>Glassmorphic Canvas Overlays</h4>
+                            <p>Beautiful, customized purple and neon aesthetics designed for peak visual clarity and professional style.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div id="scripts" class="tab-content">
-            <h2 class="tab-title">Premium Combat Modules</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>[FPS] One Tap</h3>
-                    <p style="margin-bottom: 15px; color: var(--text-muted);">Eliminate delays and optimize client-side hit registration. Engineered for instant trigger responses.</p>
-                    <div class="output-box" id="script1">loadstring(game:HttpGet("https://pastebin.com/raw/CgK8na0G"))()</div>
-                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('script1', 'Script copied to clipboard!')">Copy Script</button>
+        <section id="scripts-tab" class="tab-panel-node">
+            <div class="section-intro-header">
+                <h2>Verified Script Repository</h2>
+                <p>Browse, query, and deploy safe, high-tier public and utility scripts verified by platform automation security runs.</p>
+            </div>
+
+            <div class="scripts-filtering-control-panel glass-panel">
+                <div class="search-input-field-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="script-search-input-field" placeholder="Search across target parameters, game hooks, tags...">
                 </div>
-                <div class="card">
-                    <h3>ESP worked any games</h3>
-                    <p style="margin-bottom: 15px; color: var(--text-muted);">Universal ESP module. Real-time player silhouettes, distance indicators, and tracers across any dynamic engine environment.</p>
-                    <div class="output-box" id="script2">loadstring(game:HttpGet("https://pastebin.com/raw/1TRHZCbA"))()</div>
-                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('script2', 'Script copied to clipboard!')">Copy Script</button>
-                </div>
-                <div class="card">
-                    <h3>Bloxstrike</h3>
-                    <p style="margin-bottom: 15px; color: var(--text-muted);">Combat automation software for Bloxstrike. Automated targeting vectors and recoil reduction.</p>
-                    <div class="output-box" id="script3">loadstring(game:HttpGet("https://pastebin.com/raw/2U0dfsm3"))()</div>
-                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('script3', 'Script copied to clipboard!')">Copy Script</button>
-                </div>
-                <div class="card">
-                    <h3>Avatar Changer V17</h3>
-                    <p style="margin-bottom: 15px; color: var(--text-muted);">Advanced client-side catalog. Unlock, modify, and inject premium asset bundles, rarity items.</p>
-                    <div class="output-box" id="script4">loadstring(game:HttpGet("https://pastebin.com/raw/a148jU62"))()</div>
-                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('script4', 'Script copied to clipboard!')">Copy Script</button>
-                </div>
-                <div class="card">
-                    <h3>Arsenal Script V5.1</h3>
-                    <p style="margin-bottom: 15px; color: var(--text-muted);">The ultimate Arsenal builds. Silent aimbot, auto-wall, and streamlined movement mechanics.</p>
-                    <div class="output-box" id="script5">loadstring(game:HttpGet("https://pastebin.com/raw/ZKWy8DYp"))()</div>
-                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('script5', 'Script copied to clipboard!')">Copy Script</button>
+                <div class="filter-tags-cluster">
+                    <button class="filter-pill-btn pill-active" data-filter-group="all">All Scripts</button>
+                    <button class="filter-pill-btn" data-filter-group="aimbot">Aimbot / ESP</button>
+                    <button class="filter-pill-btn" data-filter-group="pve">Zombie / PvE</button>
+                    <button class="filter-pill-btn" data-filter-group="utility">Performance Utils</button>
                 </div>
             </div>
-        </div>
 
-        <div id="keys" class="tab-content">
-            <h2 class="tab-title">Yukio Hub Premium License Keys</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>[FPS] One Tap</h3>
-                    <p style="margin-bottom: 15px; color: var(--text-muted);">Activate premium modules for a unique PoloX simulation experience.</p>
-                    <div class="output-box key-code" id="key1">Yukio-MI28RF-48WHYEG24HR829</div>
-                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('key1', 'Key code copied!')">Copy Key</button>
+            <div class="scripts-grid-matrix" id="scripts-rendering-grid-root">
+                
+                <div class="script-card-blueprint glass-panel" data-script-category="aimbot">
+                    <div>
+                        <div class="card-top-identity">
+                            <h3>Yukio Universal Combat Workspace</h3>
+                            <span class="card-functional-badge badge-state-working">Working</span>
+                        </div>
+                        <p>Advanced crosshair alignment matrix featuring positional target prediction, multi-bone tracking weights, and lightweight structural bounding-box ESP line geometric traces.</p>
+                    </div>
+                    <div>
+                        <div class="card-metadata-row">
+                            <span><i class="fa-solid fa-rotate"></i> Updated: 3 Hours ago</span>
+                            <span><i class="fa-solid fa-layer-group"></i> Ver: 2.1.8</span>
+                        </div>
+                        <button class="btn-action-copy-script" data-raw-script-string='loadstring(game:HttpGet("https://raw.githubusercontent.com/Yukio/Hub/main/source.lua"))()'>
+                            <i class="fa-solid fa-paste"></i> Copy Script Payload
+                        </button>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>ESP Universale Access</h3>
-                    <p style="margin-bottom: 15px; color: var(--text-muted);">Access the full suite of ESP and simulation tools. Full validity matrix enabled.</p>
-                    <div class="output-box key-code" id="key2">Yukio-OI48HF-483H3E12GHSN29X</div>
-                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('key2', 'Key code copied!')">Copy Key</button>
+
+                <div class="script-card-blueprint glass-panel" data-script-category="pve">
+                    <div>
+                        <div class="card-top-identity">
+                            <h3>Rivals Zombie Wave Survival RoundManager</h3>
+                            <span class="card-functional-badge badge-state-working">Working</span>
+                        </div>
+                        <p>Automated wave loop sequence skip flags, structural map utility pickups tracking, high-yield infinite ammo loop virtualization configurations, and entity spawn telemetry projection arrays.</p>
+                    </div>
+                    <div>
+                        <div class="card-metadata-row">
+                            <span><i class="fa-solid fa-rotate"></i> Updated: 1 Day ago</span>
+                            <span><i class="fa-solid fa-layer-group"></i> Ver: 1.0.4</span>
+                        </div>
+                        <button class="btn-action-copy-script" data-raw-script-string='loadstring(game:HttpGet("https://raw.githubusercontent.com/Yukio/ZombieManager/main/main.lua"))()'>
+                            <i class="fa-solid fa-paste"></i> Copy Script Payload
+                        </button>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>Arsenal Elite Bypass Key</h3>
-                    <p style="margin-bottom: 15px; color: var(--text-muted);">Unlocks the specialized high-frequency silent aim vectors and custom hitbox expands.</p>
-                    <div class="output-box key-code" id="key3">Yukio-MI28RF-48WHYEG24HR829</div>
-                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('key3', 'Key code copied!')">Copy Key</button>
+
+                <div class="script-card-blueprint glass-panel" data-script-category="utility">
+                    <div>
+                        <div class="card-top-identity">
+                            <h3>PoloX Premium Frame Pipeline Optimizer</h3>
+                            <span class="card-functional-badge badge-state-updated">Updated</span>
+                        </div>
+                        <p>Forces proactive garbage collection cycles, applies aggressive dynamic drawing resolution reduction steps to non-visible geometric instances, and limits frame stall queues during intense execution loads.</p>
+                    </div>
+                    <div>
+                        <div class="card-metadata-row">
+                            <span><i class="fa-solid fa-rotate"></i> Updated: June 10, 2026</span>
+                            <span><i class="fa-solid fa-layer-group"></i> Ver: 4.1.0</span>
+                        </div>
+                        <button class="btn-action-copy-script" data-raw-script-string='loadstring(game:HttpGet("https://raw.githubusercontent.com/Yukio/Optimizer/main/core.lua"))()'>
+                            <i class="fa-solid fa-paste"></i> Copy Script Payload
+                        </button>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>Bloxstrike Key</h3>
-                    <p style="margin-bottom: 15px; color: var(--text-muted);">Authorizes automatic recoil damping matrix and frame-perfect target tracking.</p>
-                    <div class="output-box key-code" id="key4">Yukio-SI21DAC-586FGEAG4H2829</div>
-                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('key4', 'Key code copied!')">Copy Key</button>
+
+                <div class="script-card-blueprint glass-panel premium-locked-script" id="premium-script-node-4" data-script-category="aimbot">
+                    <div class="premium-lock-indicator-overlay">
+                        <i class="fa-solid fa-lock-keyhole"></i>
+                        <h4>Premium License Locked</h4>
+                        <p>Unlock by verifying a premium key sequence token in the Key tab infrastructure grid.</p>
+                    </div>
+                    <div>
+                        <div class="card-top-identity">
+                            <h3>Silent Aim Vector Position Injected Hooks</h3>
+                            <span class="card-functional-badge badge-state-premium">Premium Only</span>
+                        </div>
+                        <p>Bypasses raycast validation checks by altering index properties on local gun alignment structures, redirecting flight trajectories directly to the target vector coordinates automatically.</p>
+                    </div>
+                    <div>
+                        <div class="card-metadata-row">
+                            <span><i class="fa-solid fa-rotate"></i> Updated: June 08, 2026</span>
+                            <span><i class="fa-solid fa-layer-group"></i> Ver: 1.9.2</span>
+                        </div>
+                        <button class="btn-action-copy-script" data-raw-script-string='loadstring(game:HttpGet("https://raw.githubusercontent.com/Yukio/SilentAim/main/src.lua"))()'>
+                            <i class="fa-solid fa-paste"></i> Copy Script Payload
+                        </button>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>Avatar Changer Ultra Key</h3>
-                    <p style="margin-bottom: 15px; color: var(--text-muted);">Grants read/write server permissions for restricted catalog packages and legacy asset injection.</p>
-                    <div class="output-box key-code" id="key5">KEYLESS</div>
-                    <button class="btn" style="width: 100%;" onclick="copyToClipboard('key5', 'Key code copied!')">Copy Key</button>
+
+                <div class="script-card-blueprint glass-panel premium-locked-script" id="premium-script-node-5" data-script-category="utility">
+                    <div class="premium-lock-indicator-overlay">
+                        <i class="fa-solid fa-lock-keyhole"></i>
+                        <h4>Premium License Locked</h4>
+                        <p>Unlock by verifying a premium key sequence token in the Key tab infrastructure grid.</p>
+                    </div>
+                    <div>
+                        <div class="card-top-identity">
+                            <h3>Custom UI Theme Canvas Asset Injector</h3>
+                            <span class="card-functional-badge badge-state-premium">Premium Only</span>
+                        </div>
+                        <p>Injects rich styling sheets into executing game GUI environments. Allows real-time translation of default assets into deep purple neon, and Sakura-themed layouts.</p>
+                    </div>
+                    <div>
+                        <div class="card-metadata-row">
+                            <span><i class="fa-solid fa-rotate"></i> Updated: May 24, 2026</span>
+                            <span><i class="fa-solid fa-layer-group"></i> Ver: 3.0.1</span>
+                        </div>
+                        <button class="btn-action-copy-script" data-raw-script-string='loadstring(game:HttpGet("https://raw.githubusercontent.com/Yukio/UITheme/main/injector.lua"))()'>
+                            <i class="fa-solid fa-paste"></i> Copy Script Payload
+                        </button>
+                    </div>
+                </div>
+
+                <div class="script-card-blueprint glass-panel" data-script-category="pve">
+                    <div>
+                        <div class="card-top-identity">
+                            <h3>Universal Item Magnet & Auto-Loot Assembler</h3>
+                            <span class="card-functional-badge badge-state-working">Working</span>
+                        </div>
+                        <p>Traces global level drop nodes positions, firing network pickup packages safely without altering local position coordinates. Complete auto-sell and item parsing parameters enabled.</p>
+                    </div>
+                    <div>
+                        <div class="card-metadata-row">
+                            <span><i class="fa-solid fa-rotate"></i> Updated: April 19, 2026</span>
+                            <span><i class="fa-solid fa-layer-group"></i> Ver: 2.4.0</span>
+                        </div>
+                        <button class="btn-action-copy-script" data-raw-script-string='loadstring(game:HttpGet("https://raw.githubusercontent.com/Yukio/LootMagnet/main/source.lua"))()'>
+                            <i class="fa-solid fa-paste"></i> Copy Script Payload
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div id="premium" class="tab-content">
-            <div id="premiumLocked" class="glass-panel premium-lock-container">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--premium-gold); filter: drop-shadow(var(--gold-glow));">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                </svg>
-                <h2>Premium Access Required</h2>
-                <p style="color: var(--text-muted); font-size: 14px; margin-top: 5px;">This sector contains high-tier encrypted bypasses. Please enter your valid Premium Key to unlock the permission layout.</p>
+        <section id="keys-tab" class="tab-panel-node">
+            <div class="section-intro-header">
+                <h2>Credential Validation Subsystem</h2>
+                <p>Input your authentication credentials token matrix string down below to unlock elite execution tier clusters or view currently distributed database access blocks.</p>
+            </div>
+
+            <div class="key-verification-dashboard-mesh">
                 
-                <div class="key-input-wrapper">
-                    <input type="text" id="premiumKeyInput" class="key-input" placeholder="ENTER PREMIUM ACCESS KEY">
+                <div class="key-input-verifier-card glass-panel">
+                    <div class="verifier-status-animation-container">
+                        <i class="fa-solid fa-key-skeleton verifier-icon-idle" id="verification-status-visual-icon"></i>
+                    </div>
+                    <h3 id="verification-status-main-heading">System Authorization Protocol</h3>
+                    <p id="verification-status-sub-description">Enter an active developer-issued token array sequence key directly to decrypt protected script hooks instances instantly.</p>
+                    
+                    <div class="key-input-field-group-row">
+                        <input type="text" id="credential-verification-input-target" placeholder="Yukio-XXXXXX-XXXXXX..." autocomplete="off">
+                        <button class="btn-blueprint btn-solid-premium" id="trigger-authentication-validation-btn">Verify Credential</button>
+                    </div>
+                    <div class="verification-feedback-status-msg" id="verification-status-feedback-string-msg"></div>
                 </div>
+
+                <div>
+                    <div class="dashboard-header-title" style="margin-bottom: 10px;"><i class="fa-solid fa-database purple-accent-text"></i> Distributed Key Registries Database</div>
+                    <div class="real-key-cards-database-grid" id="real-key-database-cards-container-root">
+                        </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="premium-tab" class="tab-panel-node">
+            <div class="section-intro-header">
+                <h2>Elevate to Premium Tier Access</h2>
+                <p>Bypass verification sequences entirely, reduce core initialization overhead delays, and unlock our restricted premium tab script repository tiers.</p>
+            </div>
+
+            <div class="premium-plans-pricing-matrix">
                 
-                <button class="btn btn-premium" style="width: 100%; padding: 12px; font-size: 14px;" onclick="checkPremiumKey()">Verify Authorization</button>
-                
-                <a href="https://t.me/YukioHub" target="_blank" class="btn-buy-key">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="9" cy="21" r="1"></circle>
-                        <circle cx="20" cy="21" r="1"></circle>
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                    </svg>
-                    Buy Key
+                <div class="pricing-tier-card-blueprint glass-panel">
+                    <div>
+                        <div class="tier-name-label">Monthly Subscription</div>
+                        <div class="tier-price-computation-row">$4.99 <span>/ month</span></div>
+                        <ul class="tier-entitlements-listing-stack">
+                            <li><i class="fa-solid fa-check"></i> 100% Ad-Free Keyless Continuous Generation</li>
+                            <li><i class="fa-solid fa-check"></i> Access to Restricted Premium Script Libraries</li>
+                            <li><i class="fa-solid fa-check"></i> Specialized Discord Core Contributor Role Access</li>
+                            <li><i class="fa-solid fa-xmark"></i> Direct Inspection of Raw Encrypted Source Repos</li>
+                        </ul>
+                    </div>
+                    <button class="btn-blueprint btn-outline-glow trigger-premium-purchase-alert" data-tier-title="Monthly Subscription">Acquire Monthly Tier</button>
+                </div>
+
+                <div class="pricing-tier-card-blueprint glass-panel featured-tier-flag">
+                    <div class="featured-ribbon-tag">MAXIMUM EFFICIENCY</div>
+                    <div>
+                        <div class="tier-name-label">Lifetime Executive</div>
+                        <div class="tier-price-computation-row">$19.99 <span>/ one-time buy</span></div>
+                        <ul class="tier-entitlements-listing-stack">
+                            <li><i class="fa-solid fa-check"></i> Permanent Keyless HWID Token Allocation</li>
+                            <li><i class="fa-solid fa-check"></i> Access to All Future Automated Game Hub Injectors</li>
+                            <li><i class="fa-solid fa-check"></i> Priority 24/7 Dedicated Support Tickets Channels</li>
+                            <li><i class="fa-solid fa-check"></i> Direct Access to Developer Layout Asset API Code</li>
+                        </ul>
+                    </div>
+                    <button class="btn-blueprint btn-solid-premium var-style-featured trigger-premium-purchase-alert" data-tier-title="Lifetime Executive">Acquire Lifetime License</button>
+                </div>
+            </div>
+
+            <div class="comparison-matrix-wrapper-block glass-panel">
+                <h3>Technical Tier Breakdown Matrix</h3>
+                <div class="responsive-table-scroll-container">
+                    <table class="matrix-data-table">
+                        <thead>
+                            <tr>
+                                <th>Functional Parameters Capabilities</th>
+                                <th>Free Standard Tier</th>
+                                <th>Premium Contributor Tier</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Key Request Frequency Requirements</td>
+                                <td>Mandatory Re-validation every 24 Hours</td>
+                                <td class="pink-accent-text">Instant Keyless Handshake Allocation</td>
+                            </tr>
+                            <tr>
+                                <td>Aimbot Smoothing Math Speed Vectors</td>
+                                <td>Standard Matrix Calculations Limit</td>
+                                <td class="pink-accent-text">Sub-tick Positional Ray Velocity Prediction</td>
+                            </tr>
+                            <tr>
+                                <td>UI Structure Modification Override Hooking</td>
+                                <td>Default Neon Pink/Sakura Settings Only</td>
+                                <td class="pink-accent-text">Custom Raw Canvas Code Injection Parameters</td>
+                            </tr>
+                            <tr>
+                                <td>Technical Incident Ticket Allocation Priorities</td>
+                                <td>Public General Forum Threads Only</td>
+                                <td class="pink-accent-text">Dedicated Real-Time Private Incident Handling</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="socials-community-wrapper-section">
+            <div class="section-intro-header">
+                <h2>Join Our Digital Community</h2>
+                <p>Keep up with ongoing update notes, script releases, and configuration presets shared by community developers.</p>
+            </div>
+            
+            <div class="socials-community-grid">
+                <a href="https://discord.gg" target="_blank" class="social-card-node-anchor glass-panel discord-anchor-card">
+                    <div class="social-avatar-icon"><i class="fa-brands fa-discord"></i></div>
+                    <div>
+                        <h4>Discord Server Hub</h4>
+                        <p>Interact with 45,000+ active scripters sharing configuration presets.</p>
+                    </div>
+                </a>
+
+                <a href="https://youtube.com" target="_blank" class="social-card-node-anchor glass-panel youtube-anchor-card">
+                    <div class="social-avatar-icon"><i class="fa-brands fa-youtube"></i></div>
+                    <div>
+                        <h4>YouTube Tutorials Channels</h4>
+                        <p>Watch detailed configuration breakdowns and execution video proofs.</p>
+                    </div>
+                </a>
+
+                <a href="https://tiktok.com" target="_blank" class="social-card-node-anchor glass-panel tiktok-anchor-card">
+                    <div class="social-avatar-icon"><i class="fa-brands fa-tiktok"></i></div>
+                    <div>
+                        <h4>TikTok Showcase Shorts</h4>
+                        <p>Catch fast-paced design previews and clean UI showcase shorts.</p>
+                    </div>
                 </a>
             </div>
+        </section>
 
-            <div id="premiumUnlocked" style="display: none;">
-                <h2 class="tab-title" style="color: var(--premium-gold); text-shadow: var(--gold-glow);">✨ Unlocked Premium Softwares</h2>
-                <div class="grid">
-                    <div class="card premium-card">
-                        <h3>Yukio Ultra Bypass V2</h3>
-                        <p style="margin-bottom: 15px; color: var(--text-muted);">High-tier anticheat bypass matrix. Clears memory footprints instantly without triggering internal flags.</p>
-                        <div class="output-box premium-code" id="premScript1">loadstring(game:HttpGet("https://pastebin.com/raw/premiumBypass"))()</div>
-                        <button class="btn btn-premium" style="width: 100%; color: #fff;" onclick="copyToClipboard('premScript1', 'Premium Script copied!')">Copy Premium Script</button>
+        <section class="faq-accordion-container-section">
+            <div class="section-intro-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Quick answers to common questions about setting up scripts, performance, and key verification parameters.</p>
+            </div>
+
+            <div class="faq-accordion-stack-block">
+                <div class="faq-accordion-node-item glass-panel">
+                    <div class="faq-accordion-interactive-trigger-row">
+                        <span>How often do public script configurations get revised?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
                     </div>
-                    <div class="card premium-card">
-                        <h3>Server Hop crasher Suite</h3>
-                        <p style="margin-bottom: 15px; color: var(--text-muted);">Advanced multi-threaded client package. Injects silent vectors designed for stress simulation testing.</p>
-                        <div class="output-box premium-code" id="premScript2">loadstring(game:HttpGet("https://pastebin.com/raw/serverHop"))()</div>
-                        <button class="btn btn-premium" style="width: 100%; color: #fff;" onclick="copyToClipboard('premScript2', 'Premium Script copied!')">Copy Premium Script</button>
+                    <div class="faq-accordion-hidden-answer-viewport">
+                        Our automated security systems perform daily status evaluations on all public scripts. If a target game introduces anti-cheat updates that cause functional breaks, our pipelines flag those dependencies for developer review immediately.
+                    </div>
+                </div>
+
+                <div class="faq-accordion-node-item glass-panel">
+                    <div class="faq-accordion-interactive-trigger-row">
+                        <span>What if a UI canvas breaks or scales poorly on my monitor?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-accordion-hidden-answer-viewport">
+                        Ensure your environment settings use the standard scale factor configurations. Our interface designs utilize standard (.5, .5) anchor-point alignment arrays to ensure text containers and icons scale correctly on all screen resolutions, from desktop screens to mobile views.
+                    </div>
+                </div>
+
+                <div class="faq-accordion-node-item glass-panel">
+                    <div class="faq-accordion-interactive-trigger-row">
+                        <span>Is my computer safe from anti-cheat bans when using Sakura Hub?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-accordion-hidden-answer-viewport">
+                        Sakura Hub uses custom memory virtualization routines to hide your active processes from pattern scanners. While this minimizes safety risks significantly, we always suggest using test profiles to ensure safe deployment on updated server environments.
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <section class="contact-form-system-section">
+            <div class="section-intro-header">
+                <h2>Contact Technical Support</h2>
+                <p>Have an incident log or issue report to file? Send your message data directly into our server queues.</p>
+            </div>
+
+            <div class="contact-form-layout-wrapper glass-panel">
+                <form id="contact-form-internal-element" onsubmit="event.preventDefault();">
+                    <div class="contact-form-grid-mesh">
+                        <div class="input-group-node-blueprint">
+                            <label>Developer Identity Handle</label>
+                            <input type="text" id="contact-form-input-name" placeholder="polo_95950" required>
+                        </div>
+                        <div class="input-group-node-blueprint">
+                            <label>Communications Email</label>
+                            <input type="email" id="contact-form-input-email" placeholder="dev@sakurahub.moe" required>
+                        </div>
+                    </div>
+                    <div class="input-group-node-blueprint" style="margin-bottom: 24px;">
+                        <label>Runtime Incident Diagnostics Logs & Details</label>
+                        <textarea id="contact-form-input-message" placeholder="Provide accurate details regarding UI thread stack tracing issues, anchor alignment offsets, or execution errors..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-blueprint btn-solid-premium" id="contact-form-submit-trigger-btn">Transmit Diagnostics Data <i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </section>
+
     </main>
 
-    <div class="toast" id="toastNotification">Action Successful</div>
+    <footer>
+        <div class="container footer-flex-container">
+            <p>&copy; 2026 Sakura Hub. All rights reserved. Precision execution managed with style and care.</p>
+            <div class="footer-navigation-shortcuts">
+                <a href="#home" class="trigger-node-route" data-route="home-tab">Home</a>
+                <a href="#scripts" class="trigger-node-route" data-route="scripts-tab">Scripts</a>
+                <a href="#keys" class="trigger-node-route" data-route="keys-tab">Keys</a>
+                <a href="#premium" class="trigger-node-route" data-route="premium-tab">Premium</a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scroll-to-top-floating-btn" title="Return back to the top of the canvas layout"><i class="fa-solid fa-turn-up"></i></button>
 
     <script>
-        // PREMIUM SECURITY LAYOUT
-        let hasPremium = false;
-        const VALID_PREMIUM_KEY = "YUKIO-JDSA-11NI-ADKP-MOAS-7777";
+        // --- DATA HOOK: SYSTEM CRYPTOGRAPHIC REAL VALID KEYS DATABASE ARRAY ---
+        const SAKURA_KEY_REGISTRY_DATABASE = [
+            {
+                keyName: "Executive Premium License",
+                keyDescription: "Full unrestricted authorization access token to premium scripts injection blocks pipelines.",
+                keyCode: "Yukio-MI28RF-48WHYEG24HR829",
+                isActive: true
+            },
+            {
+                keyName: "Developer Alpha Testing Sandbox Token",
+                keyDescription: "Elevated configuration clearance for runtime sub-tick memory patching parameter sets verification.",
+                keyCode: "Yukio-SI21DAC-586FGEAG4H2829",
+                isActive: true
+            },
+            {
+                keyName: "Complimentary Public Promo Pass (2026)",
+                keyDescription: "Seasonal platform standard access token bypass code configured directly for global users.",
+                keyCode: "Yukio-FREE-2026",
+                isActive: true
+            },
+            {
+                keyName: "Unified Universal Bypass Gateway Token",
+                keyDescription: "Legacy hardware acceleration simulation key overrides block configured for keyless automation bypass testing frameworks runtime.",
+                keyCode: "KEYLESS",
+                isActive: true
+            },
+            {
+                keyName: "Expired Tier Public Ad-Link Loop Token",
+                keyDescription: "Legacy distribution validation license sequence string, deprecated via server security runtime updates.",
+                keyCode: "Yukio-STALE-882HGDAX9104",
+                isActive: false
+            }
+        ];
 
-        const music = document.getElementById('bgMusic');
-        const btn = document.getElementById('musicToggleBtn');
-        const icon = document.getElementById('musicIcon');
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- CORE COMPONENT A: SAKURA PETALS CANVAS GRAPHICS RENDERING SYSTEMS ---
+            const sakuraCanvas = document.getElementById("sakura-canvas");
+            const canvasContext = sakuraCanvas.getContext("2d");
+            
+            let canvasDisplayWidth = (sakuraCanvas.width = window.innerWidth);
+            let canvasDisplayHeight = (sakuraCanvas.height = window.innerHeight);
 
-        music.volume = 0.4;
-
-        function startAutoplay() {
-            music.play().then(() => {
-                btn.classList.add('playing');
-                icon.innerHTML = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h6V3h-6z"/>';
-            }).catch(err => {
-                console.log("Autoplay blocked by browser. Awaiting user click.");
-                document.addEventListener('click', forceMusicPlay, { once: true });
+            window.addEventListener("resize", () => {
+                canvasDisplayWidth = (sakuraCanvas.width = window.innerWidth);
+                canvasDisplayHeight = (sakuraCanvas.height = window.innerHeight);
             });
-        }
 
-        function forceMusicPlay() {
-            if (music.paused) {
-                music.play().then(() => {
-                    btn.classList.add('playing');
-                    icon.innerHTML = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h6V3h-6z"/>';
+            const activePetalsCollectionArray = [];
+            const absoluteMaxPetalsCountLimit = 55;
+
+            class SakuraOrganicPetalInstance {
+                constructor() {
+                    this.resetTrackState(true);
+                }
+
+                resetTrackState(isInitialLaunchFrame = false) {
+                    this.coordinateX = Math.random() * canvasDisplayWidth;
+                    this.coordinateY = isInitialLaunchFrame ? (Math.random() * canvasDisplayHeight) : -30;
+                    this.petalVolumetricSize = Math.random() * 10 + 6;
+                    this.fallingVelocitySpeedX = Math.random() * 1.8 + 0.6;
+                    this.fallingVelocitySpeedY = Math.random() * 1.2 + 0.8;
+                    this.rotationalAngleFlipValue = Math.random() * Math.PI;
+                    this.rotationalDeltaSpeedValue = Math.random() * 0.02 + 0.01;
+                    this.petalOpacityAlphaValue = Math.random() * 0.45 + 0.25;
+                }
+
+                evaluateVectorMovementUpdate() {
+                    this.coordinateY += this.fallingVelocitySpeedY;
+                    this.coordinateX += this.fallingVelocitySpeedX;
+                    this.rotationalAngleFlipValue += this.rotationalDeltaSpeedValue;
+
+                    if (this.coordinateY > canvasDisplayHeight + 20 || this.coordinateX > canvasDisplayWidth + 20) {
+                        this.resetTrackState(false);
+                    }
+                }
+
+                renderGraphicCanvasLayerDraw() {
+                    canvasContext.beginPath();
+                    canvasContext.save();
+                    canvasContext.translate(this.coordinateX, this.coordinateY);
+                    canvasContext.rotate(this.rotationalAngleFlipValue);
+                    
+                    canvasContext.fillStyle = `rgba(255, 173, 212, ${this.petalOpacityAlphaValue})`;
+                    canvasContext.ellipse(0, 0, this.petalVolumetricSize, this.petalVolumetricSize / 1.7, 0, 0, 2 * Math.PI);
+                    canvasContext.fill();
+                    
+                    canvasContext.restore();
+                }
+            }
+
+            for (let petalIterationIndex = 0; petalIterationIndex < absoluteMaxPetalsCountLimit; petalIterationIndex++) {
+                activePetalsCollectionArray.push(new SakuraOrganicPetalInstance());
+            }
+
+            function masterCanvasAnimationTicksLoop() {
+                canvasContext.clearRect(0, 0, canvasDisplayWidth, canvasDisplayHeight);
+                activePetalsCollectionArray.forEach(petalNodeInstance => {
+                    petalNodeInstance.evaluateVectorMovementUpdate();
+                    petalNodeInstance.renderGraphicCanvasLayerDraw();
+                });
+                requestAnimationFrame(masterCanvasAnimationTicksLoop);
+            }
+            masterCanvasAnimationTicksLoop();
+
+
+            // --- CORE COMPONENT B: REUSABLE TOAST ALERTS INTERFACE PIPELINES ---
+            const toastHubRoutingBox = document.getElementById("toast-hub-routing-box");
+            
+            function dispatchSystemNotificationToast(notificationDisplayMessageString, targetFontAwesomeIconClass = "fa-circle-info") {
+                const toastNodeInstance = document.createElement("div");
+                toastNodeInstance.className = "toast-notification-instance";
+                toastNodeInstance.innerHTML = `<i class="fa-solid ${targetFontAwesomeIconClass} pink-accent-text"></i> <span>${notificationDisplayMessageString}</span>`;
+                
+                toastHubRoutingBox.appendChild(toastNodeInstance);
+                
+                setTimeout(() => {
+                    toastNodeInstance.style.opacity = "0";
+                    toastNodeInstance.style.transform = "translateX(30px)";
+                    setTimeout(() => {
+                        toastNodeInstance.remove();
+                    }, 400);
+                }, 3500);
+            }
+
+
+            // --- CORE COMPONENT C: PROGRESSIVE INITIALIZATION LOADER SIMULATION ---
+            const platformGlobalLoader = document.getElementById("platform-global-loader");
+            const loaderProgressBarFill = document.getElementById("loader-progress-bar-fill");
+            let activeLoaderProgressValueValue = 0;
+
+            const loaderProgressSimulIntervalLoop = setInterval(() => {
+                activeLoaderProgressValueValue += Math.floor(Math.random() * 12) + 4;
+                if (activeLoaderProgressValueValue >= 100) {
+                    activeLoaderProgressValueValue = 100;
+                    clearInterval(loaderProgressSimulIntervalLoop);
+                    
+                    setTimeout(() => {
+                        platformGlobalLoader.style.opacity = "0";
+                        platformGlobalLoader.style.visibility = "hidden";
+                        dispatchSystemNotificationToast("Welcome to Sakura Hub v3.4 Engine Workspace", "fa-sparkles");
+                        initializeNumericalCountersInterpolationLoop();
+                    }, 400);
+                }
+                loaderProgressBarFill.style.width = `${activeLoaderProgressValueValue}%`;
+            }, 80);
+
+
+            // --- CORE COMPONENT D: CENTRALIZED ROUTING TAB COORDINATOR LOGIC ---
+            const routingNavigationActionTriggers = document.querySelectorAll(".trigger-node-route");
+            const platformTabPanelsNodeList = document.querySelectorAll(".tab-panel-node");
+            const mobileNavCollapsibleMenu = document.getElementById("mobile-nav-collapsible-menu");
+
+            routingNavigationActionTriggers.forEach(actionTriggerItemNode => {
+                actionTriggerItemNode.addEventListener("click", (clickEventInstance) => {
+                    const targetRouteIdentityString = actionTriggerItemNode.getAttribute("data-route");
+                    if (!targetRouteIdentityString) return;
+
+                    clickEventInstance.preventDefault();
+
+                    document.querySelectorAll(".nav-item").forEach(itemElement => itemElement.classList.remove("active"));
+                    const matchingNavbarLinkElementNode = document.querySelector(`.nav-item[data-route="${targetRouteIdentityString}"]`);
+                    if (matchingNavbarLinkElementNode) matchingNavbarLinkElementNode.classList.add("active");
+
+                    platformTabPanelsNodeList.forEach(panelNodeInstance => {
+                        panelNodeInstance.classList.remove("active-node");
+                        if (panelNodeInstance.id === targetRouteIdentityString) {
+                            panelNodeInstance.classList.add("active-node");
+                        }
+                    });
+
+                    mobileNavCollapsibleMenu.classList.remove("mobile-active");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                });
+            });
+
+            document.getElementById("mobile-hamburger-toggle-hook").addEventListener("click", () => {
+                mobileNavCollapsibleMenu.classList.toggle("mobile-active");
+            });
+
+
+            // --- CORE COMPONENT E: DYNAMIC SEARCH AND CARD CATEGORY LAYOUT FILTERS ---
+            const scriptSearchInputField = document.getElementById("script-search-input-field");
+            const masterScriptCardBlueprintsNodeList = document.querySelectorAll(".script-card-blueprint");
+            const pillFilteringActionButtonsList = document.querySelectorAll(".filter-pill-btn");
+
+            function executeRepositoryFilterEvaluationRouting() {
+                const searchStringQueryValue = scriptSearchInputField.value.toLowerCase().trim();
+                const currentSelectedActiveCategoryPill = document.querySelector(".filter-pill-btn.pill-active").getAttribute("data-filter-group");
+
+                masterScriptCardBlueprintsNodeList.forEach(scriptCardElementInstance => {
+                    // Extract text content while omitting overlay lock texts to preserve search accuracy
+                    let scriptSearchableText = "";
+                    if (scriptCardElementInstance.querySelector(".card-top-identity")) {
+                        scriptSearchableText += scriptCardElementInstance.querySelector(".card-top-identity").textContent;
+                    }
+                    if (scriptCardElementInstance.querySelector("p")) {
+                        scriptSearchableText += scriptCardElementInstance.querySelector("p").textContent;
+                    }
+                    
+                    const contentStringExtractionMatch = scriptSearchableText.toLowerCase();
+                    const groupCategoryExtractionMatch = scriptCardElementInstance.getAttribute("data-script-category");
+                    
+                    const satisfiesSearchQueryCriteria = contentStringExtractionMatch.includes(searchStringQueryValue);
+                    const satisfiesCategoryQueryCriteria = (currentSelectedActiveCategoryPill === "all" || groupCategoryExtractionMatch === currentSelectedActiveCategoryPill);
+
+                    if (satisfiesSearchQueryCriteria && satisfiesCategoryQueryCriteria) {
+                        scriptCardElementInstance.style.display = "flex";
+                    } else {
+                        scriptCardElementInstance.style.display = "none";
+                    }
                 });
             }
-        }
 
-        window.addEventListener('DOMContentLoaded', startAutoplay);
+            scriptSearchInputField.addEventListener("input", executeRepositoryFilterEvaluationRouting);
 
-        function toggleMusic() {
-            document.removeEventListener('click', forceMusicPlay);
-            if (music.paused) {
-                music.play().then(() => {
-                    btn.classList.add('playing');
-                    icon.innerHTML = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h6V3h-6z"/>';
+            pillFilteringActionButtonsList.forEach(pillBtnElementNode => {
+                pillBtnElementNode.addEventListener("click", () => {
+                    pillFilteringActionButtonsList.forEach(btnNode => btnNode.classList.remove("pill-active"));
+                    pillBtnElementNode.classList.add("pill-active");
+                    executeRepositoryFilterEvaluationRouting();
                 });
-            } else {
-                music.pause();
-                btn.classList.remove('playing');
-                icon.innerHTML = '<path d="M16.5 12c0-1.77-1.02-3.25-2.5-4.01v8.01c1.48-.76 2.5-2.24 2.5-4.01zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zM3 9v6h4l5 5V4L7 9H3z"/>';
-            }
-        }
-
-        function openTab(tabId) {
-            document.querySelectorAll('nav .btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            
-            const targetBtn = Array.from(document.querySelectorAll('nav .btn')).find(btn => {
-                if (tabId === 'premium') return btn.classList.contains('btn-premium');
-                return btn.textContent.toLowerCase() === (tabId === 'home' ? 'home' : tabId === 'keys' ? 'keys' : tabId);
             });
-            if(targetBtn) targetBtn.classList.add('active');
-            
-            document.getElementById(tabId).classList.add('active');
 
-            if (tabId === 'premium') {
-                renderPremiumTab();
-            }
-        }
-
-        function renderPremiumTab() {
-            const lockedView = document.getElementById('premiumLocked');
-            const unlockedView = document.getElementById('premiumUnlocked');
-
-            if (hasPremium) {
-                lockedView.style.display = 'none';
-                unlockedView.style.display = 'block';
-            } else {
-                lockedView.style.display = 'flex';
-                unlockedView.style.display = 'none';
-            }
-        }
-
-        function checkPremiumKey() {
-            const inputVal = document.getElementById('premiumKeyInput').value.trim();
-            const toast = document.getElementById('toastNotification');
-
-            if (inputVal === VALID_PREMIUM_KEY) {
-                hasPremium = true;
-                toast.innerText = "✨ Premium Access Granted! Enjoy.";
-                toast.classList.add('active');
-                setTimeout(() => toast.classList.remove('active'), 3000);
-                renderPremiumTab();
-            } else {
-                toast.innerText = "❌ Invalid Premium Key. Try again!";
-                toast.classList.add('active');
-                setTimeout(() => toast.classList.remove('active'), 3000);
-            }
-        }
-
-        function copyToClipboard(elementId, message) {
-            const text = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                const toast = document.getElementById('toastNotification');
-                toast.innerText = message;
-                toast.classList.add('active');
-                setTimeout(() => toast.classList.remove('active'), 3000);
+            document.querySelectorAll(".btn-action-copy-script").forEach(copyActionBtnNode => {
+                copyActionBtnNode.addEventListener("click", () => {
+                    const runtimePayloadTargetLuaString = copyActionBtnNode.getAttribute("data-raw-script-string");
+                    navigator.clipboard.writeText(runtimePayloadTargetLuaString).then(() => {
+                        dispatchSystemNotificationToast("Script payload string copied to clipboard allocation buffer!", "fa-circle-check");
+                    }).catch(() => {
+                        dispatchSystemNotificationToast("Failed to write to clipboard, permissions block detected.", "fa-triangle-exclamation");
+                    });
+                });
             });
-        }
 
-        /* BACKGROUND ENGINE: SAKURA PETALS GENERATOR */
-        const canvas = document.getElementById('sakuraCanvas');
-        const ctx = canvas.getContext('2d');
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-        const petals = [];
 
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        });
+            // --- CORE COMPONENT F: REAL KEY RENDERING ENGINE & SECURE VALIDATION SYSTEM ---
+            const realKeyDatabaseCardsContainerRoot = document.getElementById("real-key-database-cards-container-root");
+            const credentialVerificationInputTarget = document.getElementById("credential-verification-input-target");
+            const triggerAuthenticationValidationBtn = document.getElementById("trigger-authentication-validation-btn");
+            const verificationStatusVisualIcon = document.getElementById("verification-status-visual-icon");
+            const verificationStatusMainHeading = document.getElementById("verification-status-main-heading");
+            const verificationStatusSubDescription = document.getElementById("verification-status-sub-description");
+            const verificationStatusFeedbackStringMsg = document.getElementById("verification-status-feedback-string-msg");
 
-        for (let i = 0; i < 25; i++) {
-            petals.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                size: Math.random() * 5 + 3,
-                speedY: Math.random() * 0.8 + 0.4,
-                speedX: Math.random() * 0.4 - 0.2,
-                r: Math.random() * Math.PI
-            });
-        }
+            // Build database cards into UI instantly from the configured object array
+            function renderSystemKeycardsDatabaseMesh() {
+                realKeyDatabaseCardsContainerRoot.innerHTML = "";
+                SAKURA_KEY_REGISTRY_DATABASE.forEach(keyRecordInstance => {
+                    const keyCardNodeMarkup = document.createElement("div");
+                    keyCardNodeMarkup.className = "key-card-node-blueprint glass-panel";
+                    
+                    const statusBadgeClass = keyRecordInstance.isActive ? "status-active-true" : "status-active-false";
+                    const statusBadgeLabel = keyRecordInstance.isActive ? "Active" : "Expired";
 
-        function loop() {
-            ctx.clearRect(0, 0, width, height);
-            petals.forEach(p => {
-                ctx.save();
-                ctx.translate(p.x, p.y);
-                ctx.rotate(p.r);
-                ctx.beginPath();
-                ctx.ellipse(0, 0, p.size, p.size * 1.4, 0, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 126, 187, 0.45)';
-                ctx.fill();
-                ctx.restore();
+                    keyCardNodeMarkup.innerHTML = `
+                        <div>
+                            <div class="key-card-header-block">
+                                <h4>${keyRecordInstance.keyName}</h4>
+                                <span class="key-card-status-pill ${statusBadgeClass}">${statusBadgeLabel}</span>
+                            </div>
+                            <p>${keyRecordInstance.keyDescription}</p>
+                        </div>
+                        <div class="key-card-token-string-action-row">
+                            <span>${keyRecordInstance.keyCode}</span>
+                            <button class="trigger-action-copy-key-token" data-token-string="${keyRecordInstance.keyCode}" title="Copy Token Security Key">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                        </div>
+                    `;
+                    realKeyDatabaseCardsContainerRoot.appendChild(keyCardNodeMarkup);
+                });
+
+                // Attach isolated copy execution routines to newly processed card injection blocks
+                document.querySelectorAll(".trigger-action-copy-key-token").forEach(copyKeyBtnElementNode => {
+                    copyKeyBtnElementNode.addEventListener("click", () => {
+                        const preciseTokenTargetString = copyKeyBtnElementNode.getAttribute("data-token-string");
+                        navigator.clipboard.writeText(preciseTokenTargetString).then(() => {
+                            dispatchSystemNotificationToast(`Copied token key sequence payload successfully!`, "fa-clipboard-check");
+                        });
+                    });
+                });
+            }
+            renderSystemKeycardsDatabaseMesh();
+
+            // Real Cryptographic Verification Handshake Processor Engine
+            triggerAuthenticationValidationBtn.addEventListener("click", () => {
+                const userSuppliedTokenStringInput = credentialVerificationInputTarget.value.trim();
                 
-                p.y += p.speedY;
-                p.x += p.speedX;
-                p.r += 0.005;
+                if (!userSuppliedTokenStringInput) {
+                    dispatchSystemNotificationToast("Input field workspace empty! Provide validation token arguments.", "fa-circle-exclamation");
+                    return;
+                }
+
+                // Reset statuses to base processing animation configurations parameters
+                triggerAuthenticationValidationBtn.disabled = true;
+                verificationStatusFeedbackStringMsg.innerText = "";
+                verificationStatusVisualIcon.className = "fa-solid fa-spinner-third loading-verification-spinner-wheel";
+                verificationStatusVisualIcon.style.animation = "spinClockwise 0.8s linear infinite";
+
+                setTimeout(() => {
+                    // Match query across existing array structure mapping
+                    const foundMatchingKeyEntryRecord = SAKURA_KEY_REGISTRY_DATABASE.find(
+                        recordItem => recordItem.keyCode === userSuppliedTokenStringInput
+                    );
+
+                    // Turn off active initialization spinning classes overrides
+                    verificationStatusVisualIcon.style.animation = "";
+
+                    if (foundMatchingKeyEntryRecord && foundMatchingKeyEntryRecord.isActive) {
+                        // STATE: ACCESS GRANTED PIPELINE FLOWS RUNTIME
+                        verificationStatusVisualIcon.className = "fa-solid fa-shield-circle-check verifier-icon-success";
+                        verificationStatusMainHeading.innerHTML = `<span class="gradient-text">Access Granted Absolute</span>`;
+                        verificationStatusSubDescription.innerText = `License validation configuration approved. High-tier premium execution pathways have been injected into your profile session.`;
+                        
+                        verificationStatusFeedbackStringMsg.style.color = "var(--status-working)";
+                        verificationStatusFeedbackStringMsg.innerText = `Token recognized: "${foundMatchingKeyEntryRecord.keyName}" parsed successfully.`;
+                        
+                        dispatchSystemNotificationToast("Authentication Handshake Complete! Premium items unlocked.", "fa-vault");
+                        unlockPlatformPremiumContentRepository();
+                    } else {
+                        // STATE: INVALID / EXPIRED KEYS EXCEPTION FLOWS
+                        verificationStatusVisualIcon.className = "fa-solid fa-shield-circle-exclamation verifier-icon-error";
+                        verificationStatusMainHeading.innerText = "Verification Failure";
+                        verificationStatusSubDescription.innerText = "The entered security parameter signature is either unrecognizable by server database lookup vectors or has reached its lifecycle expiration limits.";
+                        
+                        verificationStatusFeedbackStringMsg.style.color = "var(--status-patched)";
+                        verificationStatusFeedbackStringMsg.innerText = foundMatchingKeyEntryRecord ? "Error: Token sequence reached absolute lifecycle expiration." : "Error: String parameter signature hash completely unrecognized.";
+                        
+                        dispatchSystemNotificationToast("Credential rejection mismatch caught! Review valid keycards parameters.", "fa-circle-xmark");
+                    }
+                    
+                    triggerAuthenticationValidationBtn.disabled = false;
+                }, 1200);
+            });
+
+            // Action Utility Modifier to strip locked filters from Premium Script Containers elements
+            function unlockPlatformPremiumContentRepository() {
+                const hiddenScriptCardPremiumNode4 = document.getElementById("premium-script-node-4");
+                const hiddenScriptCardPremiumNode5 = document.getElementById("premium-script-node-5");
+
+                if (hiddenScriptCardPremiumNode4) hiddenScriptCardPremiumNode4.classList.add("premium-unlocked-state");
+                if (hiddenScriptCardPremiumNode5) hiddenScriptCardPremiumNode5.classList.add("premium-unlocked-state");
                 
-                if (p.y > height) { 
-                    p.y = -10; 
-                    p.x = Math.random() * width; 
+                executeRepositoryFilterEvaluationRouting();
+            }
+
+
+            // --- CORE COMPONENT G: LINEAR INTERPOLATION STATISTICAL INCREMENT NUMBERS ---
+            function initializeNumericalCountersInterpolationLoop() {
+                const platformNumericalCounterElementsNodeList = document.querySelectorAll(".platform-numerical-counter");
+                
+                platformNumericalCounterElementsNodeList.forEach(counterItemElementNode => {
+                    const targetLimitValueCalculation = parseFloat(counterItemElementNode.getAttribute("data-target-value"));
+                    const decimalPlacesPointPrecision = parseInt(counterItemElementNode.getAttribute("data-decimal-points") || "0");
+                    
+                    const scalingAnimationDurationFactorCyclesCount = 100; 
+                    const animationIncrementalStepValue = targetLimitValueCalculation / scalingAnimationDurationFactorCyclesCount;
+                    let currentAccumulatedRunCounterValue = 0;
+
+                    const counterUpdateStepFunction = () => {
+                        currentAccumulatedRunCounterValue += animationIncrementalStepValue;
+                        if (currentAccumulatedRunCounterValue < targetLimitValueCalculation) {
+                            counterItemElementNode.innerText = currentAccumulatedRunCounterValue.toFixed(decimalPlacesPointPrecision);
+                            setTimeout(counterUpdateStepFunction, 12);
+                        } else {
+                            counterItemElementNode.innerText = targetLimitValueCalculation.toLocaleString(undefined, {
+                                minimumFractionDigits: decimalPlacesPointPrecision,
+                                maximumFractionDigits: decimalPlacesPointPrecision
+                            }) + (decimalPlacesPointPrecision > 0 ? "%" : "+");
+                        }
+                    };
+                    counterUpdateStepFunction();
+                });
+            }
+
+
+            // --- CORE COMPONENT H: AMBIENT DISPLAY MANAGEMENT THEME HARDWARE CLUSTER ---
+            const themeToggleHardwareHook = document.getElementById("theme-toggle-hardware-hook");
+            
+            themeToggleHardwareHook.addEventListener("click", () => {
+                document.body.classList.toggle("light-theme");
+                const conditionStateLightActiveFlag = document.body.classList.contains("light-theme");
+                
+                themeToggleHardwareHook.innerHTML = conditionStateLightActiveFlag ? `<i class="fa-solid fa-sun"></i>` : `<i class="fa-solid fa-moon"></i>`;
+                dispatchSystemNotificationToast(
+                    conditionStateLightActiveFlag ? "Light structural workspace ambience loaded." : "Dark structural glass aesthetic matrix restored.",
+                    conditionStateLightActiveFlag ? "fa-sun" : "fa-moon"
+                );
+            });
+
+
+            // --- CORE COMPONENT I: INTERACTIVE GLOW COORDINATE CANVAS LISTENER HOOK ---
+            const interactiveMouseGlowElement = document.getElementById("interactive-mouse-glow-element");
+            const glassPanelsNodeListCollection = document.querySelectorAll(".glass-panel");
+
+            window.addEventListener("mousemove", (mouseMoveEventInstance) => {
+                const pointerPositionX = mouseMoveEventInstance.clientX;
+                const pointerPositionY = mouseMoveEventInstance.clientY;
+
+                interactiveMouseGlowElement.style.left = `${pointerPositionX}px`;
+                interactiveMouseGlowElement.style.top = `${pointerPositionY}px`;
+
+                glassPanelsNodeListCollection.forEach(glassPanelNodeElement => {
+                    const elementBoundaryMetricsBox = glassPanelNodeElement.getBoundingClientRect();
+                    const relativeCoordinateX = pointerPositionX - elementBoundaryMetricsBox.left;
+                    const relativeCoordinateY = pointerPositionY - elementBoundaryMetricsBox.top;
+
+                    glassPanelNodeElement.style.setProperty("--mouse-x", `${relativeCoordinateX}px`);
+                    glassPanelNodeElement.style.setProperty("--mouse-y", `${relativeCoordinateY}px`);
+                });
+            });
+
+
+            // --- CORE COMPONENT J: REUSABLE FAQS ACCORDION TOGGLE INTERACTIVE LINKS ---
+            document.querySelectorAll(".faq-accordion-node-item").forEach(accordionItemElementNode => {
+                accordionItemElementNode.addEventListener("click", () => {
+                    const isCurrentlyOpenStateConditionFlag = accordionItemElementNode.classList.contains("accordion-node-open");
+                    
+                    document.querySelectorAll(".faq-accordion-node-item").forEach(itemElement => itemElement.classList.remove("accordion-node-open"));
+                    
+                    if (!isCurrentlyOpenStateConditionFlag) {
+                        accordionItemElementNode.classList.add("accordion-node-open");
+                    }
+                });
+            });
+
+
+            // --- CORE COMPONENT K: PREMIUM PURCHASE FIRED SIMULATION TOASTS ALERTS ---
+            document.querySelectorAll(".trigger-premium-purchase-alert").forEach(purchaseTriggerBtnNode => {
+                purchaseTriggerBtnNode.addEventListener("click", () => {
+                    const chosenTierTitleStringValue = purchaseTriggerBtnNode.getAttribute("data-tier-title");
+                    dispatchSystemNotificationToast(`Purchase routing gateway initialization failed: API transmission pipelines are currently locked.`, "fa-triangle-exclamation");
+                });
+            });
+
+
+            // --- CORE COMPONENT L: DIAGNOSTICS CONTACT FORM SIMULATION CAPTURE ---
+            const contactFormSubmitTriggerBtn = document.getElementById("contact-form-submit-trigger-btn");
+            
+            document.getElementById("contact-form-internal-element").addEventListener("submit", (formSubmitEventInstance) => {
+                formSubmitEventInstance.preventDefault();
+                
+                const profileIdentityValueName = document.getElementById("contact-form-input-name").value;
+                const extractionTargetEmailValue = document.getElementById("contact-form-input-email").value;
+                const textMessageDataValue = document.getElementById("contact-form-input-message").value;
+
+                if (!profileIdentityValueName || !extractionTargetEmailValue || !textMessageDataValue) return;
+
+                contactFormSubmitTriggerBtn.disabled = true;
+                contactFormSubmitTriggerBtn.innerText = "Transmitting Packet Streams...";
+
+                setTimeout(() => {
+                    dispatchSystemNotificationToast("Diagnostics packet log payload accepted safely by server array indices endpoints.", "fa-square-rss");
+                    document.getElementById("contact-form-internal-element").reset();
+                    contactFormSubmitTriggerBtn.disabled = false;
+                    contactFormSubmitTriggerBtn.innerHTML = `Transmit Diagnostics Data <i class="fa-solid fa-paper-plane"></i>`;
+                }, 1500);
+            });
+
+
+            // --- CORE COMPONENT M: WINDOW ELEMENT LEVEL SCROLL SENSORS & FLOATING ACTION TRIGGER ---
+            const scrollToTopFloatingBtn = document.getElementById("scroll-to-top-floating-btn");
+            const platformHeaderNavbar = document.getElementById("platform-header-navbar");
+
+            window.addEventListener("scroll", () => {
+                const currentVerticalScrollYDistanceValue = window.scrollY;
+
+                if (currentVerticalScrollYDistanceValue > 60) {
+                    platformHeaderNavbar.classList.add("scrolled");
+                } else {
+                    platformHeaderNavbar.classList.remove("scrolled");
+                }
+
+                if (currentVerticalScrollYDistanceValue > 500) {
+                    scrollToTopFloatingBtn.style.display = "flex";
+                } else {
+                    scrollToTopFloatingBtn.style.display = "none";
                 }
             });
-            requestAnimationFrame(loop);
-        }
-        loop();
+
+            scrollToTopFloatingBtn.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        });
     </script>
 </body>
 </html>
