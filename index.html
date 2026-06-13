@@ -817,7 +817,7 @@
             font-size: 1.05rem;
         }
 
-        .scripts-filtering-control-panel {
+        .scripts-filtering-control-panel glass-panel {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -1507,7 +1507,7 @@
             font-size: 1.1rem;
             font-family: 'Outfit', sans-serif;
             color: var(--text-main);
-        }
+            }
 
         .faq-accordion-interactive-trigger-row i {
             font-size: 0.9rem;
@@ -1927,6 +1927,26 @@
 
             <div class="scripts-grid-matrix" id="scripts-rendering-grid-root">
                 
+                <!-- NEW ADDED CARD -->
+                <div class="script-card-blueprint glass-panel" data-script-category="utility">
+                    <div>
+                        <div class="card-top-identity">
+                            <h3>Murderers vs Sheriffs: Duels Script</h3>
+                            <span class="card-functional-badge badge-state-working">Working</span>
+                        </div>
+                        <p>Main master interface panel for unified executor environments. Provides seamless command hooks injection, optimized telemetry performance frameworks, and dynamic sub-tick interface render scaling overlays.</p>
+                    </div>
+                    <div>
+                        <div class="card-metadata-row">
+                            <span><i class="fa-solid fa-rotate"></i> Updated: Just now</span>
+                            <span><i class="fa-solid fa-layer-group"></i> Ver: 1.0.0</span>
+                        </div>
+                        <button class="btn-action-copy-script" data-raw-script-string='loadstring(game:HttpGet("https://pastebin.com/raw/gMHVRGj2"))()'>
+                            <i class="fa-solid fa-paste"></i> Copy Script Payload
+                        </button>
+                    </div>
+                </div>
+
                 <div class="script-card-blueprint glass-panel" data-script-category="aimbot">
                     <div>
                         <div class="card-top-identity">
@@ -2278,6 +2298,13 @@
     <script>
         // --- DATA HOOK: SYSTEM CRYPTOGRAPHIC REAL VALID KEYS DATABASE ARRAY ---
         const Yukio_KEY_REGISTRY_DATABASE = [
+            // NEW ADDED KEY CARD
+            {
+                keyName: "Murderers vs Sheriffs: Duels Script",
+                keyDescription: "Full developer access authorization layer assigned for active workspace testing pipelines execution.",
+                keyCode: "Yukio-1248HF-483NSDB9SABSADN",
+                isActive: true
+            },
             {
                 keyName: "[FPS] One Tap",
                 keyDescription: "Full unrestricted authorization access token to premium scripts injection blocks pipelines.",
@@ -2640,12 +2667,9 @@
                         currentAccumulatedRunCounterValue += animationIncrementalStepValue;
                         if (currentAccumulatedRunCounterValue < targetLimitValueCalculation) {
                             counterItemElementNode.innerText = currentAccumulatedRunCounterValue.toFixed(decimalPlacesPointPrecision);
-                            setTimeout(counterUpdateStepFunction, 12);
+                            setTimeout(counterUpdateStepFunction, 10);
                         } else {
-                            counterItemElementNode.innerText = targetLimitValueCalculation.toLocaleString(undefined, {
-                                minimumFractionDigits: decimalPlacesPointPrecision,
-                                maximumFractionDigits: decimalPlacesPointPrecision
-                            }) + (decimalPlacesPointPrecision > 0 ? "%" : "+");
+                            counterItemElementNode.innerText = targetLimitValueCalculation.toFixed(decimalPlacesPointPrecision);
                         }
                     };
                     counterUpdateStepFunction();
@@ -2653,113 +2677,96 @@
             }
 
 
-            // --- CORE COMPONENT H: AMBIENT DISPLAY MANAGEMENT THEME HARDWARE CLUSTER ---
-            const themeToggleHardwareHook = document.getElementById("theme-toggle-hardware-hook");
-            
-            themeToggleHardwareHook.addEventListener("click", () => {
-                document.body.classList.toggle("light-theme");
-                const conditionStateLightActiveFlag = document.body.classList.contains("light-theme");
-                
-                themeToggleHardwareHook.innerHTML = conditionStateLightActiveFlag ? `<i class="fa-solid fa-sun"></i>` : `<i class="fa-solid fa-moon"></i>`;
-                dispatchSystemNotificationToast(
-                    conditionStateLightActiveFlag ? "Light structural workspace ambience loaded." : "Dark structural glass aesthetic matrix restored.",
-                    conditionStateLightActiveFlag ? "fa-sun" : "fa-moon"
-                );
-            });
-
-
-            // --- CORE COMPONENT I: INTERACTIVE GLOW COORDINATE CANVAS LISTENER HOOK ---
+            // --- CORE COMPONENT H: INTERACTIVE AMBIENT GLOW MOUSE HOVER MATRIX ---
             const interactiveMouseGlowElement = document.getElementById("interactive-mouse-glow-element");
-            const glassPanelsNodeListCollection = document.querySelectorAll(".glass-panel");
-
-            window.addEventListener("mousemove", (mouseMoveEventInstance) => {
-                const pointerPositionX = mouseMoveEventInstance.clientX;
-                const pointerPositionY = mouseMoveEventInstance.clientY;
-
+            
+            window.addEventListener("mousemove", (mouseEventInstance) => {
+                const pointerPositionX = mouseEventInstance.clientX;
+                const pointerPositionY = mouseEventInstance.clientY;
+                
                 interactiveMouseGlowElement.style.left = `${pointerPositionX}px`;
                 interactiveMouseGlowElement.style.top = `${pointerPositionY}px`;
 
-                glassPanelsNodeListCollection.forEach(glassPanelNodeElement => {
-                    const elementBoundaryMetricsBox = glassPanelNodeElement.getBoundingClientRect();
-                    const relativeCoordinateX = pointerPositionX - elementBoundaryMetricsBox.left;
-                    const relativeCoordinateY = pointerPositionY - elementBoundaryMetricsBox.top;
-
-                    glassPanelNodeElement.style.setProperty("--mouse-x", `${relativeCoordinateX}px`);
-                    glassPanelNodeElement.style.setProperty("--mouse-y", `${relativeCoordinateY}px`);
-                });
-            });
-
-
-            // --- CORE COMPONENT J: REUSABLE FAQS ACCORDION TOGGLE INTERACTIVE LINKS ---
-            document.querySelectorAll(".faq-accordion-node-item").forEach(accordionItemElementNode => {
-                accordionItemElementNode.addEventListener("click", () => {
-                    const isCurrentlyOpenStateConditionFlag = accordionItemElementNode.classList.contains("accordion-node-open");
+                // Calculate relative grid positions loops for spotlight variables adjustments within elements
+                const activeHoveredGlassPanelsNodeList = document.querySelectorAll(".glass-panel");
+                activeHoveredGlassPanelsNodeList.forEach(glassPanelNode => {
+                    const boundingClientRectRectangle = glassPanelNode.getBoundingClientRect();
+                    const computedRelativeX = pointerPositionX - boundingClientRectRectangle.left;
+                    const computedRelativeY = pointerPositionY - boundingClientRectRectangle.top;
                     
-                    document.querySelectorAll(".faq-accordion-node-item").forEach(itemElement => itemElement.classList.remove("accordion-node-open"));
-                    
-                    if (!isCurrentlyOpenStateConditionFlag) {
-                        accordionItemElementNode.classList.add("accordion-node-open");
-                    }
+                    glassPanelNode.style.setProperty("--mouse-x", `${computedRelativeX}px`);
+                    glassPanelNode.style.setProperty("--mouse-y", `${computedRelativeY}px`);
                 });
             });
 
 
-            // --- CORE COMPONENT K: PREMIUM PURCHASE FIRED SIMULATION TOASTS ALERTS ---
-            document.querySelectorAll(".trigger-premium-purchase-alert").forEach(purchaseTriggerBtnNode => {
-                purchaseTriggerBtnNode.addEventListener("click", () => {
-                    const chosenTierTitleStringValue = purchaseTriggerBtnNode.getAttribute("data-tier-title");
-                    dispatchSystemNotificationToast(`Purchase routing gateway initialization failed: API transmission pipelines are currently locked.`, "fa-triangle-exclamation");
-                });
-            });
+            // --- CORE COMPONENT I: GLOBAL THEME TOGGLE (DARK / LIGHT AMBIENCE) ---
+            const themeToggleHardwareHook = document.getElementById("theme-toggle-hardware-hook");
+            const bodyRootElementContainer = document.body;
 
-
-            // --- CORE COMPONENT L: DIAGNOSTICS CONTACT FORM SIMULATION CAPTURE ---
-            const contactFormSubmitTriggerBtn = document.getElementById("contact-form-submit-trigger-btn");
-            
-            document.getElementById("contact-form-internal-element").addEventListener("submit", (formSubmitEventInstance) => {
-                formSubmitEventInstance.preventDefault();
+            themeToggleHardwareHook.addEventListener("click", () => {
+                bodyRootElementContainer.classList.toggle("light-theme");
+                const currentIconElement = themeToggleHardwareHook.querySelector("i");
                 
-                const profileIdentityValueName = document.getElementById("contact-form-input-name").value;
-                const extractionTargetEmailValue = document.getElementById("contact-form-input-email").value;
-                const textMessageDataValue = document.getElementById("contact-form-input-message").value;
-
-                if (!profileIdentityValueName || !extractionTargetEmailValue || !textMessageDataValue) return;
-
-                contactFormSubmitTriggerBtn.disabled = true;
-                contactFormSubmitTriggerBtn.innerText = "Transmitting Packet Streams...";
-
-                setTimeout(() => {
-                    dispatchSystemNotificationToast("Diagnostics packet log payload accepted safely by server array indices endpoints.", "fa-square-rss");
-                    document.getElementById("contact-form-internal-element").reset();
-                    contactFormSubmitTriggerBtn.disabled = false;
-                    contactFormSubmitTriggerBtn.innerHTML = `Transmit Diagnostics Data <i class="fa-solid fa-paper-plane"></i>`;
-                }, 1500);
+                if (bodyRootElementContainer.classList.contains("light-theme")) {
+                    currentIconElement.className = "fa-solid fa-sun";
+                    dispatchSystemNotificationToast("Light Ambiance Profile Mode activated", "fa-sun");
+                } else {
+                    currentIconElement.className = "fa-solid fa-moon";
+                    dispatchSystemNotificationToast("Dark Abyssal Core Profile Mode activated", "fa-moon");
+                }
             });
 
 
-            // --- CORE COMPONENT M: WINDOW ELEMENT LEVEL SCROLL SENSORS & FLOATING ACTION TRIGGER ---
+            // --- CORE COMPONENT J: BACK TO TOP FLOATING BUTTON INTERFACES ---
             const scrollToTopFloatingBtn = document.getElementById("scroll-to-top-floating-btn");
-            const platformHeaderNavbar = document.getElementById("platform-header-navbar");
-
+            
             window.addEventListener("scroll", () => {
-                const currentVerticalScrollYDistanceValue = window.scrollY;
-
-                if (currentVerticalScrollYDistanceValue > 60) {
-                    platformHeaderNavbar.classList.add("scrolled");
-                } else {
-                    platformHeaderNavbar.classList.remove("scrolled");
-                }
-
-                if (currentVerticalScrollYDistanceValue > 500) {
+                if (window.scrollY > 400) {
                     scrollToTopFloatingBtn.style.display = "flex";
                 } else {
                     scrollToTopFloatingBtn.style.display = "none";
+                }
+                
+                // Toggle header navbar background density configurations properties on active movement scroll
+                const platformHeaderNavbar = document.getElementById("platform-header-navbar");
+                if (window.scrollY > 50) {
+                    platformHeaderNavbar.classList.add("scrolled");
+                } else {
+                    platformHeaderNavbar.classList.remove("scrolled");
                 }
             });
 
             scrollToTopFloatingBtn.addEventListener("click", () => {
                 window.scrollTo({ top: 0, behavior: "smooth" });
             });
+
+
+            // --- CORE COMPONENT K: ACCORDION INTERACTION SYSTEMS HOOKS ---
+            const faqAccordionNodeItemsList = document.querySelectorAll(".faq-accordion-node-item");
+            
+            faqAccordionNodeItemsList.forEach(accordionItemNode => {
+                accordionItemNode.addEventListener("click", () => {
+                    const isAlreadyOpen = accordionItemNode.classList.contains("accordion-node-open");
+                    
+                    // Collapse all adjacent layers completely
+                    faqAccordionNodeItemsList.forEach(node => node.classList.remove("accordion-node-open"));
+                    
+                    if (!isAlreadyOpen) {
+                        accordionItemNode.classList.add("accordion-node-open");
+                    }
+                });
+            });
+
+
+            // --- CORE COMPONENT L: PREMIUM PURCHASE SYSTEM WARNING HANDLERS ---
+            document.querySelectorAll(".trigger-premium-purchase-alert").forEach(alertTriggerNode => {
+                alertTriggerNode.addEventListener("click", () => {
+                    const analyticalTierTitle = alertTriggerNode.getAttribute("data-tier-title");
+                    dispatchSystemNotificationToast(`Redirecting session profile down to "${analyticalTierTitle}" checkout merchant layers...`, "fa-spinner");
+                });
+            });
+
         });
     </script>
 </body>
